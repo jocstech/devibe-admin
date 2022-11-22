@@ -1,4 +1,4 @@
-<div align="center"> <a href="https://github.com/kailong321200875/vue-element-plus-admin"> <img width="100" src="./public/logo.png"> </a> <br> <br>
+<div align="center"> <a href="https://github.com/jocstech/devibe-admin"> <img width="100" src="./public/logo.png"> </a> <br> <br>
 
 [![license](https://img.shields.io/github/license/kailong321200875/vue-element-plus-admin.svg)](LICENSE)
 
@@ -10,13 +10,13 @@
 - Get the project code
 
 ```bash
-git clone https://github.com/kailong321200875/vue-element-plus-admin.git
+git clone https://github.com/jocstech/devibe-admin.git
 ```
 
 - Installation dependencies
 
 ```bash
-cd vue-element-plus-admin
+cd devibe-admin
 
 pnpm install
 
@@ -36,7 +36,7 @@ pnpm run build:pro
 
 ## How to contribute
 
-You can [Raise an issue](https://github.com/kailong321200875/vue-element-plus-admin/issues/new) Or submit a Pull Request.
+You can [Raise an issue](https://github.com/jocstech/devibe-admin/issues/new) Or submit a Pull Request.
 
 **Pull Request:**
 
