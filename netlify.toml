@@ -1,0 +1,9 @@
+# Netlify Configuration
+[build]
+publish = "dist-pro/"
+command = "pnpm run build:pro"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
