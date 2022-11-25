@@ -109,10 +109,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kailong321200875/vue-element-plus-admin.git"
+    "url": "git+https://github.com/jocstech/devibe-admin.git"
   },
   "bugs": {
-    "url": "https://github.com/kailong321200875/vue-element-plus-admin/issues"
+    "url": "https://github.com/jocstech/devibe-admin/issues"
   },
-  "homepage": "https://github.com/kailong321200875/vue-element-plus-admin"
+  "homepage": "https://github.com/jocstech/devibe-admin"
 }
