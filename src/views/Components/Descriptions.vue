@@ -1,75 +1,75 @@
 <script setup lang="ts">
-import { Descriptions } from '@/components/Descriptions'
-import { useI18n } from '@/hooks/web/useI18n'
-import { reactive, unref } from 'vue'
-import { Form } from '@/components/Form'
-import { ElFormItem, ElInput, ElButton } from 'element-plus'
-import { useValidator } from '@/hooks/web/useValidator'
-import { useForm } from '@/hooks/web/useForm'
-import { DescriptionsSchema } from '@/types/descriptions'
+  import { Descriptions } from '@/components/Descriptions'
+  import { useI18n } from '@/hooks/web/useI18n'
+  import { reactive, unref } from 'vue'
+  import { Form } from '@/components/Form'
+  import { ElFormItem, ElInput, ElButton } from 'element-plus'
+  import { useValidator } from '@/hooks/web/useValidator'
+  import { useForm } from '@/hooks/web/useForm'
+  import { DescriptionsSchema } from '@/types/descriptions'
 
-const { required } = useValidator()
+  const { required } = useValidator()
 
-const { t } = useI18n()
+  const { t } = useI18n()
 
-const data = reactive({
-  username: 'chenkl',
-  nickName: '梦似花落。',
-  age: 26,
-  phone: '13655971xxxx',
-  email: '502431556@qq.com',
-  addr: '这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的地址',
-  sex: '男',
-  certy: '3505831994xxxxxxxx'
-})
-
-const schema = reactive<DescriptionsSchema[]>([
-  {
-    field: 'username',
-    label: t('descriptionsDemo.username')
-  },
-  {
-    field: 'nickName',
-    label: t('descriptionsDemo.nickName')
-  },
-  {
-    field: 'phone',
-    label: t('descriptionsDemo.phone')
-  },
-  {
-    field: 'email',
-    label: t('descriptionsDemo.email')
-  },
-  {
-    field: 'addr',
-    label: t('descriptionsDemo.addr'),
-    span: 24
-  }
-])
-
-const form = reactive({
-  username: '',
-  nickName: '',
-  phone: '',
-  email: '',
-  addr: ''
-})
-
-const rules = reactive({
-  username: [required()],
-  nickName: [required()],
-  phone: [required()],
-  email: [required()],
-  addr: [required()]
-})
-
-const { register, elFormRef } = useForm()
-
-const formValidation = () => {
-  unref(elFormRef)!.validate((isValid) => {
-    console.log(isValid)
+  const data = reactive({
+    username: 'chenkl',
+    nickName: '梦似花落。',
+    age: 26,
+    phone: '13655971xxxx',
+    email: '502431556@qq.com',
+    addr: '这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的地址',
+    sex: '男',
+    certy: '3505831994xxxxxxxx'
   })
-}
+
+  const schema = reactive<DescriptionsSchema[]>([
+    {
+      field: 'username',
+      label: t('descriptionsDemo.username')
+    },
+    {
+      field: 'nickName',
+      label: t('descriptionsDemo.nickName')
+    },
+    {
+      field: 'phone',
+      label: t('descriptionsDemo.phone')
+    },
+    {
+      field: 'email',
+      label: t('descriptionsDemo.email')
+    },
+    {
+      field: 'addr',
+      label: t('descriptionsDemo.addr'),
+      span: 24
+    }
+  ])
+
+  const form = reactive({
+    username: '',
+    nickName: '',
+    phone: '',
+    email: '',
+    addr: ''
+  })
+
+  const rules = reactive({
+    username: [required()],
+    nickName: [required()],
+    phone: [required()],
+    email: [required()],
+    addr: [required()]
+  })
+
+  const { register, elFormRef } = useForm()
+
+  const formValidation = () => {
+    unref(elFormRef)!.validate((isValid) => {
+      console.log(isValid)
+    })
+  }
 </script>
 
 <template>
@@ -131,13 +131,13 @@ const formValidation = () => {
 </template>
 
 <style lang="less" scoped>
-.is-required--item {
-  position: relative;
+  .is-required--item {
+    position: relative;
 
-  &::before {
-    margin-right: 4px;
-    color: var(--el-color-danger);
-    content: '*';
+    &::before {
+      margin-right: 4px;
+      color: var(--el-color-danger);
+      content: '*';
+    }
   }
-}
 </style>

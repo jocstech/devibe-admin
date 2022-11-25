@@ -1,96 +1,98 @@
 <script setup lang="ts">
-import { Form } from '@/components/Form'
-import { PropType, computed, unref, ref } from 'vue'
-import { propTypes } from '@/utils/propTypes'
-import { ElButton } from 'element-plus'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useForm } from '@/hooks/web/useForm'
-import { findIndex } from '@/utils'
-import { cloneDeep } from 'lodash-es'
-import { FormSchema } from '@/types/form'
+  import { Form } from '@/components/Form'
+  import { PropType, computed, unref, ref } from 'vue'
+  import { propTypes } from '@/utils/propTypes'
+  import { ElButton } from 'element-plus'
+  import { useI18n } from '@/hooks/web/useI18n'
+  import { useForm } from '@/hooks/web/useForm'
+  import { findIndex } from '@/utils'
+  import { cloneDeep } from 'lodash-es'
+  import { FormSchema } from '@/types/form'
 
-const { t } = useI18n()
+  const { t } = useI18n()
 
-const props = defineProps({
-  // 生成Form的布局结构数组
-  schema: {
-    type: Array as PropType<FormSchema[]>,
-    default: () => []
-  },
-  // 是否需要栅格布局
-  isCol: propTypes.bool.def(false),
-  // 表单label宽度
-  labelWidth: propTypes.oneOfType([String, Number]).def('auto'),
-  // 操作按钮风格位置
-  layout: propTypes.string.validate((v: string) => ['inline', 'bottom'].includes(v)).def('inline'),
-  // 底部按钮的对齐方式
-  buttomPosition: propTypes.string
-    .validate((v: string) => ['left', 'center', 'right'].includes(v))
-    .def('center'),
-  showSearch: propTypes.bool.def(true),
-  showReset: propTypes.bool.def(true),
-  // 是否显示伸缩
-  expand: propTypes.bool.def(false),
-  // 伸缩的界限字段
-  expandField: propTypes.string.def(''),
-  inline: propTypes.bool.def(true)
-})
+  const props = defineProps({
+    // 生成Form的布局结构数组
+    schema: {
+      type: Array as PropType<FormSchema[]>,
+      default: () => []
+    },
+    // 是否需要栅格布局
+    isCol: propTypes.bool.def(false),
+    // 表单label宽度
+    labelWidth: propTypes.oneOfType([String, Number]).def('auto'),
+    // 操作按钮风格位置
+    layout: propTypes.string
+      .validate((v: string) => ['inline', 'bottom'].includes(v))
+      .def('inline'),
+    // 底部按钮的对齐方式
+    buttomPosition: propTypes.string
+      .validate((v: string) => ['left', 'center', 'right'].includes(v))
+      .def('center'),
+    showSearch: propTypes.bool.def(true),
+    showReset: propTypes.bool.def(true),
+    // 是否显示伸缩
+    expand: propTypes.bool.def(false),
+    // 伸缩的界限字段
+    expandField: propTypes.string.def(''),
+    inline: propTypes.bool.def(true)
+  })
 
-const emit = defineEmits(['search', 'reset'])
+  const emit = defineEmits(['search', 'reset'])
 
-const visible = ref(true)
+  const visible = ref(true)
 
-const newSchema = computed(() => {
-  let schema: FormSchema[] = cloneDeep(props.schema)
-  if (props.expand && props.expandField && !unref(visible)) {
-    const index = findIndex(schema, (v: FormSchema) => v.field === props.expandField)
-    if (index > -1) {
-      const length = schema.length
-      schema.splice(index + 1, length)
-    }
-  }
-  if (props.layout === 'inline') {
-    schema = schema.concat([
-      {
-        field: 'action',
-        formItemProps: {
-          labelWidth: '0px'
-        }
+  const newSchema = computed(() => {
+    let schema: FormSchema[] = cloneDeep(props.schema)
+    if (props.expand && props.expandField && !unref(visible)) {
+      const index = findIndex(schema, (v: FormSchema) => v.field === props.expandField)
+      if (index > -1) {
+        const length = schema.length
+        schema.splice(index + 1, length)
       }
-    ])
+    }
+    if (props.layout === 'inline') {
+      schema = schema.concat([
+        {
+          field: 'action',
+          formItemProps: {
+            labelWidth: '0px'
+          }
+        }
+      ])
+    }
+    return schema
+  })
+
+  const { register, elFormRef, methods } = useForm()
+
+  const search = async () => {
+    await unref(elFormRef)?.validate(async (isValid) => {
+      if (isValid) {
+        const { getFormData } = methods
+        const model = await getFormData()
+        emit('search', model)
+      }
+    })
   }
-  return schema
-})
 
-const { register, elFormRef, methods } = useForm()
+  const reset = async () => {
+    unref(elFormRef)?.resetFields()
+    const { getFormData } = methods
+    const model = await getFormData()
+    emit('reset', model)
+  }
 
-const search = async () => {
-  await unref(elFormRef)?.validate(async (isValid) => {
-    if (isValid) {
-      const { getFormData } = methods
-      const model = await getFormData()
-      emit('search', model)
+  const bottonButtonStyle = computed(() => {
+    return {
+      textAlign: props.buttomPosition as unknown as 'left' | 'center' | 'right'
     }
   })
-}
 
-const reset = async () => {
-  unref(elFormRef)?.resetFields()
-  const { getFormData } = methods
-  const model = await getFormData()
-  emit('reset', model)
-}
-
-const bottonButtonStyle = computed(() => {
-  return {
-    textAlign: props.buttomPosition as unknown as 'left' | 'center' | 'right'
+  const setVisible = () => {
+    unref(elFormRef)?.resetFields()
+    visible.value = !unref(visible)
   }
-})
-
-const setVisible = () => {
-  unref(elFormRef)?.resetFields()
-  visible.value = !unref(visible)
-}
 </script>
 
 <template>

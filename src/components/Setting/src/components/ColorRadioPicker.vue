@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import { PropType, watch, unref, ref } from 'vue'
-import { propTypes } from '@/utils/propTypes'
-import { useDesign } from '@/hooks/web/useDesign'
+  import { PropType, watch, unref, ref } from 'vue'
+  import { propTypes } from '@/utils/propTypes'
+  import { useDesign } from '@/hooks/web/useDesign'
 
-const { getPrefixCls } = useDesign()
+  const { getPrefixCls } = useDesign()
 
-const prefixCls = getPrefixCls('color-radio-picker')
+  const prefixCls = getPrefixCls('color-radio-picker')
 
-const props = defineProps({
-  schema: {
-    type: Array as PropType<string[]>,
-    default: () => []
-  },
-  modelValue: propTypes.string.def('')
-})
+  const props = defineProps({
+    schema: {
+      type: Array as PropType<string[]>,
+      default: () => []
+    },
+    modelValue: propTypes.string.def('')
+  })
 
-const emit = defineEmits(['update:modelValue', 'change'])
+  const emit = defineEmits(['update:modelValue', 'change'])
 
-const colorVal = ref(props.modelValue)
+  const colorVal = ref(props.modelValue)
 
-watch(
-  () => props.modelValue,
-  (val: string) => {
-    if (val === unref(colorVal)) return
-    colorVal.value = val
-  }
-)
+  watch(
+    () => props.modelValue,
+    (val: string) => {
+      if (val === unref(colorVal)) return
+      colorVal.value = val
+    }
+  )
 
-// 监听
-watch(
-  () => colorVal.value,
-  (val: string) => {
-    emit('update:modelValue', val)
-    emit('change', val)
-  }
-)
+  // 监听
+  watch(
+    () => colorVal.value,
+    (val: string) => {
+      emit('update:modelValue', val)
+      emit('change', val)
+    }
+  )
 </script>
 
 <template>
@@ -55,11 +55,11 @@ watch(
 </template>
 
 <style lang="less" scoped>
-@prefix-cls: ~'@{namespace}-color-radio-picker';
+  @prefix-cls: ~'@{namespace}-color-radio-picker';
 
-.@{prefix-cls} {
-  .is-active {
-    border-color: var(--el-color-primary);
+  .@{prefix-cls} {
+    .is-active {
+      border-color: var(--el-color-primary);
+    }
   }
-}
 </style>

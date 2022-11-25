@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Sticky } from '@/components/Sticky'
-import { ElAffix } from 'element-plus'
+  import { ContentWrap } from '@/components/ContentWrap'
+  import { useI18n } from '@/hooks/web/useI18n'
+  import { Sticky } from '@/components/Sticky'
+  import { ElAffix } from 'element-plus'
 
-const { t } = useI18n()
+  const { t } = useI18n()
 </script>
 
 <template>

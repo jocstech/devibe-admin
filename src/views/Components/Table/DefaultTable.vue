@@ -1,91 +1,91 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Table } from '@/components/Table'
-import { getTableListApi } from '@/api/table'
-import { TableData } from '@/api/table/types'
-import { ref, h } from 'vue'
-import { ElTag, ElButton } from 'element-plus'
-import { TableColumn, TableSlotDefault } from '@/types/table'
+  import { ContentWrap } from '@/components/ContentWrap'
+  import { useI18n } from '@/hooks/web/useI18n'
+  import { Table } from '@/components/Table'
+  import { getTableListApi } from '@/api/table'
+  import { TableData } from '@/api/table/types'
+  import { ref, h } from 'vue'
+  import { ElTag, ElButton } from 'element-plus'
+  import { TableColumn, TableSlotDefault } from '@/types/table'
 
-interface Params {
-  pageIndex?: number
-  pageSize?: number
-}
-
-const { t } = useI18n()
-
-const columns: TableColumn[] = [
-  {
-    field: 'index',
-    label: t('tableDemo.index'),
-    type: 'index'
-  },
-  {
-    field: 'title',
-    label: t('tableDemo.title')
-  },
-  {
-    field: 'author',
-    label: t('tableDemo.author')
-  },
-  {
-    field: 'display_time',
-    label: t('tableDemo.displayTime')
-  },
-  {
-    field: 'importance',
-    label: t('tableDemo.importance'),
-    formatter: (_: Recordable, __: TableColumn, cellValue: number) => {
-      return h(
-        ElTag,
-        {
-          type: cellValue === 1 ? 'success' : cellValue === 2 ? 'warning' : 'danger'
-        },
-        () =>
-          cellValue === 1
-            ? t('tableDemo.important')
-            : cellValue === 2
-            ? t('tableDemo.good')
-            : t('tableDemo.commonly')
-      )
-    }
-  },
-  {
-    field: 'pageviews',
-    label: t('tableDemo.pageviews')
-  },
-  {
-    field: 'action',
-    label: t('tableDemo.action')
+  interface Params {
+    pageIndex?: number
+    pageSize?: number
   }
-]
 
-const loading = ref(true)
+  const { t } = useI18n()
 
-let tableDataList = ref<TableData[]>([])
-
-const getTableList = async (params?: Params) => {
-  const res = await getTableListApi(
-    params || {
-      pageIndex: 1,
-      pageSize: 10
+  const columns: TableColumn[] = [
+    {
+      field: 'index',
+      label: t('tableDemo.index'),
+      type: 'index'
+    },
+    {
+      field: 'title',
+      label: t('tableDemo.title')
+    },
+    {
+      field: 'author',
+      label: t('tableDemo.author')
+    },
+    {
+      field: 'display_time',
+      label: t('tableDemo.displayTime')
+    },
+    {
+      field: 'importance',
+      label: t('tableDemo.importance'),
+      formatter: (_: Recordable, __: TableColumn, cellValue: number) => {
+        return h(
+          ElTag,
+          {
+            type: cellValue === 1 ? 'success' : cellValue === 2 ? 'warning' : 'danger'
+          },
+          () =>
+            cellValue === 1
+              ? t('tableDemo.important')
+              : cellValue === 2
+              ? t('tableDemo.good')
+              : t('tableDemo.commonly')
+        )
+      }
+    },
+    {
+      field: 'pageviews',
+      label: t('tableDemo.pageviews')
+    },
+    {
+      field: 'action',
+      label: t('tableDemo.action')
     }
-  )
-    .catch(() => {})
-    .finally(() => {
-      loading.value = false
-    })
-  if (res) {
-    tableDataList.value = res.data.list
+  ]
+
+  const loading = ref(true)
+
+  let tableDataList = ref<TableData[]>([])
+
+  const getTableList = async (params?: Params) => {
+    const res = await getTableListApi(
+      params || {
+        pageIndex: 1,
+        pageSize: 10
+      }
+    )
+      .catch(() => {})
+      .finally(() => {
+        loading.value = false
+      })
+    if (res) {
+      tableDataList.value = res.data.list
+    }
   }
-}
 
-getTableList()
+  getTableList()
 
-const actionFn = (data: TableSlotDefault) => {
-  console.log(data)
-}
+  const actionFn = (data: TableSlotDefault) => {
+    console.log(data)
+  }
 </script>
 
 <template>

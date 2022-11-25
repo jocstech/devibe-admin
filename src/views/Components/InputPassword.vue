@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { InputPassword } from '@/components/InputPassword'
-import { ref } from 'vue'
+  import { ContentWrap } from '@/components/ContentWrap'
+  import { useI18n } from '@/hooks/web/useI18n'
+  import { InputPassword } from '@/components/InputPassword'
+  import { ref } from 'vue'
 
-const { t } = useI18n()
+  const { t } = useI18n()
 
-const password = ref('')
+  const password = ref('')
 </script>
 
 <template>

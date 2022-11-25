@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Infotip } from '@/components/Infotip'
+  import { ContentWrap } from '@/components/ContentWrap'
+  import { useI18n } from '@/hooks/web/useI18n'
+  import { Infotip } from '@/components/Infotip'
 
-const { t } = useI18n()
+  const { t } = useI18n()
 
-const keyClick = (key: string) => {
-  if (key === t('iconDemo.accessAddress')) {
-    window.open('https://iconify.design/')
+  const keyClick = (key: string) => {
+    if (key === t('iconDemo.accessAddress')) {
+      window.open('https://iconify.design/')
+    }
   }
-}
 </script>
 
 <template>

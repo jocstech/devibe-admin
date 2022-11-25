@@ -24,44 +24,44 @@
 </template>
 
 <script setup lang="ts">
-import { ElDropdown, ElDropdownMenu, ElDropdownItem, ElMessageBox } from 'element-plus'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useCache } from '@/hooks/web/useCache'
-import { resetRouter } from '@/router'
-import { useRouter } from 'vue-router'
-import { authLogout } from '@/api/login'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useTagsViewStore } from '@/store/modules/tagsView'
-import { useAppStore } from '@/store/modules/app'
-const tagsViewStore = useTagsViewStore()
-const { getPrefixCls } = useDesign()
-const prefixCls = getPrefixCls('user-info')
-const { t } = useI18n()
-const { wsCache } = useCache()
-const { replace } = useRouter()
+  import { ElDropdown, ElDropdownMenu, ElDropdownItem, ElMessageBox } from 'element-plus'
+  import { useI18n } from '@/hooks/web/useI18n'
+  import { useCache } from '@/hooks/web/useCache'
+  import { resetRouter } from '@/router'
+  import { useRouter } from 'vue-router'
+  import { authLogout } from '@/api/login'
+  import { useDesign } from '@/hooks/web/useDesign'
+  import { useTagsViewStore } from '@/store/modules/tagsView'
+  import { useAppStore } from '@/store/modules/app'
+  const tagsViewStore = useTagsViewStore()
+  const { getPrefixCls } = useDesign()
+  const prefixCls = getPrefixCls('user-info')
+  const { t } = useI18n()
+  const { wsCache } = useCache()
+  const { replace } = useRouter()
 
-const appStore = useAppStore()
-const currentUser = appStore.getCurrentUser
+  const appStore = useAppStore()
+  const currentUser = appStore.getCurrentUser
 
-const logout = () => {
-  ElMessageBox.confirm(t('common.loginOutMessage'), t('common.reminder'), {
-    confirmButtonText: t('common.ok'),
-    cancelButtonText: t('common.cancel'),
-    type: 'warning'
-  })
-    .then(async () => {
-      const res = await authLogout().catch(() => {})
-      if (res) {
-        wsCache.clear()
-        tagsViewStore.delAllViews()
-        resetRouter() // 重置静态路由表
-        replace('/login')
-      }
+  const logout = () => {
+    ElMessageBox.confirm(t('common.loginOutMessage'), t('common.reminder'), {
+      confirmButtonText: t('common.ok'),
+      cancelButtonText: t('common.cancel'),
+      type: 'warning'
     })
-    .catch(() => {})
-}
+      .then(async () => {
+        const res = await authLogout().catch(() => {})
+        if (res) {
+          wsCache.clear()
+          tagsViewStore.delAllViews()
+          resetRouter() // 重置静态路由表
+          replace('/login')
+        }
+      })
+      .catch(() => {})
+  }
 
-const toDocument = () => {
-  window.open('https://element-plus-admin-doc.cn/')
-}
+  const toDocument = () => {
+    window.open('https://element-plus-admin-doc.cn/')
+  }
 </script>

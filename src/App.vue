@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useAppStore } from '@/store/modules/app'
-import { ConfigGlobal } from '@/components/ConfigGlobal'
-import { isDark } from '@/utils/is'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useCache } from '@/hooks/web/useCache'
+  import { computed } from 'vue'
+  import { useAppStore } from '@/store/modules/app'
+  import { ConfigGlobal } from '@/components/ConfigGlobal'
+  import { isDark } from '@/utils/is'
+  import { useDesign } from '@/hooks/web/useDesign'
+  import { useCache } from '@/hooks/web/useCache'
 
-const { getPrefixCls } = useDesign()
+  const { getPrefixCls } = useDesign()
 
-const prefixCls = getPrefixCls('app')
+  const prefixCls = getPrefixCls('app')
 
-const appStore = useAppStore()
+  const appStore = useAppStore()
 
-const currentSize = computed(() => appStore.getCurrentSize)
+  const currentSize = computed(() => appStore.getCurrentSize)
 
-const greyMode = computed(() => appStore.getGreyMode)
+  const greyMode = computed(() => appStore.getGreyMode)
 
-const { wsCache } = useCache()
+  const { wsCache } = useCache()
 
-// 根据浏览器当前主题设置系统主题色
-const setDefaultTheme = () => {
-  if (wsCache.get('isDark')) {
-    appStore.setIsDark(wsCache.get('isDark'))
-    return
+  // 根据浏览器当前主题设置系统主题色
+  const setDefaultTheme = () => {
+    if (wsCache.get('isDark')) {
+      appStore.setIsDark(wsCache.get('isDark'))
+      return
+    }
+    const isDarkTheme = isDark()
+    appStore.setIsDark(isDarkTheme)
   }
-  const isDarkTheme = isDark()
-  appStore.setIsDark(isDarkTheme)
-}
 
-setDefaultTheme()
+  setDefaultTheme()
 </script>
 
 <template>
@@ -38,26 +38,26 @@ setDefaultTheme()
 </template>
 
 <style lang="less">
-@prefix-cls: ~'@{namespace}-app';
+  @prefix-cls: ~'@{namespace}-app';
 
-.size {
-  width: 100%;
-  height: 100%;
-}
-
-html,
-body {
-  padding: 0 !important;
-  margin: 0;
-  overflow: hidden;
-  .size;
-
-  #app {
-    .size;
+  .size {
+    width: 100%;
+    height: 100%;
   }
-}
 
-.@{prefix-cls}-grey-mode {
-  filter: grayscale(100%);
-}
+  html,
+  body {
+    padding: 0 !important;
+    margin: 0;
+    overflow: hidden;
+    .size;
+
+    #app {
+      .size;
+    }
+  }
+
+  .@{prefix-cls}-grey-mode {
+    filter: grayscale(100%);
+  }
 </style>

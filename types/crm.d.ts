@@ -1,5 +1,21 @@
-interface SystemUser {
+interface SystemBasic {
   readonly _id?: string
+  creator?: SystemUser | string
+  updater?: SystemUser | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string
+}
+
+interface SystemRole extends SystemBasic {
+  name?: string
+  value?: string
+  description?: string
+  icon?: string
+  subset?: string[] | SystemRole[]
+}
+
+interface SystemUser extends SystemBasic {
   username: string
   nickname: string
   name: string
@@ -8,17 +24,18 @@ interface SystemUser {
   avatar: string
 }
 
-interface CRMTag {
-  readonly _id?: string
+interface CRMTag extends SystemBasic {
   slug?: string
   name?: string
   icon?: string
   cover?: string
+  category?: string
   visible?: boolean
+  count?: number
+  roles?: string[] | SystemRole[]
 }
 
-interface CRMArticle {
-  readonly _id?: string
+interface CRMArticle extends SystemBasic {
   slug?: string
   cover?: string
   title?: string
@@ -29,7 +46,5 @@ interface CRMArticle {
   tags?: CRMTag[]
   roles?: any[]
   published_at?: Date | string
-  author?: SystemUser
-  updator?: SystemUser
-  creator?: SystemUser
+  author?: SystemUser | string
 }

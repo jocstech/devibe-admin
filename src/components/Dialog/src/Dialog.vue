@@ -1,60 +1,60 @@
 <script setup lang="ts">
-import { ElDialog, ElScrollbar } from 'element-plus'
-import { propTypes } from '@/utils/propTypes'
-import { computed, useAttrs, ref, unref, useSlots, watch, nextTick } from 'vue'
-import { isNumber } from '@/utils/is'
+  import { ElDialog, ElScrollbar } from 'element-plus'
+  import { propTypes } from '@/utils/propTypes'
+  import { computed, useAttrs, ref, unref, useSlots, watch, nextTick } from 'vue'
+  import { isNumber } from '@/utils/is'
 
-const slots = useSlots()
+  const slots = useSlots()
 
-const props = defineProps({
-  modelValue: propTypes.bool.def(false),
-  title: propTypes.string.def('Dialog'),
-  fullscreen: propTypes.bool.def(true),
-  maxHeight: propTypes.oneOfType([String, Number]).def('500px')
-})
+  const props = defineProps({
+    modelValue: propTypes.bool.def(false),
+    title: propTypes.string.def('Dialog'),
+    fullscreen: propTypes.bool.def(true),
+    maxHeight: propTypes.oneOfType([String, Number]).def('500px')
+  })
 
-const getBindValue = computed(() => {
-  const delArr: string[] = ['fullscreen', 'title', 'maxHeight']
-  const attrs = useAttrs()
-  const obj = { ...attrs, ...props }
-  for (const key in obj) {
-    if (delArr.indexOf(key) !== -1) {
-      delete obj[key]
+  const getBindValue = computed(() => {
+    const delArr: string[] = ['fullscreen', 'title', 'maxHeight']
+    const attrs = useAttrs()
+    const obj = { ...attrs, ...props }
+    for (const key in obj) {
+      if (delArr.indexOf(key) !== -1) {
+        delete obj[key]
+      }
     }
+    return obj
+  })
+
+  const isFullscreen = ref(false)
+
+  const toggleFull = () => {
+    isFullscreen.value = !unref(isFullscreen)
   }
-  return obj
-})
 
-const isFullscreen = ref(false)
+  const dialogHeight = ref(isNumber(props.maxHeight) ? `${props.maxHeight}px` : props.maxHeight)
 
-const toggleFull = () => {
-  isFullscreen.value = !unref(isFullscreen)
-}
-
-const dialogHeight = ref(isNumber(props.maxHeight) ? `${props.maxHeight}px` : props.maxHeight)
-
-watch(
-  () => isFullscreen.value,
-  async (val: boolean) => {
-    await nextTick()
-    if (val) {
-      const windowHeight = document.documentElement.offsetHeight
-      dialogHeight.value = `${windowHeight - 55 - 60 - (slots.footer ? 63 : 0)}px`
-    } else {
-      dialogHeight.value = isNumber(props.maxHeight) ? `${props.maxHeight}px` : props.maxHeight
+  watch(
+    () => isFullscreen.value,
+    async (val: boolean) => {
+      await nextTick()
+      if (val) {
+        const windowHeight = document.documentElement.offsetHeight
+        dialogHeight.value = `${windowHeight - 55 - 60 - (slots.footer ? 63 : 0)}px`
+      } else {
+        dialogHeight.value = isNumber(props.maxHeight) ? `${props.maxHeight}px` : props.maxHeight
+      }
+    },
+    {
+      immediate: true
     }
-  },
-  {
-    immediate: true
-  }
-)
+  )
 
-const dialogStyle = computed(() => {
-  console.log(unref(dialogHeight))
-  return {
-    height: unref(dialogHeight)
-  }
-})
+  const dialogStyle = computed(() => {
+    console.log(unref(dialogHeight))
+    return {
+      height: unref(dialogHeight)
+    }
+  })
 </script>
 
 <template>
@@ -92,28 +92,28 @@ const dialogStyle = computed(() => {
 </template>
 
 <style lang="less">
-.@{elNamespace}-dialog__header {
-  margin-right: 0 !important;
-  border-bottom: 1px solid var(--tags-view-border-color);
-}
-
-.@{elNamespace}-dialog__footer {
-  border-top: 1px solid var(--tags-view-border-color);
-}
-
-.is-hover {
-  &:hover {
-    color: var(--el-color-primary) !important;
-  }
-}
-
-.dark {
   .@{elNamespace}-dialog__header {
-    border-bottom: 1px solid var(--el-border-color);
+    margin-right: 0 !important;
+    border-bottom: 1px solid var(--tags-view-border-color);
   }
 
   .@{elNamespace}-dialog__footer {
-    border-top: 1px solid var(--el-border-color);
+    border-top: 1px solid var(--tags-view-border-color);
   }
-}
+
+  .is-hover {
+    &:hover {
+      color: var(--el-color-primary) !important;
+    }
+  }
+
+  .dark {
+    .@{elNamespace}-dialog__header {
+      border-bottom: 1px solid var(--el-border-color);
+    }
+
+    .@{elNamespace}-dialog__footer {
+      border-top: 1px solid var(--el-border-color);
+    }
+  }
 </style>

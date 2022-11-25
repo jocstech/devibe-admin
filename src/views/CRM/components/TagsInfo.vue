@@ -1,14 +1,14 @@
 <template>
-  <span class="space-x-1">
+  <span class="space-x-1" v-if="tags">
     <el-tag v-for="tag of tags" :key="tag._id">{{ tag.name }} </el-tag>
   </span>
 </template>
 
 <script setup lang="ts">
-import { ElTag } from 'element-plus'
-defineProps<{
-  tags: CRMTag[]
-}>()
+  import { ElTag } from 'element-plus'
+  defineProps<{
+    tags: CRMTag[]
+  }>()
 </script>
 
 <style scoped></style>

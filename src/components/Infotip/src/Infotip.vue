@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { PropType } from 'vue'
-import { Highlight } from '@/components/Highlight'
-import { useDesign } from '@/hooks/web/useDesign'
-import { propTypes } from '@/utils/propTypes'
-import { TipSchema } from '@/types/infoTip'
+  import { PropType } from 'vue'
+  import { Highlight } from '@/components/Highlight'
+  import { useDesign } from '@/hooks/web/useDesign'
+  import { propTypes } from '@/utils/propTypes'
+  import { TipSchema } from '@/types/infoTip'
 
-const { getPrefixCls } = useDesign()
+  const { getPrefixCls } = useDesign()
 
-const prefixCls = getPrefixCls('infotip')
+  const prefixCls = getPrefixCls('infotip')
 
-defineProps({
-  title: propTypes.string.def(''),
-  schema: {
-    type: Array as PropType<Array<string | TipSchema>>,
-    required: true,
-    default: () => []
-  },
-  showIndex: propTypes.bool.def(true),
-  highlightColor: propTypes.string.def('var(--el-color-primary)')
-})
+  defineProps({
+    title: propTypes.string.def(''),
+    schema: {
+      type: Array as PropType<Array<string | TipSchema>>,
+      required: true,
+      default: () => []
+    },
+    showIndex: propTypes.bool.def(true),
+    highlightColor: propTypes.string.def('var(--el-color-primary)')
+  })
 
-const emit = defineEmits(['click'])
+  const emit = defineEmits(['click'])
 
-const keyClick = (key: string) => {
-  emit('click', key)
-}
+  const keyClick = (key: string) => {
+    emit('click', key)
+  }
 </script>
 
 <template>

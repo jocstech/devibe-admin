@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { PropType } from 'vue'
-import type { TableData } from '@/api/table/types'
-import { Descriptions } from '@/components/Descriptions'
-import { useI18n } from '@/hooks/web/useI18n'
-import { ElTag } from 'element-plus'
-import { DescriptionsSchema } from '@/types/descriptions'
+  import { PropType } from 'vue'
+  import type { TableData } from '@/api/table/types'
+  import { Descriptions } from '@/components/Descriptions'
+  import { useI18n } from '@/hooks/web/useI18n'
+  import { ElTag } from 'element-plus'
+  import { DescriptionsSchema } from '@/types/descriptions'
 
-const { t } = useI18n()
+  const { t } = useI18n()
 
-defineProps({
-  currentRow: {
-    type: Object as PropType<Nullable<TableData>>,
-    default: () => null
-  },
-  detailSchema: {
-    type: Array as PropType<DescriptionsSchema[]>,
-    default: () => []
-  }
-})
+  defineProps({
+    currentRow: {
+      type: Object as PropType<Nullable<TableData>>,
+      default: () => null
+    },
+    detailSchema: {
+      type: Array as PropType<DescriptionsSchema[]>,
+      default: () => []
+    }
+  })
 </script>
 
 <template>

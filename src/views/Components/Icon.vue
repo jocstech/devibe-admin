@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Infotip } from '@/components/Infotip'
-import { ElButton } from 'element-plus'
-import { useIcon } from '@/hooks/web/useIcon'
+  import { ContentWrap } from '@/components/ContentWrap'
+  import { useI18n } from '@/hooks/web/useI18n'
+  import { Infotip } from '@/components/Infotip'
+  import { ElButton } from 'element-plus'
+  import { useIcon } from '@/hooks/web/useIcon'
 
-const { t } = useI18n()
+  const { t } = useI18n()
 
-const keyClick = (key: string) => {
-  if (key === t('iconDemo.accessAddress')) {
-    window.open('https://iconify.design/')
+  const keyClick = (key: string) => {
+    if (key === t('iconDemo.accessAddress')) {
+      window.open('https://iconify.design/')
+    }
   }
-}
 
-const peoples = useIcon({ icon: 'svg-icon:peoples' })
-const money = useIcon({ icon: 'svg-icon:money' })
-const aim = useIcon({ icon: 'ep:aim' })
-const alarmClock = useIcon({ icon: 'ep:alarm-clock' })
+  const peoples = useIcon({ icon: 'svg-icon:peoples' })
+  const money = useIcon({ icon: 'svg-icon:money' })
+  const aim = useIcon({ icon: 'ep:aim' })
+  const alarmClock = useIcon({ icon: 'ep:alarm-clock' })
 </script>
 
 <template>

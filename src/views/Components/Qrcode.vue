@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { Qrcode } from '@/components/Qrcode'
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { computed, ref, unref } from 'vue'
-import { useAppStore } from '@/store/modules/app'
-import { ElRow, ElCard, ElCol, ElMessage } from 'element-plus'
-// @ts-ignore
-import logoImg from '@/assets/imgs/logo.png'
+  import { Qrcode } from '@/components/Qrcode'
+  import { ContentWrap } from '@/components/ContentWrap'
+  import { useI18n } from '@/hooks/web/useI18n'
+  import { computed, ref, unref } from 'vue'
+  import { useAppStore } from '@/store/modules/app'
+  import { ElRow, ElCard, ElCol, ElMessage } from 'element-plus'
+  // @ts-ignore
+  import logoImg from '@/assets/imgs/logo.png'
 
-const appStore = useAppStore()
+  const appStore = useAppStore()
 
-const { t } = useI18n()
+  const { t } = useI18n()
 
-const title = computed(() => appStore.getTitle)
+  const title = computed(() => appStore.getTitle)
 
-const asyncTitle = ref('')
+  const asyncTitle = ref('')
 
-setTimeout(() => {
-  asyncTitle.value = unref(title)
-}, 3000)
+  setTimeout(() => {
+    asyncTitle.value = unref(title)
+  }, 3000)
 
-const codeClick = () => {
-  ElMessage.info(t('qrcodeDemo.click'))
-}
+  const codeClick = () => {
+    ElMessage.info(t('qrcodeDemo.click'))
+  }
 
-const disabledClick = () => {
-  ElMessage.info(t('qrcodeDemo.invalid'))
-}
+  const disabledClick = () => {
+    ElMessage.info(t('qrcodeDemo.invalid'))
+  }
 </script>
 
 <template>

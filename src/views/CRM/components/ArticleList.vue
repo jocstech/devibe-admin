@@ -45,12 +45,11 @@
 </template>
 
 <script setup lang="ts">
-import { AuthorInfo, TagsInfo } from './'
-import { ElImage } from 'element-plus'
-const props = defineProps<{
-  articles: CRMArticle[]
-}>()
-console.log(props.articles)
+  import { AuthorInfo, TagsInfo } from './'
+  import { ElImage } from 'element-plus'
+  defineProps<{
+    articles: CRMArticle[]
+  }>()
 </script>
 
 <style scoped></style>

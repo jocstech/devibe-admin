@@ -41,49 +41,49 @@
 </template>
 
 <script setup lang="ts">
-import { ElInput, ElButton } from 'element-plus'
-import { Delete, Edit, Upload } from '@element-plus/icons-vue'
-import { Editor } from '@/components/Editor'
-import { ref, computed, watch } from 'vue'
-// import { deepClone } from '@/utils/data'
+  import { ElInput, ElButton } from 'element-plus'
+  import { Delete, Edit, Upload } from '@element-plus/icons-vue'
+  import { Editor } from '@/components/Editor'
+  import { ref, computed, watch } from 'vue'
+  // import { deepClone } from '@/utils/data'
 
-const props = defineProps<{
-  article: CRMArticle
-}>()
+  const props = defineProps<{
+    article: CRMArticle
+  }>()
 
-// const isEditing = computed(() => props.article.hasOwnProperty('_id'))
-const isModified = ref(false)
+  // const isEditing = computed(() => props.article.hasOwnProperty('_id'))
+  const isModified = ref(false)
 
-const emit = defineEmits<{
-  (e: 'update:article', article: CRMArticle): void
-  (e: 'save', article: CRMArticle): void
-}>()
+  const emit = defineEmits<{
+    (e: 'update:article', article: CRMArticle): void
+    (e: 'save', article: CRMArticle): void
+  }>()
 
-// v-model object 双向绑定的秘密
-const article = computed({
-  get: () => props.article,
-  set: (value) => emit('update:article', value)
-})
+  // v-model object 双向绑定的秘密
+  const article = computed({
+    get: () => props.article,
+    set: (value) => emit('update:article', value)
+  })
 
-// 监听文章数据是否已经更新
-watch(article, () => (isModified.value = true), { deep: true })
+  // 监听文章数据是否已经更新
+  watch(article, () => (isModified.value = true), { deep: true })
 
-const save = () => {
-  emit('save', article.value)
-}
+  const save = () => {
+    emit('save', article.value)
+  }
 
-const publish = () => {
-  delete article.value.published_at
-}
+  const publish = () => {
+    delete article.value.published_at
+  }
 
-const recover = () => {
-  article.value = {}
-}
+  const recover = () => {
+    article.value = {}
+  }
 </script>
 
 <style scoped>
-.section-title {
-  padding-left: 0.5rem;
-  padding-bottom: 0.5rem;
-}
+  .section-title {
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
 </style>
