@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
   import { Search } from '@/components/Search'
   import { useI18n } from '@/hooks/web/useI18n'
   import { ElButton, ElTag } from 'element-plus'
