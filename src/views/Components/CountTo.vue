@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { ContentWrap } from '@/components/ContentWrap'
   import { useI18n } from '@/hooks/web/useI18n'
   import { CountTo } from '@/components/CountTo'
   import { ElRow, ElCol, ElInputNumber, ElInput, ElButton } from 'element-plus'

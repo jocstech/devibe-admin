@@ -3,7 +3,7 @@
   import { reactive, ref, onMounted, computed } from 'vue'
   import { useI18n } from '@/hooks/web/useI18n'
   import { useIcon } from '@/hooks/web/useIcon'
-  import { ContentWrap } from '@/components/ContentWrap'
+
   import { useAppStore } from '@/store/modules/app'
   import { FormSchema } from '@/types/form'
   import { ComponentOptions } from '@/types/components'

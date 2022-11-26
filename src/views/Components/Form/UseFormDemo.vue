@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Form } from '@/components/Form'
-  import { ContentWrap } from '@/components/ContentWrap'
+
   import { useI18n } from '@/hooks/web/useI18n'
   import { useForm } from '@/hooks/web/useForm'
   import { reactive, unref, ref } from 'vue'

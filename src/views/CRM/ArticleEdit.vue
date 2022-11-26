@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <h1 class="text-2xl">{{ article.title }}</h1>
-    <br />
+  <ContentDetailWrap :title="article.title" @back="$router.push('/crm/articles')">
     <article-editor v-model:article="article" @save="onSave" />
-  </div>
+  </ContentDetailWrap>
 </template>
 
 <script setup lang="ts">
+  import { ContentDetailWrap } from '@/components/ContentDetailWrap'
   import { ArticleEditor } from './components'
   import { getArticleById, updateArticleById } from '@/api/crm'
   import { onMounted, ref } from 'vue'

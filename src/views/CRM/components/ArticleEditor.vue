@@ -1,15 +1,15 @@
 <template>
-  <div class="flex gap-2">
+  <div class="flex flex-col lg:flex-row gap-2">
     <div class="editor-section flex flex-col gap-2 flex-1">
       <div class="title-section flex flex-col gap-2">
         <el-input v-model="article.title" size="large" placeholder="请输入标题" />
         <el-input v-model="article.subtitle" size="large" placeholder="请输入副标题" />
       </div>
       <div class="content-section">
-        <Editor v-model:modelValue="article.content" editorId="editor-1" />
+        <Editor v-model:modelValue="article.content" editorId="editor-1" height="600px" />
       </div>
     </div>
-    <div class="side-section flex flex-col gap-2 flex-auto max-w-lg">
+    <div class="side-section flex flex-col gap-2 flex-auto lg:max-w-sm">
       <div class="meta-section flex flex-col gap-2">
         <div class="bg-white border p-2">
           <div class="section-title">访问地址</div>
@@ -23,10 +23,14 @@
           <div class="section-title">文章摘要</div>
           <el-input
             v-model="article.excerpt"
-            :rows="5"
+            :rows="4"
             type="textarea"
             placeholder="Please input"
           />
+        </div>
+        <div class="bg-white border p-2">
+          <div class="section-title">文章标签</div>
+          <tags-select v-model="tags" />
         </div>
       </div>
       <div class="actions">
@@ -45,7 +49,7 @@
   import { Delete, Edit, Upload } from '@element-plus/icons-vue'
   import { Editor } from '@/components/Editor'
   import { ref, computed, watch } from 'vue'
-  // import { deepClone } from '@/utils/data'
+  import { TagsSelect } from './'
 
   const props = defineProps<{
     article: CRMArticle
@@ -63,6 +67,14 @@
   const article = computed({
     get: () => props.article,
     set: (value) => emit('update:article', value)
+  })
+
+  const tags = computed({
+    get: () => article.value.tags?.map((i) => i._id),
+    set: (tagsStr: string[]) =>
+      (article.value.tags = tagsStr.map((_id) => {
+        return { _id }
+      }))
   })
 
   // 监听文章数据是否已经更新

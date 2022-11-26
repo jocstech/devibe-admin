@@ -50,7 +50,7 @@
   )
 
   const dialogStyle = computed(() => {
-    console.log(unref(dialogHeight))
+    // console.log(unref(dialogHeight))
     return {
       height: unref(dialogHeight)
     }

@@ -14,7 +14,7 @@ export const getArticleById = (id: string): Promise<IResponse<CRMArticle>> => {
 
 // 创建一篇新文章
 export const createArticle = (data: CRMArticle): Promise<IResponse> => {
-  return request.get({ url: '/articles/', data })
+  return request.post({ url: '/articles/', data })
 }
 
 // 通过ID更新文章
@@ -25,8 +25,12 @@ export const updateArticleById = (id: string, data: CRMArticle): Promise<IRespon
 // Tags APIs =========================================================
 
 // 模拟获取全部文章标签
-export const getTags = async (): Promise<IResponse<CRMArticle>> => {
+export const getTags = async (): Promise<IResponse<CRMTag>> => {
   return request.get({ url: '/tags' })
+}
+
+export const getTagsList = async (): Promise<IResponse<CRMTag[]>> => {
+  return request.get({ url: '/tags/list' })
 }
 
 // 通过ID获取文章标签
@@ -34,7 +38,12 @@ export const getTagById = (id: string): Promise<IResponse<CRMTag>> => {
   return request.get({ url: '/tags/' + id })
 }
 
+// 创建一个新文章标签
+export const createTag = (data: CRMTag): Promise<IResponse<CRMTag>> => {
+  return request.post({ url: '/tags/', data })
+}
+
 // 通过ID更新文章标签
-export const updateTagById = (id: string, data: CRMTag): Promise<IResponse> => {
+export const updateTagById = (id: string | undefined, data: CRMTag): Promise<IResponse> => {
   return request.patch({ url: '/tags/' + id, data })
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2">
+  <div class="p-0">
     <div class="article-list" v-if="articles.length">
       <ul>
         <li
@@ -11,17 +11,17 @@
             <div class="cover">
               <el-image class="w-60 rounded m-1" :src="article.cover" fit="cover" />
             </div>
-            <div class="info py-1 px-3 space-y-1">
-              <div class="title font-sans text-2xl text-gray-800 font-semibold">
+            <div class="info flex flex-col py-1 px-3 space-y-1">
+              <div class="title font-sans text-2xl text-gray-800 font-semibold hover:text-blue-500">
                 <router-link :to="`/crm/articles/${article._id}`">
                   <h2> {{ article.title }}</h2>
                 </router-link>
               </div>
-              <div class="subtitle font-serif text-lg text-dark-200">
+              <div class="subtitle font-sans text-lg text-dark-200">
                 <h3> {{ article.subtitle }}</h3>
               </div>
-              <div class="excerpt">
-                <p class="text-dark-100 leading-9">
+              <div class="excerpt flex-1">
+                <p class="text-dark-100 leading-7">
                   {{ article.excerpt }}
                 </p>
               </div>

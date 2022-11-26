@@ -40,32 +40,21 @@
         </template>
       </el-table-column>
     </el-table>
-    <tag-edit-dialog v-model:visible="editDialogConfig.visible" :tag="editDialogConfig.tag" />
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { reactive } from 'vue'
-  import { TagEditDialog } from './index'
   import { ElTable, ElTableColumn, ElTag, ElButton, ElPopconfirm } from 'element-plus'
-  import { getTagById } from '@/api/crm'
-
-  const editDialogConfig = reactive({ visible: false, tag: {} })
 
   defineProps<{ tags: CRMTag[] }>()
 
-  const onEdit = async (id: string) => {
-    if (id) {
-      const { data } = await getTagById(id)
-      if (data) {
-        editDialogConfig.tag = data
-        editDialogConfig.visible = true
-      }
-    }
-  }
-  const onDelete = (id: string) => {
-    console.log('delete' + id)
-  }
+  const emit = defineEmits<{
+    (e: 'edit', id: string): void
+    (e: 'delete', id: string): void
+  }>()
+
+  const onEdit = (id: string) => emit('edit', id)
+  const onDelete = (id: string) => emit('delete', id)
 </script>
 
 <style scoped></style>

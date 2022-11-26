@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <h1>文章管理（一共{{ count }}篇文章）</h1>
-    <div v-if="articles">
-      <article-list :articles="articles" />
-    </div>
-  </div>
+  <ContentWrap :title="`文章管理（一共${count}篇文章）`">
+    <article-list v-if="articles" :articles="articles" />
+  </ContentWrap>
 </template>
 
 <script setup lang="ts">

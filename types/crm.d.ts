@@ -30,6 +30,7 @@ interface CRMTag extends SystemBasic {
   icon?: string
   cover?: string
   category?: string
+  description?: string
   visible?: boolean
   count?: number
   roles?: string[] | SystemRole[]

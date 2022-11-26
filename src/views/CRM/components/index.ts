@@ -4,6 +4,16 @@ import ArticleEditor from './ArticleEditor.vue'
 import TagsInfo from './TagsInfo.vue'
 import TagList from './TagList.vue'
 import TagEditDialog from './TagEditDialog.vue'
-import TagEditor from './TagEditor.vue'
+import TagForm from './TagForm.vue'
+import TagsSelect from './TagsSelect.vue'
 
-export { ArticleEditor, ArticleList, AuthorInfo, TagsInfo, TagList, TagEditor, TagEditDialog }
+export {
+  ArticleEditor,
+  ArticleList,
+  AuthorInfo,
+  TagsInfo,
+  TagList,
+  TagForm,
+  TagEditDialog,
+  TagsSelect
+}

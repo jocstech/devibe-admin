@@ -35,8 +35,8 @@ service.interceptors.request.use(
     // 请求提示动画
     loading = ElLoading.service({
       lock: true,
-      text: 'Loading',
-      background: 'rgba(0, 0, 0, 0.1)'
+      text: '服务器请求中',
+      background: 'rgba(0, 0, 0, 0.5)'
     })
 
     if (

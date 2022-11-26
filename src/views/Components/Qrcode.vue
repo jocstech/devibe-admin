@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Qrcode } from '@/components/Qrcode'
-  import { ContentWrap } from '@/components/ContentWrap'
+
   import { useI18n } from '@/hooks/web/useI18n'
   import { computed, ref, unref } from 'vue'
   import { useAppStore } from '@/store/modules/app'
