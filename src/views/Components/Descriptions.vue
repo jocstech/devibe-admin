@@ -125,7 +125,9 @@
       </template>
     </Descriptions>
     <div class="text-center mt-10px">
-      <ElButton @click="formValidation"> {{ t('formDemo.formValidation') }} </ElButton>
+      <ElButton @click="formValidation">
+        {{ t('formDemo.formValidation') }}
+      </ElButton>
     </div>
   </Form>
 </template>

@@ -267,7 +267,9 @@
 
     <ElButton @click="addItem"> {{ t('formDemo.add') }} {{ t('formDemo.subitem') }} </ElButton>
 
-    <ElButton @click="formValidation"> {{ t('formDemo.formValidation') }} </ElButton>
+    <ElButton @click="formValidation">
+      {{ t('formDemo.formValidation') }}
+    </ElButton>
     <ElButton @click="verifyReset"> {{ t('formDemo.verifyReset') }} </ElButton>
 
     <ElButton @click="getDictOne">

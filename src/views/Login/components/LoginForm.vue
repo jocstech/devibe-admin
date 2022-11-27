@@ -134,7 +134,9 @@
                 addRoute(route as RouteRecordRaw) // 动态添加可访问路由表
               })
               permissionStore.setIsAddRouters(true)
-              push({ path: redirect.value || permissionStore.addRouters[0].path })
+              push({
+                path: redirect.value || permissionStore.addRouters[0].path
+              })
             }
           }
         } finally {
@@ -189,7 +191,9 @@
     @register="register"
   >
     <template #title>
-      <h2 class="text-2xl font-bold text-center w-[100%]">{{ t('login.login') }}</h2>
+      <h2 class="text-2xl font-bold text-center w-[100%]">
+        {{ t('login.login') }}
+      </h2>
     </template>
 
     <template #tool>

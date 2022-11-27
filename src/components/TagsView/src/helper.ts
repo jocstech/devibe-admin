@@ -7,7 +7,11 @@ export const filterAffixTags = (routes: AppRouteRecordRaw[], parentPath = '') =>
     const meta = route.meta as RouteMeta
     const tagPath = pathResolve(parentPath, route.path)
     if (meta?.affix) {
-      tags.push({ ...route, path: tagPath, fullPath: tagPath } as RouteLocationNormalizedLoaded)
+      tags.push({
+        ...route,
+        path: tagPath,
+        fullPath: tagPath
+      } as RouteLocationNormalizedLoaded)
     }
     if (route.children) {
       const tempTags: RouteLocationNormalizedLoaded[] = filterAffixTags(route.children, tagPath)

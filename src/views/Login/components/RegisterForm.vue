@@ -120,7 +120,9 @@
     @register="register"
   >
     <template #title>
-      <h2 class="text-2xl font-bold text-center w-[100%]">{{ t('login.register') }}</h2>
+      <h2 class="text-2xl font-bold text-center w-[100%]">
+        {{ t('login.register') }}
+      </h2>
     </template>
 
     <template #code="form">
