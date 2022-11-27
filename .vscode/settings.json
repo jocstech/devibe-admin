@@ -5,7 +5,7 @@
     "source.fixAll.eslint": true
   },
   "[vue]": {
-    "editor.defaultFormatter": "Vue.volar"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "i18n-ally.localesPaths": ["src/locales"],
   "i18n-ally.keystyle": "nested",
@@ -15,5 +15,20 @@
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.displayLanguage": "zh-CN",
   "i18n-ally.enabledFrameworks": ["vue", "react"],
-  "vue3snippets.enable-compile-vue-file-on-did-save-code": false
+  "vue3snippets.enable-compile-vue-file-on-did-save-code": false,
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll.eslint": true
+  // },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": false
+    }
+  }
 }
