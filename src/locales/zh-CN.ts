@@ -102,7 +102,7 @@ export default {
     codePlaceholder: '请输入验证码'
   },
   router: {
-    crm: '内容管理',
+    cms: '内容管理',
     articles: '文章列表',
     tags: '文章标签',
     article_edit: '文章编辑',

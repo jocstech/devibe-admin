@@ -32,7 +32,7 @@
       <el-form-item label="Category">
         <el-radio-group v-model="tag.category">
           <el-radio label="all" size="large">All</el-radio>
-          <el-radio label="crm" size="large">CRM</el-radio>
+          <el-radio label="cms" size="large">CMS</el-radio>
           <el-radio label="resource" size="large">Resource</el-radio>
         </el-radio-group>
       </el-form-item>
@@ -55,12 +55,12 @@
   } from 'element-plus'
 
   const props = defineProps<{
-    tag: CRMTag
+    tag: CMSTag
     mode: String
   }>()
 
   const emit = defineEmits<{
-    (e: 'update:tag', tag: CRMTag): void
+    (e: 'update:tag', tag: CMSTag): void
   }>()
 
   // v-model object 双向绑定的秘密

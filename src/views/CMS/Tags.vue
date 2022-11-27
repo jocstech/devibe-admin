@@ -16,7 +16,7 @@
   import { ref, reactive, onMounted, computed } from 'vue'
   import { Edit } from '@element-plus/icons-vue'
   import { ElButton, ElNotification } from 'element-plus'
-  import { getTags, getTagById, updateTagById, createTag } from '@/api/crm'
+  import { getTags, getTagById, updateTagById, createTag } from '@/api/cms'
 
   import { TagList, TagEditDialog } from './components'
 
@@ -53,7 +53,7 @@
   }
 
   // Save the new tag
-  const onSave = async (tag: CRMTag) => {
+  const onSave = async (tag: CMSTag) => {
     if (tag?._id) {
       // update
       const { data } = await updateTagById(tag._id, tag)
@@ -78,12 +78,12 @@
   }
 
   // Edge Handler
-  function openDialog(data?: CRMTag) {
+  function openDialog(data?: CMSTag) {
     editDialogConfig.visible = true
     if (data) editDialogConfig.tag = data
   }
 
-  function closeDialog(data?: CRMTag) {
+  function closeDialog(data?: CMSTag) {
     editDialogConfig.visible = false
     if (data) editDialogConfig.tag = data
   }

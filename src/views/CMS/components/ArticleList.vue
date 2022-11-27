@@ -13,7 +13,7 @@
             </div>
             <div class="info flex flex-col py-1 px-3 space-y-1">
               <div class="title font-sans text-2xl text-gray-800 font-semibold hover:text-blue-500">
-                <router-link :to="`/crm/articles/${article._id}`">
+                <router-link :to="`/cms/articles/${article._id}`">
                   <h2> {{ article.title }}</h2>
                 </router-link>
               </div>
@@ -30,7 +30,7 @@
                   <author-info :author="article.author as SystemUser" />
                 </div>
                 <div v-if="article.tags?.length" class="tags">
-                  <tags-info :tags="article.tags as CRMTag[]" />
+                  <tags-info :tags="article.tags as CMSTag[]" />
                 </div>
                 <div class="actions text-sm">
                   <button>编辑</button> | <button>下架</button> | <button>删除</button>
@@ -48,7 +48,7 @@
   import { AuthorInfo, TagsInfo } from './'
   import { ElImage } from 'element-plus'
   defineProps<{
-    articles: CRMArticle[]
+    articles: CMSArticle[]
   }>()
 </script>
 

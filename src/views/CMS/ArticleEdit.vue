@@ -1,5 +1,5 @@
 <template>
-  <ContentDetailWrap :title="article.title" @back="$router.push('/crm/articles')">
+  <ContentDetailWrap :title="article.title" @back="$router.push('/cms/articles')">
     <article-editor v-model:article="article" @save="onSave" />
   </ContentDetailWrap>
 </template>
@@ -7,24 +7,24 @@
 <script setup lang="ts">
   import { ContentDetailWrap } from '@/components/ContentDetailWrap'
   import { ArticleEditor } from './components'
-  import { getArticleById, updateArticleById } from '@/api/crm'
+  import { getArticleById, updateArticleById } from '@/api/cms'
   import { onMounted, ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { ElMessage } from 'element-plus'
   const { currentRoute, push } = useRouter()
 
-  const article = ref({} as CRMArticle)
+  const article = ref({} as CMSArticle)
 
   onMounted(async () => {
     try {
       const { data } = await getArticleById(currentRoute.value.params.id as string)
       article.value = data
     } catch (error) {
-      push('/crm')
+      push('/cms')
     }
   })
 
-  const onSave = async (updatedArticle: CRMArticle) => {
+  const onSave = async (updatedArticle: CMSArticle) => {
     if (updatedArticle) {
       const { type, data } = await updateArticleById(updatedArticle._id as string, updatedArticle)
       if (type === 'success') {

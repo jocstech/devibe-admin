@@ -8,10 +8,10 @@
 
 <script setup lang="ts">
   import { ref, onMounted } from 'vue'
-  import { getTagsList } from '@/api/crm'
+  import { getTagsList } from '@/api/cms'
   import { ElSelect, ElOption } from 'element-plus'
 
-  const tags = ref<CRMTag[]>()
+  const tags = ref<CMSTag[]>()
 
   const fetchTagsList = async () => {
     const { data } = await getTagsList()

@@ -24,7 +24,7 @@ interface SystemUser extends SystemBasic {
   avatar: string
 }
 
-interface CRMTag extends SystemBasic {
+interface CMSTag extends SystemBasic {
   slug?: string
   name?: string
   icon?: string
@@ -36,7 +36,7 @@ interface CRMTag extends SystemBasic {
   roles?: string[] | SystemRole[]
 }
 
-interface CRMArticle extends SystemBasic {
+interface CMSArticle extends SystemBasic {
   slug?: string
   cover?: string
   title?: string
@@ -44,7 +44,7 @@ interface CRMArticle extends SystemBasic {
   editor_type?: string
   content?: string
   excerpt?: string
-  tags?: CRMTag[]
+  tags?: CMSTag[]
   roles?: any[]
   published_at?: Date | string
   author?: SystemUser | string

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-  import { getArticles } from '@/api/crm'
+  import { getArticles } from '@/api/cms'
   import { onMounted, ref, computed } from 'vue'
   import { ArticleList } from './components'
 

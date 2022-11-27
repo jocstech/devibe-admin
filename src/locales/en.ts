@@ -102,7 +102,7 @@ export default {
     codePlaceholder: 'Please input verification code'
   },
   router: {
-    crm: 'CRM',
+    cms: 'CMS',
     articles: 'Articles',
     tags: 'Tags',
     article_edit: 'Edit Article',

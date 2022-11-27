@@ -19,19 +19,19 @@
   import { TagForm } from './index'
   import { propTypes } from '@/utils/propTypes'
 
-  // const props = defineProps<{ tag: CRMTag; visible: Boolean }>()
+  // const props = defineProps<{ tag: CMSTag; visible: Boolean }>()
 
   const props = defineProps({
     visible: propTypes.bool.def(false),
     tag: {
-      type: Object as PropType<CRMTag>,
+      type: Object as PropType<CMSTag>,
       default: () => undefined
     }
   })
 
   const emit = defineEmits<{
-    (e: 'save', tag: CRMTag): void
-    (e: 'update:tag', tag: CRMTag): void
+    (e: 'save', tag: CMSTag): void
+    (e: 'update:tag', tag: CMSTag): void
     (e: 'update:visible', visible: Boolean): void
   }>()
 
@@ -41,7 +41,7 @@
   // v-model object 双向绑定的秘密
   const tag = computed({
     get: () => props.tag,
-    set: (value: CRMTag) => emit('update:tag', value)
+    set: (value: CMSTag) => emit('update:tag', value)
   })
 
   const visible = computed({
@@ -50,7 +50,7 @@
   })
 
   const onSave = () => {
-    emit('save', tag.value as CRMTag)
+    emit('save', tag.value as CMSTag)
   }
 </script>
 

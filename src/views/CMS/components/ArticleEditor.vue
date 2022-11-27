@@ -52,15 +52,15 @@
   import { TagsSelect } from './'
 
   const props = defineProps<{
-    article: CRMArticle
+    article: CMSArticle
   }>()
 
   // const isEditing = computed(() => props.article.hasOwnProperty('_id'))
   const isModified = ref(false)
 
   const emit = defineEmits<{
-    (e: 'update:article', article: CRMArticle): void
-    (e: 'save', article: CRMArticle): void
+    (e: 'update:article', article: CMSArticle): void
+    (e: 'save', article: CMSArticle): void
   }>()
 
   // v-model object 双向绑定的秘密

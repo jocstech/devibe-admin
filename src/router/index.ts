@@ -10,7 +10,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
-    redirect: '/crm',
+    redirect: '/cms',
     name: 'Root',
     meta: {
       hidden: true
@@ -57,19 +57,19 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
 
 export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
-    path: '/crm',
+    path: '/cms',
     component: Layout,
-    redirect: '/crm/articles',
-    name: 'CRM',
+    redirect: '/cms/articles',
+    name: 'CMS',
     meta: {
-      title: t('router.crm'),
+      title: t('router.cms'),
       icon: 'ant-design:dashboard-filled',
       alwaysShow: true
     },
     children: [
       {
         path: 'articles',
-        component: () => import('@/views/CRM/Articles.vue'),
+        component: () => import('@/views/CMS/Articles.vue'),
         name: 'Articles',
         meta: {
           title: t('router.articles'),
@@ -79,7 +79,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       },
       {
         path: 'articles/:id',
-        component: () => import('@/views/CRM/ArticleEdit.vue'),
+        component: () => import('@/views/CMS/ArticleEdit.vue'),
         name: 'ArticleEdit',
         meta: {
           title: t('router.article_edit'),
@@ -88,7 +88,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       },
       {
         path: 'tags',
-        component: () => import('@/views/CRM/Tags.vue'),
+        component: () => import('@/views/CMS/Tags.vue'),
         name: 'Tags',
         meta: {
           title: t('router.tags'),
@@ -97,7 +97,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       },
       {
         path: 'tags/:id',
-        component: () => import('@/views/CRM/TagEdit.vue'),
+        component: () => import('@/views/CMS/TagEdit.vue'),
         name: 'TagEdit',
         meta: {
           title: t('router.tags'),

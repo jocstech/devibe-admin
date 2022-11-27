@@ -46,7 +46,7 @@
 <script lang="ts" setup>
   import { ElTable, ElTableColumn, ElTag, ElButton, ElPopconfirm } from 'element-plus'
 
-  defineProps<{ tags: CRMTag[] }>()
+  defineProps<{ tags: CMSTag[] }>()
 
   const emit = defineEmits<{
     (e: 'edit', id: string): void

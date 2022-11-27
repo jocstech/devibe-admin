@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-  import { getTags } from '@/api/crm'
+  import { getTags } from '@/api/cms'
   import { onMounted, ref, computed } from 'vue'
   import { TagList } from './components'
 

@@ -7,7 +7,7 @@
 <script setup lang="ts">
   import { ElTag } from 'element-plus'
   defineProps<{
-    tags: CRMTag[]
+    tags: CMSTag[]
   }>()
 </script>
 
