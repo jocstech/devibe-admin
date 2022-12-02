@@ -56,6 +56,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
 ]
 
 export const asyncRouterMap: AppRouteRecordRaw[] = [
+  // CMS 内容管理系统
   {
     path: '/cms',
     component: Layout,
@@ -63,7 +64,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     name: 'CMS',
     meta: {
       title: t('router.cms'),
-      icon: 'ant-design:dashboard-filled',
+      icon: 'ant-design:unordered-list-outlined',
       alwaysShow: true,
     },
     children: [
@@ -74,7 +75,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           icon: 'ant-design:file-text-filled',
           title: t('router.articles'),
-          affix: true,
+          noCache: true,
         },
       },
       {
@@ -84,6 +85,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: t('router.article_edit'),
           hidden: true,
+          noCache: true,
         },
       },
       {
@@ -103,6 +105,38 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: t('router.tags'),
           hidden: true,
+        },
+      },
+    ],
+  },
+  // SYSTEM 系统管理
+  {
+    path: '/system',
+    component: Layout,
+    redirect: '/system/users',
+    name: 'System',
+    meta: {
+      title: '系统管理',
+      icon: 'ant-design:tool-outlined',
+      alwaysShow: true,
+    },
+    children: [
+      {
+        path: 'users',
+        component: () => import('@/views/System/Users.vue'),
+        name: 'Users',
+        meta: {
+          title: '用户管理',
+          icon: 'ant-design:user-outlined',
+        },
+      },
+      {
+        path: 'roles',
+        component: () => import('@/views/System/Roles.vue'),
+        name: 'Roles',
+        meta: {
+          title: '角色管理',
+          icon: 'ant-design:solution-outlined',
         },
       },
     ],

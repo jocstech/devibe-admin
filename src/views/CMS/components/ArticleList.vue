@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ElImage } from 'element-plus'
 import { AuthorInfo, TagsInfo } from './'
 defineProps<{
   articles: CMSArticle[]
 }>()
+
+const size = ref(10)
+const spacer = h(ElDivider, { direction: 'vertical' })
 </script>
 
 <template>
@@ -37,12 +39,20 @@ defineProps<{
                 <div v-if="article.author" class="author">
                   <AuthorInfo :author="article.author as SystemUser" />
                 </div>
-                <div v-if="article.tags?.length" class="tags">
+                <div v-if="article.tags?.length" class="tags flex-auto">
                   <TagsInfo :tags="article.tags as CMSTag[]" />
                 </div>
                 <div class="actions text-sm">
-                  <button>编辑</button> | <button>下架</button> |
-                  <button>删除</button>
+                  <el-space :size="size" :spacer="spacer">
+                    <ElButton size="small" type="primary" link>
+                      编辑
+                    </ElButton><ElButton size="small" link>
+                      下架
+                    </ElButton>
+                    <ElButton size="small" type="danger" link>
+                      删除
+                    </ElButton>
+                  </el-space>
                 </div>
               </div>
             </div>

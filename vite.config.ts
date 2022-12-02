@@ -1,16 +1,24 @@
-import { resolve } from 'path'
+import path, { resolve } from 'path'
 import { loadEnv } from 'vite'
-import type { ConfigEnv, UserConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
-import WindiCSS from 'vite-plugin-windicss'
-import VueJsx from '@vitejs/plugin-vue-jsx'
+// i18n
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
-import { ElementPlusResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
+// vite-plugins
+// import { ElementPlusResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import PurgeIcons from 'vite-plugin-purge-icons'
 import { viteMockServe } from 'vite-plugin-mock'
 import { createHtmlPlugin } from 'vite-plugin-html'
-import VueMarcos from 'unplugin-vue-macros/vite'
+import WindiCSS from 'vite-plugin-windicss'
+import VueJsx from '@vitejs/plugin-vue-jsx'
+
+// unplugin
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import VueMacros from 'unplugin-vue-macros/vite'
+// types
+import type { ConfigEnv, UserConfig } from 'vite'
 
 // https://vitejs.dev/config/
 const root = process.cwd()
@@ -20,36 +28,23 @@ function pathResolve(dir: string) {
 }
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
-  let env = {} as any
   const isBuild = command === 'build'
-  if (!isBuild)
-    env = loadEnv((process.argv[3] === '--mode' ? process.argv[4] : process.argv[3]), root)
-
-  else
-    env = loadEnv(mode, root)
+  const env = isBuild ? loadEnv(mode, root) : loadEnv((process.argv[3] === '--mode' ? process.argv[4] : process.argv[3]), root)
 
   return {
     base: env.VITE_BASE_PATH,
-    plugins: [
-      Vue(),
-      VueJsx(),
-      WindiCSS(),
-      createStyleImportPlugin({
-        resolves: [ElementPlusResolve()],
-        libs: [{
-          libraryName: 'element-plus',
-          esModule: true,
-          resolveStyle: (name) => {
-            return `element-plus/es/components/${name.substring(3)}/style/css`
-          },
-        }],
-      }),
+    resolve: {
+      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.less', '.css'],
+      alias: {
+        '~/': `${path.resolve(__dirname, 'src')}/`,
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
+        '/\@\//': `${path.resolve(__dirname, 'src')}/`,
+        '@/': `${path.resolve(__dirname, 'src')}/`,
+      },
 
-      VueI18n({
-        runtimeOnly: true,
-        compositionOnly: true,
-        include: [resolve(__dirname, 'src/locales/**')],
-      }),
+    },
+    plugins: [
+      VueJsx(),
       createSvgIconsPlugin({
         iconDirs: [pathResolve('src/assets/svgs')],
         symbolId: 'icon-[dir]-[name]',
@@ -63,11 +58,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         prodEnabled: isBuild,
         injectCode: `
           import { setupProdMockServer } from '../mock/_createProductionServer'
-
           setupProdMockServer()
           `,
       }),
-      VueMarcos(),
       createHtmlPlugin({
         inject: {
           data: {
@@ -76,8 +69,51 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           },
         },
       }),
-    ],
+      VueMacros({
+        plugins: {
+          vue: Vue({
+            include: [/\.vue$/, /\.md$/],
+            reactivityTransform: true,
+          }),
+        },
+      }),
+      // https://github.com/antfu/unplugin-auto-import
+      AutoImport({
+        imports: [
+          'vue',
+          'vue-router',
+          'vue-i18n',
+          'vue/macros',
+          '@vueuse/head',
+          '@vueuse/core',
+        ],
+        resolvers: [ElementPlusResolver()],
+        dts: 'src/auto-imports.d.ts',
+        dirs: [
+          'src/composables',
+          'src/store',
+        ],
+        vueTemplate: true,
+      }),
 
+      // https://github.com/antfu/unplugin-vue-components
+      Components({
+        resolvers: [ElementPlusResolver()],
+        // allow auto load markdown components under `./src/components/`
+        extensions: ['vue', 'md'],
+        // allow auto import and register components used in markdown
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+        dts: 'src/components.d.ts',
+      }),
+
+      WindiCSS(),
+      // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
+      VueI18n({
+        runtimeOnly: true,
+        compositionOnly: true,
+        include: [path.resolve(__dirname, 'locales/**')],
+      }),
+    ],
     css: {
       preprocessorOptions: {
         less: {
@@ -85,19 +121,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           javascriptEnabled: true,
         },
       },
-    },
-    resolve: {
-      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.less', '.css'],
-      alias: [
-        {
-          find: 'vue-i18n',
-          replacement: 'vue-i18n/dist/vue-i18n.cjs.js',
-        },
-        {
-          find: /\@\//,
-          replacement: `${pathResolve('src')}/`,
-        },
-      ],
     },
     build: {
       minify: 'terser',

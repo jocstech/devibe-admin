@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ElButton, ElCard } from 'element-plus'
-import { onMounted, ref } from 'vue'
 import { propTypes } from '@/utils/propTypes'
 import { useDesign } from '@/hooks/web/useDesign'
 // import { Sticky } from '@/components/Sticky'
@@ -9,15 +8,10 @@ defineProps({
   title: propTypes.string.def(''),
   message: propTypes.string.def(''),
 })
-
 const emit = defineEmits(['back'])
-
 const { t } = useI18n()
-
 const { getPrefixCls } = useDesign()
-
 const prefixCls = getPrefixCls('content-detail-wrap')
-
 const offset = ref(1)
 const contentDetailWrap = ref()
 onMounted(() => {
