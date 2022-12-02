@@ -33,6 +33,11 @@ analysis:
   videoAdvertising: Video advertising
   wednesday: Wednesday
   weeklyUserActivity: Weekly user activity
+cms:
+  coverUpload:
+    or: or
+    dropFileHere: Drop file here
+    clickToUpload: click to upload
 common:
   back: Back
   cancel: Cancel

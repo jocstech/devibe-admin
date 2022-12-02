@@ -1,9 +1,6 @@
 <script lang="ts" setup>
-import { ElButton } from 'element-plus'
 import type { PropType } from 'vue'
-import { computed } from 'vue'
 import { TagForm } from './index'
-import { Dialog } from '@/components/Dialog'
 import { propTypes } from '@/utils/propTypes'
 
 // const props = defineProps<{ tag: CMSTag; visible: Boolean }>()

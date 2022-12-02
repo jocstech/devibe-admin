@@ -33,6 +33,11 @@ analysis:
   videoAdvertising: 视频广告
   wednesday: 周三
   weeklyUserActivity: 每周用户活跃量
+cms:
+  coverUpload:
+    or: 或者
+    dropFileHere: 拖拽图片到这
+    clickToUpload: 点击上传
 common:
   back: 返回
   cancel: 取消

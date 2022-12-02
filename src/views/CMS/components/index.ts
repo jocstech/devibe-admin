@@ -6,11 +6,13 @@ import TagList from './TagList.vue'
 import TagEditDialog from './TagEditDialog.vue'
 import TagForm from './TagForm.vue'
 import TagsSelect from './TagsSelect.vue'
+import CoverUpload from './CoverUpload.vue'
 
 export {
   ArticleEditor,
   ArticleList,
   AuthorInfo,
+  CoverUpload,
   TagsInfo,
   TagList,
   TagForm,

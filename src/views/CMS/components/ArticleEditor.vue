@@ -2,7 +2,7 @@
 import { ElButton, ElInput } from 'element-plus'
 import { Delete, Edit, Upload } from '@element-plus/icons-vue'
 import { computed, ref, watch } from 'vue'
-import { TagsSelect } from './'
+import { CoverUpload, TagsSelect } from './'
 import { Editor } from '@/components/Editor'
 
 const props = defineProps<{
@@ -45,6 +45,11 @@ const publish = () => {
 const recover = () => {
   article.value = {}
 }
+
+const onUploadSuccess = (url: string) => {
+  if (url)
+    article.value.cover = url
+}
 </script>
 
 <template>
@@ -71,6 +76,7 @@ const recover = () => {
             文章封面图
           </div>
           <img v-if="article.cover" :src="article.cover" :alt="article.title">
+          <CoverUpload v-else @on-upload-success="onUploadSuccess" />
         </div>
         <div class="bg-white border p-2">
           <div class="section-title">

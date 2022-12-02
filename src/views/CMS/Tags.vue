@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
-import { Edit } from '@element-plus/icons-vue'
-import { ElButton, ElNotification } from 'element-plus'
+import { ElNotification } from 'element-plus'
 import { TagEditDialog, TagList } from './components'
 import { createTag, getTagById, getTags, updateTagById } from '@/api/cms'
 
@@ -93,11 +91,12 @@ function onFailed(title?: string, message?: string) {
 
 <template>
   <ContentWrap :title="`标签管理（一共${count}个标签）`" message="标签管理">
-    <div class="operations mb-2">
-      <ElButton :icon="Edit" type="primary" @click="onCreate">
+    <template #actions>
+      <ElButton type="primary" @click="onCreate">
         创建新标签
       </ElButton>
-    </div>
+    </template>
+
     <TagList v-if="tags" :tags="tags" @edit="onEdit" @delete="onDelete" />
   </ContentWrap>
   <TagEditDialog

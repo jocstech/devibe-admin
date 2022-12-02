@@ -22,14 +22,18 @@ const spacer = h(ElDivider, { direction: 'vertical' })
             <div class="cover">
               <ElImage class="w-60 rounded m-1" :src="article.cover" fit="cover" />
             </div>
-            <div class="info flex flex-col py-1 px-3 space-y-1">
+            <div class="info flex flex-col py-1 px-3 space-y-1 overflow-auto">
               <div class="title font-sans text-2xl text-gray-800 font-semibold hover:text-blue-500">
                 <router-link :to="`/cms/articles/${article._id}`">
-                  <h2>{{ article.title }}</h2>
+                  <h2 class="truncate">
+                    {{ article.title }}
+                  </h2>
                 </router-link>
               </div>
               <div class="subtitle font-sans text-lg text-dark-200 italic">
-                <h3>{{ article.subtitle }}</h3>
+                <h3 class="truncate">
+                  {{ article.subtitle }}
+                </h3>
               </div>
               <div class="excerpt flex-1">
                 <p class="text-md text-dark-50 leading-7">
