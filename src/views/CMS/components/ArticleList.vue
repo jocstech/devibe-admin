@@ -3,6 +3,7 @@ import { AuthorInfo, TagsInfo } from './'
 defineProps<{
   articles: CMSArticle[]
 }>()
+const articleHook = useArticle()
 
 const size = ref(5)
 const spacer = h(ElDivider, { direction: 'vertical' })
@@ -44,12 +45,12 @@ const spacer = h(ElDivider, { direction: 'vertical' })
                 </div>
                 <div class="actions text-sm">
                   <el-space :size="size" :spacer="spacer">
-                    <ElButton size="small" type="primary" link>
+                    <ElButton size="small" type="primary" link @click="articleHook.onEdit(article._id as string)">
                       编辑
-                    </ElButton><ElButton size="small" link>
+                    </ElButton><ElButton size="small" link @click="articleHook.onUnpublish(article._id as string)">
                       下架
                     </ElButton>
-                    <ElButton size="small" type="danger" link>
+                    <ElButton size="small" type="danger" link @click="articleHook.onDelete(article._id as string)">
                       删除
                     </ElButton>
                   </el-space>

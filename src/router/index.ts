@@ -79,6 +79,16 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         },
       },
       {
+        path: 'articles/create',
+        component: () => import('@/views/CMS/ArticleCreate.vue'),
+        name: 'ArticleCreate',
+        meta: {
+          title: t('router.article_create'),
+          hidden: true,
+          noCache: true,
+        },
+      },
+      {
         path: 'articles/:id',
         component: () => import('@/views/CMS/ArticleEdit.vue'),
         name: 'ArticleEdit',

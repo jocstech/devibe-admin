@@ -244,6 +244,7 @@ richText:
   richTextDes: 基于 wangeditor 二次封装
 router:
   analysis: 分析页
+  article_create: 创建文章
   article_edit: 文章编辑
   articles: 文章列表
   authorization: 权限管理

@@ -256,6 +256,7 @@ richText:
   richTextDes: Secondary packaging based on wangeditor
 router:
   analysis: Analysis
+  article_create: Create Article
   article_edit: Edit Article
   articles: Articles
   authorization: Authorization

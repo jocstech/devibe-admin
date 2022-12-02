@@ -15,25 +15,9 @@ export default defineConfig({
   theme: {
     extend: {
       backgroundColor: {
-        // 暗黑背景色
         'v-dark': 'var(--dark-bg-color)',
       },
-      // screens: {
-      //   sm: '768px',
-      //   md: '992px',
-      //   lg: '1200px',
-      //   xl: '1920px'
-      // }
     },
-    // height: {
-    //   ...range(50).map((i) => `h-${i}px`)
-    // },
-    // margin: {
-    //   // ...range(50).map((i) => `mt-${i}px`),
-    //   // ...range(50).map((i) => `mr-${i}px`),
-    //   // ...range(50).map((i) => `mb-${i}px`),
-    //   // ...range(50).map((i) => `ml-${i}px`)
-    // }
   },
   plugins: [
     plugin(({ addComponents }) => {
