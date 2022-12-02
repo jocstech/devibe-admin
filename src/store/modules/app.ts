@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia'
-import { store } from '../index'
-import { setCssVar, humpToUnderline } from '@/utils'
 import { ElMessage } from 'element-plus'
-import { ElementPlusSize } from '@/types/elementPlus'
-import { useCache } from '@/hooks/web/useCache'
-import { LayoutType } from '@/types/layout'
-import { ThemeTypes } from '@/types/theme'
-import { User } from '@/api/auth/types'
-import { APP } from '@/config'
 import jwt_decode from 'jwt-decode'
+import { store } from '../index'
+import { humpToUnderline, setCssVar } from '@/utils'
+import type { ElementPlusSize } from '@/types/elementPlus'
+import { useCache } from '@/hooks/web/useCache'
+import type { LayoutType } from '@/types/layout'
+import type { ThemeTypes } from '@/types/theme'
+import type { User } from '@/api/auth/types'
+import { APP } from '@/config'
 
 const { wsCache } = useCache()
 
@@ -98,8 +98,8 @@ export const useStore = defineStore('app', {
         // 头部悬停颜色
         topHeaderHoverColor: '#f6f6f6',
         // 头部边框颜色
-        topToolBorderColor: '#eee'
-      }
+        topToolBorderColor: '#eee',
+      },
     }
   },
   getters: {
@@ -180,21 +180,24 @@ export const useStore = defineStore('app', {
     },
     getFooter(): boolean {
       return this.footer
-    }
+    },
   },
   actions: {
     setAuthToken(token: string) {
-      if (!token) return
+      if (!token)
+        return
       this.authToken = token
       wsCache.set(APP.AUTH_JWT_KEY, this.getAuthToken)
     },
     setCurrentUser(user: User) {
-      if (!user) return
+      if (!user)
+        return
       this.currentUser = user
       wsCache.set(APP.USER_CACHE_KEY, this.getCurrentUser)
     },
     setCurrentUserByJWT(token: string) {
-      if (!token) return
+      if (!token)
+        return
       this.currentUser = jwt_decode(token)
       wsCache.set(APP.USER_CACHE_KEY, this.getCurrentUser)
     },
@@ -265,7 +268,8 @@ export const useStore = defineStore('app', {
       if (this.isDark) {
         document.documentElement.classList.add('dark')
         document.documentElement.classList.remove('light')
-      } else {
+      }
+      else {
         document.documentElement.classList.add('light')
         document.documentElement.classList.remove('dark')
       }
@@ -283,14 +287,13 @@ export const useStore = defineStore('app', {
       wsCache.set('theme', this.theme)
     },
     setCssVarTheme() {
-      for (const key in this.theme) {
+      for (const key in this.theme)
         setCssVar(`--${humpToUnderline(key)}`, this.theme[key])
-      }
     },
     setFooter(footer: boolean) {
       this.footer = footer
-    }
-  }
+    },
+  },
 })
 
 export const useAppStore = () => {

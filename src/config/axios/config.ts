@@ -20,7 +20,7 @@ const config: {
     // 打包生产环境接口前缀
     pro: 'https://api.devibe.cn/v1',
     // 打包测试环境接口前缀
-    test: 'http://localhost:4500/v1'
+    test: 'http://localhost:4500/v1',
   },
 
   /**
@@ -37,7 +37,7 @@ const config: {
    * 默认接口请求类型
    * 可选值：application/x-www-form-urlencoded multipart/form-data
    */
-  default_headers: 'application/json'
+  default_headers: 'application/json',
 }
 
 export { config }

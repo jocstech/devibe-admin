@@ -1,8 +1,8 @@
-import type { Form, FormExpose } from '@/components/Form'
 import type { ElForm } from 'element-plus'
-import { ref, unref, nextTick } from 'vue'
+import { nextTick, ref, unref } from 'vue'
+import type { Form, FormExpose } from '@/components/Form'
 import type { FormProps } from '@/components/Form/src/types'
-import { FormSchema, FormSetPropsType } from '@/types/form'
+import type { FormSchema, FormSetPropsType } from '@/types/form'
 
 export const useForm = (props?: FormProps) => {
   // From实例
@@ -23,9 +23,9 @@ export const useForm = (props?: FormProps) => {
   const getForm = async () => {
     await nextTick()
     const form = unref(formRef)
-    if (!form) {
+    if (!form)
       console.error('The form is not registered. Please use the register method to register')
-    }
+
     return form
   }
 
@@ -79,7 +79,7 @@ export const useForm = (props?: FormProps) => {
     getFormData: async <T = Recordable>(): Promise<T> => {
       const form = await getForm()
       return form?.formModel as T
-    }
+    },
   }
 
   props && methods.setProps(props)
@@ -87,6 +87,6 @@ export const useForm = (props?: FormProps) => {
   return {
     register,
     elFormRef,
-    methods
+    methods,
   }
 }

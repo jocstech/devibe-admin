@@ -1,20 +1,22 @@
 <script setup lang="ts">
-  import { ElInput } from 'element-plus'
+import { ElInput } from 'element-plus'
 
-  import { useI18n } from '@/hooks/web/useI18n'
-  import { ref } from 'vue'
+import { ref } from 'vue'
+import { useI18n } from '@/hooks/web/useI18n'
 
-  defineOptions({
-    name: 'Menu2'
-  })
+defineOptions({
+  name: 'Menu2',
+})
 
-  const { t } = useI18n()
+const { t } = useI18n()
 
-  const text = ref('')
+const text = ref('')
 </script>
 
 <template>
   <ContentWrap :title="t('levelDemo.menu')">
-    <div class="flex items-center"> Menu2: <ElInput v-model="text" class="pl-20px" /> </div>
+    <div class="flex items-center">
+      Menu2: <ElInput v-model="text" class="pl-20px" />
+    </div>
   </ContentWrap>
 </template>

@@ -1,14 +1,14 @@
+import type { RouteRecordRaw } from 'vue-router'
 import router from './router'
+import { APP } from './config'
 import { useAppStore } from '@/store/modules/app'
 import { useCache } from '@/hooks/web/useCache'
-import type { RouteRecordRaw } from 'vue-router'
 import { useTitle } from '@/hooks/web/useTitle'
 import { useNProgress } from '@/hooks/web/useNProgress'
 import { usePermissionStoreWithOut } from '@/store/modules/permission'
 import { useDictStoreWithOut } from '@/store/modules/dict'
 import { usePageLoading } from '@/hooks/web/usePageLoading'
 import { getDictApi } from '@/api/common'
-import { APP } from './config'
 
 const permissionStore = usePermissionStoreWithOut()
 
@@ -30,7 +30,8 @@ router.beforeEach(async (to, from, next) => {
   if (wsCache.get(APP.USER_CACHE_KEY)) {
     if (to.path === '/login') {
       next({ path: '/' })
-    } else {
+    }
+    else {
       if (permissionStore.getIsAddRouters) {
         next()
         return
@@ -54,7 +55,8 @@ router.beforeEach(async (to, from, next) => {
         userInfo.role === 'admin'
           ? await permissionStore.generateRoutes('admin', roleRouters as AppCustomRouteRecordRaw[])
           : await permissionStore.generateRoutes('test', roleRouters as string[])
-      } else {
+      }
+      else {
         await permissionStore.generateRoutes('none')
       }
 
@@ -67,12 +69,12 @@ router.beforeEach(async (to, from, next) => {
       permissionStore.setIsAddRouters(true)
       next(nextData)
     }
-  } else {
-    if (whiteList.indexOf(to.path) !== -1) {
+  }
+  else {
+    if (whiteList.includes(to.path))
       next()
-    } else {
+    else
       next(`/login?redirect=${to.path}`) // 否则全部重定向到登录页
-    }
   }
 })
 

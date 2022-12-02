@@ -15,5 +15,5 @@ export {
   TagList,
   TagForm,
   TagEditDialog,
-  TagsSelect
+  TagsSelect,
 }

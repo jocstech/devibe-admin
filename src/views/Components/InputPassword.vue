@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import { useI18n } from '@/hooks/web/useI18n'
-  import { InputPassword } from '@/components/InputPassword'
-  import { ref } from 'vue'
+import { ref } from 'vue'
+import { useI18n } from '@/hooks/web/useI18n'
+import { InputPassword } from '@/components/InputPassword'
 
-  const { t } = useI18n()
+const { t } = useI18n()
 
-  const password = ref('')
+const password = ref('')
 </script>
 
 <template>

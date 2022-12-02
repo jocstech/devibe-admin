@@ -10,9 +10,9 @@ export interface ScrollToParams {
 
 const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
   t /= d / 2
-  if (t < 1) {
+  if (t < 1)
     return (c / 2) * t * t + b
-  }
+
   t--
   return (-c / 2) * (t * (t - 2) - 1) + b
 }
@@ -25,7 +25,7 @@ export function useScrollTo({
   position = 'scrollLeft',
   to,
   duration = 500,
-  callback
+  callback,
 }: ScrollToParams) {
   const isActiveRef = ref(false)
   const start = el[position]
@@ -34,18 +34,18 @@ export function useScrollTo({
   let currentTime = 0
 
   function animateScroll() {
-    if (!unref(isActiveRef)) {
+    if (!unref(isActiveRef))
       return
-    }
+
     currentTime += increment
     const val = easeInOutQuad(currentTime, start, change, duration)
     move(el, position, val)
     if (currentTime < duration && unref(isActiveRef)) {
       requestAnimationFrame(animateScroll)
-    } else {
-      if (callback) {
+    }
+    else {
+      if (callback)
         callback()
-      }
     }
   }
 

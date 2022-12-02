@@ -1,38 +1,38 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
-  import { useAppStore } from '@/store/modules/app'
-  import { ElSwitch } from 'element-plus'
-  import { useIcon } from '@/hooks/web/useIcon'
-  import { useDesign } from '@/hooks/web/useDesign'
+import { ref } from 'vue'
+import { ElSwitch } from 'element-plus'
+import { useAppStore } from '@/store/modules/app'
+import { useIcon } from '@/hooks/web/useIcon'
+import { useDesign } from '@/hooks/web/useDesign'
 
-  const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign()
 
-  const prefixCls = getPrefixCls('theme-switch')
+const prefixCls = getPrefixCls('theme-switch')
 
-  const Sun = useIcon({ icon: 'emojione-monotone:sun', color: '#fde047' })
+const Sun = useIcon({ icon: 'emojione-monotone:sun', color: '#fde047' })
 
-  const CrescentMoon = useIcon({
-    icon: 'emojione-monotone:crescent-moon',
-    color: '#fde047'
-  })
+const CrescentMoon = useIcon({
+  icon: 'emojione-monotone:crescent-moon',
+  color: '#fde047',
+})
 
-  const appStore = useAppStore()
+const appStore = useAppStore()
 
-  // 初始化获取是否是暗黑主题
-  const isDark = ref(appStore.getIsDark)
+// 初始化获取是否是暗黑主题
+const isDark = ref(appStore.getIsDark)
 
-  // 设置switch的背景颜色
-  const blackColor = 'var(--el-color-black)'
+// 设置switch的背景颜色
+const blackColor = 'var(--el-color-black)'
 
-  const themeChange = (val: boolean) => {
-    appStore.setIsDark(val)
-  }
+const themeChange = (val: boolean) => {
+  appStore.setIsDark(val)
+}
 </script>
 
 <template>
   <ElSwitch
-    :class="prefixCls"
     v-model="isDark"
+    :class="prefixCls"
     inline-prompt
     :border-color="blackColor"
     :inactive-color="blackColor"

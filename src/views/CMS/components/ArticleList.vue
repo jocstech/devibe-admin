@@ -1,15 +1,23 @@
+<script setup lang="ts">
+import { ElImage } from 'element-plus'
+import { AuthorInfo, TagsInfo } from './'
+defineProps<{
+  articles: CMSArticle[]
+}>()
+</script>
+
 <template>
   <div class="p-0">
-    <div class="article-list" v-if="articles.length">
+    <div v-if="articles.length" class="article-list">
       <ul>
         <li
-          class="bg-white even:bg-light-100 rounded"
           v-for="article of articles"
           :key="article._id"
+          class="bg-white even:bg-light-100 rounded"
         >
           <div class="flex">
             <div class="cover">
-              <el-image class="w-60 rounded m-1" :src="article.cover" fit="cover" />
+              <ElImage class="w-60 rounded m-1" :src="article.cover" fit="cover" />
             </div>
             <div class="info flex flex-col py-1 px-3 space-y-1">
               <div class="title font-sans text-2xl text-gray-800 font-semibold hover:text-blue-500">
@@ -27,10 +35,10 @@
               </div>
               <div class="flex items-center space-x-2">
                 <div v-if="article.author" class="author">
-                  <author-info :author="article.author as SystemUser" />
+                  <AuthorInfo :author="article.author as SystemUser" />
                 </div>
                 <div v-if="article.tags?.length" class="tags">
-                  <tags-info :tags="article.tags as CMSTag[]" />
+                  <TagsInfo :tags="article.tags as CMSTag[]" />
                 </div>
                 <div class="actions text-sm">
                   <button>编辑</button> | <button>下架</button> |
@@ -44,13 +52,5 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-  import { AuthorInfo, TagsInfo } from './'
-  import { ElImage } from 'element-plus'
-  defineProps<{
-    articles: CMSArticle[]
-  }>()
-</script>
 
 <style scoped></style>

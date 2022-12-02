@@ -1,113 +1,109 @@
 <script setup lang="ts">
-  import { useTimeAgo } from '@/hooks/web/useTimeAgo'
-  import { ElRow, ElCol, ElSkeleton, ElCard, ElDivider, ElLink } from 'element-plus'
-  import { useI18n } from '@/hooks/web/useI18n'
-  import { ref, reactive } from 'vue'
-  import { CountTo } from '@/components/CountTo'
-  import { formatTime } from '@/utils'
-  import { Echart } from '@/components/Echart'
-  import { EChartsOption } from 'echarts'
-  import { radarOption } from './echarts-data'
-  import { Highlight } from '@/components/Highlight'
-  import {
-    getCountApi,
-    getProjectApi,
-    getDynamicApi,
-    getTeamApi,
-    getRadarApi
-  } from '@/api/dashboard/workplace'
-  import type { WorkplaceTotal, Project, Dynamic, Team } from '@/api/dashboard/workplace/types'
-  import { set } from 'lodash-es'
+import { ElCard, ElCol, ElDivider, ElLink, ElRow, ElSkeleton } from 'element-plus'
+import { reactive, ref } from 'vue'
+import type { EChartsOption } from 'echarts'
+import { set } from 'lodash-es'
+import { radarOption } from './echarts-data'
+import { useTimeAgo } from '@/hooks/web/useTimeAgo'
+import { useI18n } from '@/hooks/web/useI18n'
+import { CountTo } from '@/components/CountTo'
+import { formatTime } from '@/utils'
+import { Echart } from '@/components/Echart'
+import { Highlight } from '@/components/Highlight'
+import {
+  getCountApi,
+  getDynamicApi,
+  getProjectApi,
+  getRadarApi,
+  getTeamApi,
+} from '@/api/dashboard/workplace'
+import type { Dynamic, Project, Team, WorkplaceTotal } from '@/api/dashboard/workplace/types'
 
-  const loading = ref(true)
+const loading = ref(true)
 
-  // 获取统计数
-  let totalSate = reactive<WorkplaceTotal>({
-    project: 0,
-    access: 0,
-    todo: 0
-  })
+// 获取统计数
+let totalSate = reactive<WorkplaceTotal>({
+  project: 0,
+  access: 0,
+  todo: 0,
+})
 
-  const getCount = async () => {
-    const res = await getCountApi().catch(() => {})
-    if (res) {
-      totalSate = Object.assign(totalSate, res.data)
-    }
-  }
+const getCount = async () => {
+  const res = await getCountApi().catch(() => {})
+  if (res)
+    totalSate = Object.assign(totalSate, res.data)
+}
 
-  let projects = reactive<Project[]>([])
+let projects = reactive<Project[]>([])
 
-  // 获取项目数
-  const getProject = async () => {
-    const res = await getProjectApi().catch(() => {})
-    if (res) {
-      projects = Object.assign(projects, res.data)
-    }
-  }
+// 获取项目数
+const getProject = async () => {
+  const res = await getProjectApi().catch(() => {})
+  if (res)
+    projects = Object.assign(projects, res.data)
+}
 
-  // 获取动态
-  let dynamics = reactive<Dynamic[]>([])
+// 获取动态
+let dynamics = reactive<Dynamic[]>([])
 
-  const getDynamic = async () => {
-    const res = await getDynamicApi().catch(() => {})
-    if (res) {
-      dynamics = Object.assign(dynamics, res.data)
-    }
-  }
+const getDynamic = async () => {
+  const res = await getDynamicApi().catch(() => {})
+  if (res)
+    dynamics = Object.assign(dynamics, res.data)
+}
 
-  // 获取团队
-  let team = reactive<Team[]>([])
+// 获取团队
+let team = reactive<Team[]>([])
 
-  const getTeam = async () => {
-    const res = await getTeamApi().catch(() => {})
-    if (res) {
-      team = Object.assign(team, res.data)
-    }
-  }
+const getTeam = async () => {
+  const res = await getTeamApi().catch(() => {})
+  if (res)
+    team = Object.assign(team, res.data)
+}
 
-  // 获取指数
-  let radarOptionData = reactive<EChartsOption>(radarOption) as EChartsOption
+// 获取指数
+const radarOptionData = reactive<EChartsOption>(radarOption) as EChartsOption
 
-  const getRadar = async () => {
-    const res = await getRadarApi().catch(() => {})
-    if (res) {
-      set(
-        radarOptionData,
-        'radar.indicator',
-        res.data.map((v) => {
-          return {
-            name: t(v.name),
-            max: v.max
-          }
-        })
-      )
-      set(radarOptionData, 'series', [
-        {
-          name: `xxx${t('workplace.index')}`,
-          type: 'radar',
-          data: [
-            {
-              value: res.data.map((v) => v.personal),
-              name: t('workplace.personal')
-            },
-            {
-              value: res.data.map((v) => v.team),
-              name: t('workplace.team')
-            }
-          ]
+const getRadar = async () => {
+  const res = await getRadarApi().catch(() => {})
+  if (res) {
+    set(
+      radarOptionData,
+      'radar.indicator',
+      res.data.map((v) => {
+        return {
+          name: t(v.name),
+          max: v.max,
         }
-      ])
-    }
+      }),
+    )
+    set(radarOptionData, 'series', [
+      {
+        name: `xxx${t('workplace.index')}`,
+        type: 'radar',
+        data: [
+          {
+            value: res.data.map(v => v.personal),
+            name: t('workplace.personal'),
+          },
+          {
+            value: res.data.map(v => v.team),
+            name: t('workplace.team'),
+          },
+        ],
+      },
+    ])
   }
+}
 
-  const getAllApi = async () => {
-    await Promise.all([getCount(), getProject(), getDynamic(), getTeam(), getRadar()])
-    loading.value = false
-  }
+const getAllApi = async () => {
+  await Promise.all([getCount(), getProject(), getDynamic(), getTeam(), getRadar()])
+  loading.value = false
+}
 
-  getAllApi()
+getAllApi()
 
-  const { t } = useI18n()
+const { t } = useI18n()
 </script>
 
 <template>
@@ -121,7 +117,7 @@
                 src="@/assets/imgs/avatar.jpg"
                 alt=""
                 class="w-70px h-70px rounded-[50%] mr-20px"
-              />
+              >
               <div>
                 <div class="text-20px text-700">
                   {{ t('workplace.goodMorning') }}，Archer，{{ t('workplace.happyDay') }}
@@ -182,7 +178,9 @@
         <template #header>
           <div class="flex justify-between">
             <span>{{ t('workplace.project') }}</span>
-            <ElLink type="primary" :underline="false">{{ t('workplace.more') }}</ElLink>
+            <ElLink type="primary" :underline="false">
+              {{ t('workplace.more') }}
+            </ElLink>
           </div>
         </template>
         <ElSkeleton :loading="loading" animated>
@@ -218,7 +216,9 @@
         <template #header>
           <div class="flex justify-between">
             <span>{{ t('workplace.dynamic') }}</span>
-            <ElLink type="primary" :underline="false">{{ t('workplace.more') }}</ElLink>
+            <ElLink type="primary" :underline="false">
+              {{ t('workplace.more') }}
+            </ElLink>
           </div>
         </template>
         <ElSkeleton :loading="loading" animated>
@@ -228,7 +228,7 @@
                 src="@/assets/imgs/avatar.jpg"
                 alt=""
                 class="w-35px h-35px rounded-[50%] mr-20px"
-              />
+              >
               <div>
                 <div class="text-14px">
                   <Highlight :keys="item.keys.map((v) => t(v))">

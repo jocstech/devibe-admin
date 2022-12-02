@@ -1,14 +1,14 @@
+<script setup lang="ts">
+import { ElTag } from 'element-plus'
+defineProps<{
+  tags: CMSTag[]
+}>()
+</script>
+
 <template>
-  <span class="space-x-1" v-if="tags">
-    <el-tag v-for="tag of tags" :key="tag._id">{{ tag.name }} </el-tag>
+  <span v-if="tags" class="space-x-1">
+    <ElTag v-for="tag of tags" :key="tag._id">{{ tag.name }} </ElTag>
   </span>
 </template>
-
-<script setup lang="ts">
-  import { ElTag } from 'element-plus'
-  defineProps<{
-    tags: CMSTag[]
-  }>()
-</script>
 
 <style scoped></style>

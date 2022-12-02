@@ -1,36 +1,36 @@
 <script setup lang="ts">
-  import { useI18n } from '@/hooks/web/useI18n'
-  import { CountTo } from '@/components/CountTo'
-  import { ElRow, ElCol, ElInputNumber, ElInput, ElButton } from 'element-plus'
-  import { ref, unref } from 'vue'
+import { ElButton, ElCol, ElInput, ElInputNumber, ElRow } from 'element-plus'
+import { ref, unref } from 'vue'
+import { useI18n } from '@/hooks/web/useI18n'
+import { CountTo } from '@/components/CountTo'
 
-  const { t } = useI18n()
+const { t } = useI18n()
 
-  const countRef = ref<ComponentRef<typeof CountTo>>()
+const countRef = ref<ComponentRef<typeof CountTo>>()
 
-  const startVal = ref(0)
+const startVal = ref(0)
 
-  const endVal = ref(1314512)
+const endVal = ref(1314512)
 
-  const duration = ref(3000)
+const duration = ref(3000)
 
-  const decimals = ref(0)
+const decimals = ref(0)
 
-  const separator = ref(',')
+const separator = ref(',')
 
-  const prefix = ref('¥ ')
+const prefix = ref('¥ ')
 
-  const suffix = ref(' rmb')
+const suffix = ref(' rmb')
 
-  const autoplay = ref(false)
+const autoplay = ref(false)
 
-  const start = () => {
-    unref(countRef)?.start()
-  }
+const start = () => {
+  unref(countRef)?.start()
+}
 
-  const pauseResume = () => {
-    unref(countRef)?.pauseResume()
-  }
+const pauseResume = () => {
+  unref(countRef)?.pauseResume()
+}
 </script>
 
 <template>
@@ -88,7 +88,9 @@
       </ElCol>
       <ElCol :span="24">
         <div class="text-center">
-          <ElButton type="primary" @click="start">{{ t('countToDemo.start') }}</ElButton>
+          <ElButton type="primary" @click="start">
+            {{ t('countToDemo.start') }}
+          </ElButton>
           <ElButton @click="pauseResume">
             {{ t('countToDemo.pause') }}/{{ t('countToDemo.resume') }}
           </ElButton>

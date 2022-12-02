@@ -1,5 +1,5 @@
+import type { LoginParams, LoginResponse, UserType } from './types'
 import request from '@/config/axios'
-import type { UserType, LoginParams, LoginResponse } from './types'
 
 interface RoleParams {
   roleName: string
@@ -21,7 +21,7 @@ export const getUserListApi = ({ params }: AxiosConfig) => {
 }
 
 export const getAdminRoleApi = (
-  params: RoleParams
+  params: RoleParams,
 ): Promise<IResponse<AppCustomRouteRecordRaw[]>> => {
   return request.get({ url: '/role/list', params })
 }

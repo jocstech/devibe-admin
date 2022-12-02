@@ -1,12 +1,12 @@
 import { reactive } from 'vue'
-import { eachTree, treeMap, filter } from '@/utils/tree'
+import type { AxiosPromise } from 'axios'
+import { eachTree, filter, treeMap } from '@/utils/tree'
 import { findIndex } from '@/utils'
 import { useDictStoreWithOut } from '@/store/modules/dict'
 import { useI18n } from '@/hooks/web/useI18n'
-import type { AxiosPromise } from 'axios'
-import { FormSchema } from '@/types/form'
-import { TableColumn } from '@/types/table'
-import { DescriptionsSchema } from '@/types/descriptions'
+import type { FormSchema } from '@/types/form'
+import type { TableColumn } from '@/types/table'
+import type { DescriptionsSchema } from '@/types/descriptions'
 
 export type CrudSchema = Omit<TableColumn, 'children'> & {
   search?: CrudSearchParams
@@ -55,9 +55,21 @@ interface AllSchemas {
   detailSchema: DescriptionsSchema[]
 }
 
+// 给options添加国际化
+const filterOptions = (options: Recordable, labelField?: string) => {
+  return options.map((v: Recordable) => {
+    if (labelField)
+      v.labelField = t(v.labelField)
+    else
+      v.label = t(v.label)
+
+    return v
+  })
+}
+
 // 过滤所有结构
 export const useCrudSchemas = (
-  crudSchema: CrudSchema[]
+  crudSchema: CrudSchema[],
 ): {
   allSchemas: AllSchemas
 } => {
@@ -66,7 +78,7 @@ export const useCrudSchemas = (
     searchSchema: [],
     tableColumns: [],
     formSchema: [],
-    detailSchema: []
+    detailSchema: [],
   })
 
   const searchSchema = filterSearchSchema(crudSchema, allSchemas)
@@ -82,7 +94,7 @@ export const useCrudSchemas = (
   allSchemas.detailSchema = detailSchema
 
   return {
-    allSchemas
+    allSchemas,
   }
 }
 
@@ -102,14 +114,15 @@ const filterSearchSchema = (crudSchema: CrudSchema[], allSchemas: AllSchemas): F
         componentProps: {},
         ...schemaItem.search,
         field: schemaItem.field,
-        label: schemaItem.search?.label || schemaItem.label
+        label: schemaItem.search?.label || schemaItem.label,
       }
 
       if (searchSchemaItem.dictName) {
         // 如果有 dictName 则证明是从字典中获取数据
         const dictArr = dictStore.getDictObj[searchSchemaItem.dictName]
         searchSchemaItem.componentProps!.options = filterOptions(dictArr)
-      } else if (searchSchemaItem.api) {
+      }
+      else if (searchSchemaItem.api) {
         searchRequestTask.push(async () => {
           const res = await (searchSchemaItem.api as () => AxiosPromise)()
           if (res) {
@@ -119,7 +132,7 @@ const filterSearchSchema = (crudSchema: CrudSchema[], allSchemas: AllSchemas): F
             if (index !== -1) {
               allSchemas.searchSchema[index]!.componentProps!.options = filterOptions(
                 res,
-                searchSchemaItem.componentProps.optionsAlias?.labelField
+                searchSchemaItem.componentProps.optionsAlias?.labelField,
               )
             }
           }
@@ -134,9 +147,8 @@ const filterSearchSchema = (crudSchema: CrudSchema[], allSchemas: AllSchemas): F
     }
   })
 
-  for (const task of searchRequestTask) {
+  for (const task of searchRequestTask)
     task()
-  }
 
   return searchSchema
 }
@@ -148,17 +160,17 @@ const filterTableSchema = (crudSchema: CrudSchema[]): TableColumn[] => {
       if (schema?.table?.show !== false) {
         return {
           ...schema.table,
-          ...schema
+          ...schema,
         }
       }
-    }
+    },
   })
 
   // 第一次过滤会有 undefined 所以需要二次过滤
   return filter<TableColumn>(tableColumns as TableColumn[], (data) => {
-    if (data.children === void 0) {
+    if (data.children === undefined)
       delete data.children
-    }
+
     return !!data.field
   })
 }
@@ -179,14 +191,15 @@ const filterFormSchema = (crudSchema: CrudSchema[], allSchemas: AllSchemas): For
         componentProps: {},
         ...schemaItem.form,
         field: schemaItem.field,
-        label: schemaItem.search?.label || schemaItem.label
+        label: schemaItem.search?.label || schemaItem.label,
       }
 
       if (formSchemaItem.dictName) {
         // 如果有 dictName 则证明是从字典中获取数据
         const dictArr = dictStore.getDictObj[formSchemaItem.dictName]
         formSchemaItem.componentProps!.options = filterOptions(dictArr)
-      } else if (formSchemaItem.api) {
+      }
+      else if (formSchemaItem.api) {
         formRequestTask.push(async () => {
           const res = await (formSchemaItem.api as () => AxiosPromise)()
           if (res) {
@@ -196,7 +209,7 @@ const filterFormSchema = (crudSchema: CrudSchema[], allSchemas: AllSchemas): For
             if (index !== -1) {
               allSchemas.formSchema[index]!.componentProps!.options = filterOptions(
                 res,
-                formSchemaItem.componentProps.optionsAlias?.labelField
+                formSchemaItem.componentProps.optionsAlias?.labelField,
               )
             }
           }
@@ -211,10 +224,10 @@ const filterFormSchema = (crudSchema: CrudSchema[], allSchemas: AllSchemas): For
     }
   })
 
-  for (const task of formRequestTask) {
+  for (const task of formRequestTask)
     task()
-  }
-  console.log(formSchema)
+
+  // console.log(formSchema)
   return formSchema
 }
 
@@ -228,7 +241,7 @@ const filterDescriptionsSchema = (crudSchema: CrudSchema[]): DescriptionsSchema[
       const descriptionsSchemaItem = {
         ...schemaItem.detail,
         field: schemaItem.field,
-        label: schemaItem.detail?.label || schemaItem.label
+        label: schemaItem.detail?.label || schemaItem.label,
       }
 
       // 删除不必要的字段
@@ -241,14 +254,3 @@ const filterDescriptionsSchema = (crudSchema: CrudSchema[]): DescriptionsSchema[
   return descriptionsSchema
 }
 
-// 给options添加国际化
-const filterOptions = (options: Recordable, labelField?: string) => {
-  return options.map((v: Recordable) => {
-    if (labelField) {
-      v['labelField'] = t(v.labelField)
-    } else {
-      v['label'] = t(v.label)
-    }
-    return v
-  })
-}

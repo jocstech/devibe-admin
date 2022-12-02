@@ -1,10 +1,11 @@
-import { Table, TableExpose } from '@/components/Table'
-import { ElTable, ElMessageBox, ElMessage } from 'element-plus'
-import { ref, reactive, watch, computed, unref, nextTick } from 'vue'
+import type { ElTable } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { computed, nextTick, reactive, ref, unref, watch } from 'vue'
 import { get } from 'lodash-es'
+import type { Table, TableExpose } from '@/components/Table'
 import type { TableProps } from '@/components/Table/src/types'
 import { useI18n } from '@/hooks/web/useI18n'
-import { TableSetPropsType } from '@/types/table'
+import type { TableSetPropsType } from '@/types/table'
 
 const { t } = useI18n()
 
@@ -51,14 +52,14 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
     // 加载中
     loading: true,
     // 当前行的数据
-    currentRow: null
+    currentRow: null,
   })
 
   const paramsObj = computed(() => {
     return {
       ...tableObject.params,
       pageSize: tableObject.pageSize,
-      pageIndex: tableObject.currentPage
+      pageIndex: tableObject.currentPage,
     }
   })
 
@@ -66,7 +67,7 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
     () => tableObject.currentPage,
     () => {
       methods.getList()
-    }
+    },
   )
 
   watch(
@@ -75,11 +76,12 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
       // 当前页不为1时，修改页数后会导致多次调用getList方法
       if (tableObject.currentPage === 1) {
         methods.getList()
-      } else {
+      }
+      else {
         tableObject.currentPage = 1
         methods.getList()
       }
-    }
+    },
   )
 
   // Table实例
@@ -96,9 +98,9 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
   const getTable = async () => {
     await nextTick()
     const table = unref(tableRef)
-    if (!table) {
+    if (!table)
       console.error('The table is not registered. Please use the register method to register')
-    }
+
     return table
   }
 
@@ -108,8 +110,8 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
       ElMessage.success(t('common.delSuccess'))
 
       // 计算出临界点
-      const currentPage =
-        tableObject.total % tableObject.pageSize === ids.length || tableObject.pageSize === 1
+      const currentPage
+        = tableObject.total % tableObject.pageSize === ids.length || tableObject.pageSize === 1
           ? tableObject.currentPage > 1
             ? tableObject.currentPage - 1
             : tableObject.currentPage
@@ -149,7 +151,7 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
       tableObject.params = Object.assign(tableObject.params, {
         pageSize: tableObject.pageSize,
         pageIndex: tableObject.currentPage,
-        ...data
+        ...data,
       })
       methods.getList()
     },
@@ -161,7 +163,8 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
           ElMessage.warning(t('common.delNoData'))
           return
         }
-      } else {
+      }
+      else {
         if (!tableObject.currentRow) {
           ElMessage.warning(t('common.delNoData'))
           return
@@ -171,14 +174,15 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
         ElMessageBox.confirm(t('common.delMessage'), t('common.delWarning'), {
           confirmButtonText: t('common.delOk'),
           cancelButtonText: t('common.delCancel'),
-          type: 'warning'
+          type: 'warning',
         }).then(async () => {
           await delData(ids)
         })
-      } else {
+      }
+      else {
         await delData(ids)
       }
-    }
+    },
   }
 
   config?.props && methods.setProps(config.props)
@@ -187,6 +191,6 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
     register,
     elTableRef,
     tableObject,
-    methods
+    methods,
   }
 }

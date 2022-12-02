@@ -1,60 +1,56 @@
 <script setup lang="ts">
-  import { useAppStore } from '@/store/modules/app'
-  import { computed } from 'vue'
-  import { useDesign } from '@/hooks/web/useDesign'
+import { computed } from 'vue'
+import { useAppStore } from '@/store/modules/app'
+import { useDesign } from '@/hooks/web/useDesign'
 
-  const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign()
 
-  const prefixCls = getPrefixCls('layout-radio-picker')
+const prefixCls = getPrefixCls('layout-radio-picker')
 
-  const appStore = useAppStore()
+const appStore = useAppStore()
 
-  const layout = computed(() => appStore.getLayout)
+const layout = computed(() => appStore.getLayout)
 </script>
 
 <template>
   <div :class="prefixCls" class="flex flex-wrap space-x-14px">
     <div
-      :class="[
+      class="relative w-56px h-48px cursor-pointer bg-gray-300" :class="[
         `${prefixCls}__classic`,
-        'relative w-56px h-48px cursor-pointer bg-gray-300',
         {
-          'is-acitve': layout === 'classic'
-        }
+          'is-acitve': layout === 'classic',
+        },
       ]"
       @click="appStore.setLayout('classic')"
-    ></div>
+    />
     <div
-      :class="[
+      class="relative w-56px h-48px cursor-pointer bg-gray-300" :class="[
         `${prefixCls}__top-left`,
-        'relative w-56px h-48px cursor-pointer bg-gray-300',
         {
-          'is-acitve': layout === 'topLeft'
-        }
+          'is-acitve': layout === 'topLeft',
+        },
       ]"
       @click="appStore.setLayout('topLeft')"
-    ></div>
+    />
     <div
-      :class="[
+      class="relative w-56px h-48px cursor-pointer bg-gray-300" :class="[
         `${prefixCls}__top`,
-        'relative w-56px h-48px cursor-pointer bg-gray-300',
         {
-          'is-acitve': layout === 'top'
-        }
+          'is-acitve': layout === 'top',
+        },
       ]"
       @click="appStore.setLayout('top')"
-    ></div>
+    />
     <div
-      :class="[
+      class="relative w-56px h-48px cursor-pointer bg-gray-300" :class="[
         `${prefixCls}__cut-menu`,
-        'relative w-56px h-48px cursor-pointer bg-gray-300',
         {
-          'is-acitve': layout === 'cutMenu'
-        }
+          'is-acitve': layout === 'cutMenu',
+        },
       ]"
       @click="appStore.setLayout('cutMenu')"
     >
-      <div class="absolute h-full w-[33%] top-0 left-[10%] bg-gray-200"></div>
+      <div class="absolute h-full w-[33%] top-0 left-[10%] bg-gray-200" />
     </div>
   </div>
 </template>

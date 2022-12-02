@@ -35,9 +35,9 @@ export function useWatermark(appendEl: HTMLElement | null = document.body) {
     div.style.left = '0px'
     div.style.position = 'absolute'
     div.style.zIndex = '100000000'
-    div.style.width = document.documentElement.clientWidth + 'px'
-    div.style.height = document.documentElement.clientHeight + 'px'
-    div.style.background = 'url(' + can.toDataURL('image/png') + ') left top repeat'
+    div.style.width = `${document.documentElement.clientWidth}px`
+    div.style.height = `${document.documentElement.clientHeight}px`
+    div.style.background = `url(${can.toDataURL('image/png')}) left top repeat`
     const el = appendEl
     el && el.appendChild(div)
     return id

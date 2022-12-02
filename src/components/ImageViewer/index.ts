@@ -1,12 +1,14 @@
+import type { VNode } from 'vue'
+import { createVNode, render } from 'vue'
 import ImageViewer from './src/ImageViewer.vue'
+import type { ImageViewerProps } from './src/types'
 import { isClient } from '@/utils/is'
-import { createVNode, render, VNode } from 'vue'
-import { ImageViewerProps } from './src/types'
 
 let instance: Nullable<VNode> = null
 
 export function createImageViewer(options: ImageViewerProps) {
-  if (!isClient) return
+  if (!isClient)
+    return
   const {
     urlList,
     initialIndex = 0,
@@ -14,7 +16,7 @@ export function createImageViewer(options: ImageViewerProps) {
     hideOnClickModal = false,
     appendToBody = false,
     zIndex = 2000,
-    show = true
+    show = true,
   } = options
 
   const propsData: Partial<ImageViewerProps> = {}

@@ -1,7 +1,7 @@
 import type { App, Directive, DirectiveBinding } from 'vue'
+import { intersection } from 'lodash-es'
 import { useI18n } from '@/hooks/web/useI18n'
 import { useCache } from '@/hooks/web/useCache'
-import { intersection } from 'lodash-es'
 import { isArray } from '@/utils/is'
 import { APP } from '@/config'
 
@@ -12,31 +12,30 @@ const { wsCache } = useCache()
 const all_permission = ['*.*.*']
 const hasPermission = (value: string | string[]): boolean => {
   const permissions = wsCache.get(APP.USER_CACHE_KEY).permissions as string[]
-  if (!value) {
+  if (!value)
     throw new Error(t('permission.hasPermission'))
-  }
-  if (!isArray(value)) {
+
+  if (!isArray(value))
     return permissions?.includes(value as string)
-  }
-  if (all_permission[0] === permissions[0]) {
+
+  if (all_permission[0] === permissions[0])
     return true
-  }
+
   return (intersection(value, permissions) as string[]).length > 0
 }
 function hasPermi(el: Element, binding: DirectiveBinding) {
   const value = binding.value
 
   const flag = hasPermission(value)
-  if (!flag) {
+  if (!flag)
     el.parentNode?.removeChild(el)
-  }
 }
 const mounted = (el: Element, binding: DirectiveBinding<any>) => {
   hasPermi(el, binding)
 }
 
 const permiDirective: Directive = {
-  mounted
+  mounted,
 }
 
 export const setupPermissionDirective = (app: App<Element>) => {

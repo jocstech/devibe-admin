@@ -1,5 +1,5 @@
+import type { Dynamic, Project, RadarData, Team, WorkplaceTotal } from './types'
 import request from '@/config/axios'
-import type { WorkplaceTotal, Project, Dynamic, Team, RadarData } from './types'
 
 export const getCountApi = (): Promise<IResponse<WorkplaceTotal>> => {
   return request.get({ url: '/workplace/total' })

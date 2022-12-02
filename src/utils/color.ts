@@ -22,7 +22,7 @@ export const isHexColor = (color: string) => {
 export const rgbToHex = (r: number, g: number, b: number) => {
   // tslint:disable-next-line:no-bitwise
   const hex = ((r << 16) | (g << 8) | b).toString(16)
-  return '#' + new Array(Math.abs(hex.length - 7)).join('0') + hex
+  return `#${new Array(Math.abs(hex.length - 7)).join('0')}${hex}`
 }
 
 /**
@@ -35,28 +35,29 @@ export const hexToRGB = (hex: string, opacity?: number) => {
   if (isHexColor(hex)) {
     if (sHex.length === 4) {
       let sColorNew = '#'
-      for (let i = 1; i < 4; i += 1) {
+      for (let i = 1; i < 4; i += 1)
         sColorNew += sHex.slice(i, i + 1).concat(sHex.slice(i, i + 1))
-      }
+
       sHex = sColorNew
     }
     const sColorChange: number[] = []
-    for (let i = 1; i < 7; i += 2) {
-      sColorChange.push(parseInt('0x' + sHex.slice(i, i + 2)))
-    }
+    for (let i = 1; i < 7; i += 2)
+      sColorChange.push(parseInt(`0x${sHex.slice(i, i + 2)}`))
+
     return opacity
-      ? 'RGBA(' + sColorChange.join(',') + ',' + opacity + ')'
-      : 'RGB(' + sColorChange.join(',') + ')'
+      ? `RGBA(${sColorChange.join(',')},${opacity})`
+      : `RGB(${sColorChange.join(',')})`
   }
   return sHex
 }
 
 export const colorIsDark = (color: string) => {
-  if (!isHexColor(color)) return
+  if (!isHexColor(color))
+    return
   const [r, g, b] = hexToRGB(color)
     .replace(/(?:\(|\)|rgb|RGB)*/g, '')
     .split(',')
-    .map((item) => Number(item))
+    .map(item => Number(item))
   return r * 0.299 + g * 0.578 + b * 0.114 < 192
 }
 
@@ -67,11 +68,11 @@ export const colorIsDark = (color: string) => {
  * @returns {string} The HEX representation of the processed color
  */
 export const darken = (color: string, amount: number) => {
-  color = color.indexOf('#') >= 0 ? color.substring(1, color.length) : color
+  color = color.includes('#') ? color.substring(1, color.length) : color
   amount = Math.trunc((255 * amount) / 100)
   return `#${subtractLight(color.substring(0, 2), amount)}${subtractLight(
     color.substring(2, 4),
-    amount
+    amount,
   )}${subtractLight(color.substring(4, 6), amount)}`
 }
 
@@ -82,11 +83,11 @@ export const darken = (color: string, amount: number) => {
  * @returns {string} The processed color represented as HEX
  */
 export const lighten = (color: string, amount: number) => {
-  color = color.indexOf('#') >= 0 ? color.substring(1, color.length) : color
+  color = color.includes('#') ? color.substring(1, color.length) : color
   amount = Math.trunc((255 * amount) / 100)
   return `#${addLight(color.substring(0, 2), amount)}${addLight(
     color.substring(2, 4),
-    amount
+    amount,
   )}${addLight(color.substring(4, 6), amount)}`
 }
 
@@ -112,7 +113,7 @@ const addLight = (color: string, amount: number) => {
 const luminanace = (r: number, g: number, b: number) => {
   const a = [r, g, b].map((v) => {
     v /= 255
-    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)
+    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4
   })
   return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722
 }
@@ -124,8 +125,8 @@ const luminanace = (r: number, g: number, b: number) => {
  */
 const contrast = (rgb1: string[], rgb2: number[]) => {
   return (
-    (luminanace(~~rgb1[0], ~~rgb1[1], ~~rgb1[2]) + 0.05) /
-    (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
+    (luminanace(~~rgb1[0], ~~rgb1[1], ~~rgb1[2]) + 0.05)
+    / (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
   )
 }
 

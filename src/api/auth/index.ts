@@ -1,5 +1,5 @@
+import type { LoginParams, LoginResponse } from './types'
 import request from '@/config/axios'
-import type { UserType, LoginParams, LoginResponse } from './types'
 
 export const authLogin = (data: LoginParams): Promise<IResponse<LoginResponse>> => {
   return request.post({ url: '/auth/login', data })

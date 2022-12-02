@@ -1,13 +1,13 @@
 <script setup lang="ts">
-  import { useI18n } from '@/hooks/web/useI18n'
-  import { Highlight } from '@/components/Highlight'
-  import { ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
+import { useI18n } from '@/hooks/web/useI18n'
+import { Highlight } from '@/components/Highlight'
 
-  const { t } = useI18n()
+const { t } = useI18n()
 
-  const keyClick = (key: string) => {
-    ElMessage.info(key)
-  }
+const keyClick = (key: string) => {
+  ElMessage.info(key)
+}
 </script>
 
 <template>

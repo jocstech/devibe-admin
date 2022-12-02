@@ -19,17 +19,14 @@ export const isObject = (val: any): val is Record<any, any> => {
 }
 
 export const isEmpty = <T = unknown>(val: T): val is T => {
-  if (isArray(val) || isString(val)) {
+  if (isArray(val) || isString(val))
     return val.length === 0
-  }
 
-  if (val instanceof Map || val instanceof Set) {
+  if (val instanceof Map || val instanceof Set)
     return val.size === 0
-  }
 
-  if (isObject(val)) {
+  if (isObject(val))
     return Object.keys(val).length === 0
-  }
 
   return false
 }
@@ -95,8 +92,8 @@ export const isServer = typeof window === 'undefined'
 export const isClient = !isServer
 
 export const isUrl = (path: string): boolean => {
-  const reg =
-    /(((^https?:(?:\/\/)?)(?:[-:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&%@.\w_]*)#?(?:[\w]*))?)$/
+  const reg
+    = /(((^https?:(?:\/\/)?)(?:[-:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&%@.\w_]*)#?(?:[\w]*))?)$/
   return reg.test(path)
 }
 

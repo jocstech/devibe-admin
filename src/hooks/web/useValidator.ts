@@ -14,44 +14,40 @@ export const useValidator = () => {
   const required = (message?: string) => {
     return {
       required: true,
-      message: message || t('common.required')
+      message: message || t('common.required'),
     }
   }
 
   const lengthRange = (val: any, callback: Callback, options: LengthRange) => {
     const { min, max, message } = options
-    if (val.length < min || val.length > max) {
+    if (val.length < min || val.length > max)
       callback(new Error(message))
-    } else {
+    else
       callback()
-    }
   }
 
   const notSpace = (val: any, callback: Callback, message: string) => {
     // 用户名不能有空格
-    if (val.indexOf(' ') !== -1) {
+    if (val.includes(' '))
       callback(new Error(message))
-    } else {
+    else
       callback()
-    }
   }
 
   const notSpecialCharacters = (val: any, callback: Callback, message: string) => {
     // 密码不能是特殊字符
-    if (/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/gi.test(val)) {
+    if (/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/gi.test(val))
       callback(new Error(message))
-    } else {
+    else
       callback()
-    }
   }
 
   // 两个字符串是否想等
   const isEqual = (val1: string, val2: string, callback: Callback, message: string) => {
-    if (val1 === val2) {
+    if (val1 === val2)
       callback()
-    } else {
+    else
       callback(new Error(message))
-    }
   }
 
   return {
@@ -59,6 +55,6 @@ export const useValidator = () => {
     lengthRange,
     notSpace,
     notSpecialCharacters,
-    isEqual
+    isEqual,
   }
 }

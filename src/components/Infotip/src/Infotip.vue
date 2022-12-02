@@ -1,42 +1,41 @@
 <script setup lang="ts">
-  import { PropType } from 'vue'
-  import { Highlight } from '@/components/Highlight'
-  import { useDesign } from '@/hooks/web/useDesign'
-  import { propTypes } from '@/utils/propTypes'
-  import { TipSchema } from '@/types/infoTip'
+import type { PropType } from 'vue'
+import { Highlight } from '@/components/Highlight'
+import { useDesign } from '@/hooks/web/useDesign'
+import { propTypes } from '@/utils/propTypes'
+import type { TipSchema } from '@/types/infoTip'
 
-  const { getPrefixCls } = useDesign()
+defineProps({
+  title: propTypes.string.def(''),
+  schema: {
+    type: Array as PropType<Array<string | TipSchema>>,
+    required: true,
+    default: () => [],
+  },
+  showIndex: propTypes.bool.def(true),
+  highlightColor: propTypes.string.def('var(--el-color-primary)'),
+})
 
-  const prefixCls = getPrefixCls('infotip')
+const emit = defineEmits(['click'])
 
-  defineProps({
-    title: propTypes.string.def(''),
-    schema: {
-      type: Array as PropType<Array<string | TipSchema>>,
-      required: true,
-      default: () => []
-    },
-    showIndex: propTypes.bool.def(true),
-    highlightColor: propTypes.string.def('var(--el-color-primary)')
-  })
+const { getPrefixCls } = useDesign()
 
-  const emit = defineEmits(['click'])
+const prefixCls = getPrefixCls('infotip')
 
-  const keyClick = (key: string) => {
-    emit('click', key)
-  }
+const keyClick = (key: string) => {
+  emit('click', key)
+}
 </script>
 
 <template>
   <div
-    :class="[
+    class="p-20px mb-20px border-1px border-solid border-[var(--el-color-primary)] bg-[var(--el-color-primary-light-9)]" :class="[
       prefixCls,
-      'p-20px mb-20px border-1px border-solid border-[var(--el-color-primary)] bg-[var(--el-color-primary-light-9)]'
     ]"
   >
-    <div v-if="title" :class="[`${prefixCls}__header`, 'flex items-center']">
+    <div v-if="title" class="flex items-center" :class="[`${prefixCls}__header`]">
       <Icon icon="bi:exclamation-circle-fill" :size="22" color="var(--el-color-primary)" />
-      <span :class="[`${prefixCls}__title`, 'pl-5px text-16px font-bold']">{{ title }}</span>
+      <span class="pl-5px text-16px font-bold" :class="[`${prefixCls}__title`]">{{ title }}</span>
     </div>
     <div :class="`${prefixCls}__content`">
       <p v-for="(item, $index) in schema" :key="$index" class="text-14px mt-15px">

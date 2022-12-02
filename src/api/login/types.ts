@@ -1,9 +1,9 @@
-export type UserLoginType = {
+export interface UserLoginType {
   username: string
   password: string
 }
 
-export type UserType = {
+export interface UserType {
   username: string
   password: string
   role: string
@@ -11,24 +11,24 @@ export type UserType = {
   permissions: string | string[]
 }
 
-export type LoginParams = {
+export interface LoginParams {
   username: string
   password: string
 }
 
-export type LoginResponse = {
+export interface LoginResponse {
   token: string
 }
 
-export type Role = {
+export interface Role {
   readonly name?: string
   readonly value?: string
-  readonly discription?: string
+  readonly description?: string
   readonly icon?: string
   readonly subset?: Role[]
 }
 
-export type User = {
+export interface User {
   readonly _id?: string
   username?: string
   email?: string
@@ -39,7 +39,7 @@ export type User = {
   last_name?: string
   phone?: string
   verified?: boolean
-  bloacked?: boolean
+  blocked?: boolean
   roles?: Role[]
   iat?: number
   exp?: number

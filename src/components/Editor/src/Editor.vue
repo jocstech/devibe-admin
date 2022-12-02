@@ -1,118 +1,122 @@
 <script setup lang="ts">
-  import { onBeforeUnmount, computed, PropType, unref, nextTick, ref, watch, shallowRef } from 'vue'
-  import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
-  import { IDomEditor, IEditorConfig, i18nChangeLanguage } from '@wangeditor/editor'
-  import { propTypes } from '@/utils/propTypes'
-  import { isNumber } from '@/utils/is'
-  import { ElMessage } from 'element-plus'
-  import { useLocaleStore } from '@/store/modules/locale'
+import type { PropType } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, shallowRef, unref, watch } from 'vue'
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+import type { IDomEditor, IEditorConfig } from '@wangeditor/editor'
+import { i18nChangeLanguage } from '@wangeditor/editor'
+import { ElMessage } from 'element-plus'
+import { propTypes } from '@/utils/propTypes'
+import { isNumber } from '@/utils/is'
+import { useLocaleStore } from '@/store/modules/locale'
 
-  const localeStore = useLocaleStore()
+const props = defineProps({
+  editorId: propTypes.string.def('wangeEditor-1'),
+  height: propTypes.oneOfType([Number, String]).def('500px'),
+  editorConfig: {
+    type: Object as PropType<IEditorConfig>,
+    default: () => undefined,
+  },
+  modelValue: propTypes.string.def(''),
+})
 
-  const currentLocale = computed(() => localeStore.getCurrentLocale)
+const emit = defineEmits(['change', 'update:modelValue'])
 
-  i18nChangeLanguage(unref(currentLocale).lang)
+const localeStore = useLocaleStore()
 
-  const props = defineProps({
-    editorId: propTypes.string.def('wangeEditor-1'),
-    height: propTypes.oneOfType([Number, String]).def('500px'),
-    editorConfig: {
-      type: Object as PropType<IEditorConfig>,
-      default: () => undefined
-    },
-    modelValue: propTypes.string.def('')
-  })
+const currentLocale = computed(() => localeStore.getCurrentLocale)
 
-  const emit = defineEmits(['change', 'update:modelValue'])
+i18nChangeLanguage(unref(currentLocale).lang)
 
-  // 编辑器实例，必须用 shallowRef
-  const editorRef = shallowRef<IDomEditor>()
+// 编辑器实例，必须用 shallowRef
+const editorRef = shallowRef<IDomEditor>()
 
-  const valueHtml = ref('')
+const valueHtml = ref('')
 
-  watch(
-    () => props.modelValue,
-    (val: string) => {
-      if (val === unref(valueHtml)) return
-      valueHtml.value = val
-    },
+watch(
+  () => props.modelValue,
+  (val: string) => {
+    if (val === unref(valueHtml))
+      return
+    valueHtml.value = val
+  },
+  {
+    immediate: true,
+  },
+)
+
+// 监听
+watch(
+  () => valueHtml.value,
+  (val: string) => {
+    emit('update:modelValue', val)
+  },
+)
+
+const handleCreated = (editor: IDomEditor) => {
+  editorRef.value = editor
+}
+
+// 编辑器配置
+const editorConfig = computed((): IEditorConfig => {
+  return Object.assign(
     {
-      immediate: true
-    }
-  )
-
-  // 监听
-  watch(
-    () => valueHtml.value,
-    (val: string) => {
-      emit('update:modelValue', val)
-    }
-  )
-
-  const handleCreated = (editor: IDomEditor) => {
-    editorRef.value = editor
-  }
-
-  // 编辑器配置
-  const editorConfig = computed((): IEditorConfig => {
-    return Object.assign(
-      {
-        readOnly: false,
-        customAlert: (s: string, t: string) => {
-          switch (t) {
-            case 'success':
-              ElMessage.success(s)
-              break
-            case 'info':
-              ElMessage.info(s)
-              break
-            case 'warning':
-              ElMessage.warning(s)
-              break
-            case 'error':
-              ElMessage.error(s)
-              break
-            default:
-              ElMessage.info(s)
-              break
-          }
-        },
-        autoFocus: false,
-        scroll: true,
-        uploadImgShowBase64: true
+      readOnly: false,
+      customAlert: (s: string, t: string) => {
+        switch (t) {
+          case 'success':
+            ElMessage.success(s)
+            break
+          case 'info':
+            ElMessage.info(s)
+            break
+          case 'warning':
+            ElMessage.warning(s)
+            break
+          case 'error':
+            ElMessage.error(s)
+            break
+          default:
+            ElMessage.info(s)
+            break
+        }
       },
-      props.editorConfig || {}
-    )
-  })
+      autoFocus: false,
+      scroll: true,
+      uploadImgShowBase64: true,
+    },
+    props.editorConfig || {},
+  )
+})
 
-  const editorStyle = computed(() => {
-    return {
-      height: isNumber(props.height) ? `${props.height}px` : props.height
-    }
-  })
-
-  // 回调函数
-  const handleChange = (editor: IDomEditor) => {
-    emit('change', editor)
+const editorStyle = computed(() => {
+  return {
+    height: isNumber(props.height) ? `${props.height}px` : props.height,
   }
+})
 
-  // 组件销毁时，及时销毁编辑器
-  onBeforeUnmount(() => {
-    const editor = unref(editorRef.value)
-    if (editor === null) return
+// 回调函数
+const handleChange = (editor: IDomEditor) => {
+  emit('change', editor)
+}
 
-    // 销毁，并移除 editor
-    editor?.destroy()
-  })
+// 组件销毁时，及时销毁编辑器
+onBeforeUnmount(() => {
+  const editor = unref(editorRef.value)
+  if (editor === null)
+    return
 
-  const getEditorRef = async (): Promise<IDomEditor> => {
-    await nextTick()
-    return unref(editorRef.value) as IDomEditor
-  }
+  // 销毁，并移除 editor
+  editor?.destroy()
+})
 
-  defineExpose({
-    getEditorRef
-  })
+const getEditorRef = async (): Promise<IDomEditor> => {
+  await nextTick()
+  return unref(editorRef.value) as IDomEditor
+}
+
+defineExpose({
+  getEditorRef,
+})
 </script>
 
 <template>
@@ -120,14 +124,14 @@
     <!-- 工具栏 -->
     <Toolbar
       :editor="editorRef"
-      :editorId="editorId"
+      :editor-id="editorId"
       class="border-bottom-1 border-solid border-[var(--tags-view-border-color)]"
     />
     <!-- 编辑器 -->
     <Editor
       v-model="valueHtml"
-      :editorId="editorId"
-      :defaultConfig="editorConfig"
+      :editor-id="editorId"
+      :default-config="editorConfig"
       :style="editorStyle"
       @on-change="handleChange"
       @on-created="handleCreated"

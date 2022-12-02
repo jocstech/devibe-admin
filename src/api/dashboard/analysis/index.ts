@@ -1,10 +1,10 @@
-import request from '@/config/axios'
 import type {
   AnalysisTotalTypes,
+  MonthlySales,
   UserAccessSource,
   WeeklyUserActivity,
-  MonthlySales
 } from './types'
+import request from '@/config/axios'
 
 export const getCountApi = (): Promise<IResponse<AnalysisTotalTypes[]>> => {
   return request.get({ url: '/analysis/total' })

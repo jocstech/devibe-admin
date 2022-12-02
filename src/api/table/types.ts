@@ -1,4 +1,4 @@
-export type TableData = {
+export interface TableData {
   id: string
   author: string
   title: string

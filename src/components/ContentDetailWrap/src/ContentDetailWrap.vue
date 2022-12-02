@@ -1,56 +1,57 @@
 <script setup lang="ts">
-  import { ElCard, ElButton } from 'element-plus'
-  import { propTypes } from '@/utils/propTypes'
-  import { useDesign } from '@/hooks/web/useDesign'
-  import { ref, onMounted } from 'vue'
-  // import { Sticky } from '@/components/Sticky'
-  import { useI18n } from '@/hooks/web/useI18n'
-  const { t } = useI18n()
+import { ElButton, ElCard } from 'element-plus'
+import { onMounted, ref } from 'vue'
+import { propTypes } from '@/utils/propTypes'
+import { useDesign } from '@/hooks/web/useDesign'
+// import { Sticky } from '@/components/Sticky'
+import { useI18n } from '@/hooks/web/useI18n'
+defineProps({
+  title: propTypes.string.def(''),
+  message: propTypes.string.def(''),
+})
 
-  const { getPrefixCls } = useDesign()
+const emit = defineEmits(['back'])
 
-  const prefixCls = getPrefixCls('content-detail-wrap')
+const { t } = useI18n()
 
-  defineProps({
-    title: propTypes.string.def(''),
-    message: propTypes.string.def('')
-  })
-  const emit = defineEmits(['back'])
-  const offset = ref(1)
-  const contentDetailWrap = ref()
-  onMounted(() => {
-    offset.value = contentDetailWrap.value.getBoundingClientRect().top
-  })
+const { getPrefixCls } = useDesign()
+
+const prefixCls = getPrefixCls('content-detail-wrap')
+
+const offset = ref(1)
+const contentDetailWrap = ref()
+onMounted(() => {
+  offset.value = contentDetailWrap.value.getBoundingClientRect().top
+})
 </script>
 
 <template>
-  <div :class="[`${prefixCls}-container`, 'relative bg-[#fff]']" ref="contentDetailWrap">
+  <div ref="contentDetailWrap" class="relative bg-[#fff]" :class="[`${prefixCls}-container`]">
     <div
-      :class="[
+      class="flex border-bottom-1 h-50px items-center text-center bg-white pr-10px" :class="[
         `${prefixCls}-header`,
-        'flex border-bottom-1 h-50px items-center text-center bg-white pr-10px'
       ]"
     >
-      <div :class="[`${prefixCls}-header__back`, 'flex pl-10px pr-10px ']">
-        <el-button @click="emit('back')">
+      <div class="flex pl-10px pr-10px " :class="[`${prefixCls}-header__back`]">
+        <ElButton @click="emit('back')">
           <Icon icon="ep:arrow-left" class="mr-5px" />
           {{ t('common.back') }}
-        </el-button>
+        </ElButton>
       </div>
-      <div :class="[`${prefixCls}-header__title`, 'flex flex-1  justify-center']">
+      <div class="flex flex-1  justify-center" :class="[`${prefixCls}-header__title`]">
         <slot name="title">
           <label class="text-16px font-700">{{ title }}</label>
         </slot>
       </div>
-      <div :class="[`${prefixCls}-header__right`, 'flex  pl-10px pr-10px']">
-        <slot name="right"></slot>
+      <div class="flex  pl-10px pr-10px" :class="[`${prefixCls}-header__right`]">
+        <slot name="right" />
       </div>
     </div>
 
     <div style="padding: var(--app-content-padding)">
-      <ElCard :class="[`${prefixCls}-body`, 'mb-20px']" shadow="never">
+      <ElCard class="mb-20px" :class="[`${prefixCls}-body`]" shadow="never">
         <div>
-          <slot></slot>
+          <slot />
         </div>
       </ElCard>
     </div>

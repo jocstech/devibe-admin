@@ -1,22 +1,22 @@
 <script setup lang="ts">
-  import { Icon } from '@/components/Icon'
-  import { useFullscreen } from '@vueuse/core'
-  import { propTypes } from '@/utils/propTypes'
-  import { useDesign } from '@/hooks/web/useDesign'
+import { useFullscreen } from '@vueuse/core'
+import { Icon } from '@/components/Icon'
+import { propTypes } from '@/utils/propTypes'
+import { useDesign } from '@/hooks/web/useDesign'
 
-  const { getPrefixCls } = useDesign()
+defineProps({
+  color: propTypes.string.def(''),
+})
 
-  const prefixCls = getPrefixCls('screenfull')
+const { getPrefixCls } = useDesign()
 
-  defineProps({
-    color: propTypes.string.def('')
-  })
+const prefixCls = getPrefixCls('screenfull')
 
-  const { toggle, isFullscreen } = useFullscreen()
+const { toggle, isFullscreen } = useFullscreen()
 
-  const toggleFullscreen = () => {
-    toggle()
-  }
+const toggleFullscreen = () => {
+  toggle()
+}
 </script>
 
 <template>

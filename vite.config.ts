@@ -1,12 +1,11 @@
 import { resolve } from 'path'
 import { loadEnv } from 'vite'
-import type { UserConfig, ConfigEnv } from 'vite'
+import type { ConfigEnv, UserConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import WindiCSS from 'vite-plugin-windicss'
 import VueJsx from '@vitejs/plugin-vue-jsx'
-import EslintPlugin from 'vite-plugin-eslint'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
-import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import'
+import { ElementPlusResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import PurgeIcons from 'vite-plugin-purge-icons'
 import { viteMockServe } from 'vite-plugin-mock'
@@ -23,11 +22,12 @@ function pathResolve(dir: string) {
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   let env = {} as any
   const isBuild = command === 'build'
-  if (!isBuild) {
+  if (!isBuild)
     env = loadEnv((process.argv[3] === '--mode' ? process.argv[4] : process.argv[3]), root)
-  } else {
+
+  else
     env = loadEnv(mode, root)
-  }
+
   return {
     base: env.VITE_BASE_PATH,
     plugins: [
@@ -41,22 +41,19 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           esModule: true,
           resolveStyle: (name) => {
             return `element-plus/es/components/${name.substring(3)}/style/css`
-          }
-        }]
+          },
+        }],
       }),
-      EslintPlugin({
-        cache: false,
-        include: ['src/**/*.vue', 'src/**/*.ts', 'src/**/*.tsx'] // 检查的文件
-      }),
+
       VueI18n({
         runtimeOnly: true,
         compositionOnly: true,
-        include: [resolve(__dirname, 'src/locales/**')]
+        include: [resolve(__dirname, 'src/locales/**')],
       }),
       createSvgIconsPlugin({
         iconDirs: [pathResolve('src/assets/svgs')],
         symbolId: 'icon-[dir]-[name]',
-        svgoOptions: true
+        svgoOptions: true,
       }),
       PurgeIcons(),
       viteMockServe({
@@ -68,39 +65,39 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           import { setupProdMockServer } from '../mock/_createProductionServer'
 
           setupProdMockServer()
-          `
+          `,
       }),
       VueMarcos(),
       createHtmlPlugin({
         inject: {
           data: {
             title: env.VITE_APP_TITLE,
-            injectScript: `<script src="./inject.js"></script>`,
-          }
-        }
-      })
+            injectScript: '<script src="./inject.js"></script>',
+          },
+        },
+      }),
     ],
 
     css: {
       preprocessorOptions: {
         less: {
           additionalData: '@import "./src/styles/variables.module.less";',
-          javascriptEnabled: true
-        }
-      }
+          javascriptEnabled: true,
+        },
+      },
     },
     resolve: {
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.less', '.css'],
       alias: [
         {
           find: 'vue-i18n',
-          replacement: 'vue-i18n/dist/vue-i18n.cjs.js'
+          replacement: 'vue-i18n/dist/vue-i18n.cjs.js',
         },
         {
           find: /\@\//,
-          replacement: `${pathResolve('src')}/`
-        }
-      ]
+          replacement: `${pathResolve('src')}/`,
+        },
+      ],
     },
     build: {
       minify: 'terser',
@@ -110,9 +107,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       terserOptions: {
         compress: {
           drop_debugger: env.VITE_DROP_DEBUGGER === 'true',
-          drop_console: env.VITE_DROP_CONSOLE === 'true'
-        }
-      }
+          drop_console: env.VITE_DROP_CONSOLE === 'true',
+        },
+      },
     },
     server: {
       port: 4000,
@@ -121,13 +118,13 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         '/api': {
           target: 'http://127.0.0.1:8000',
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, '')
-        }
+          rewrite: path => path.replace(/^\/api/, ''),
+        },
       },
       hmr: {
-        overlay: false
+        overlay: false,
       },
-      host: '0.0.0.0'
+      host: '0.0.0.0',
     },
     optimizeDeps: {
       include: [
@@ -145,8 +142,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'intro.js',
         'qrcode',
         '@wangeditor/editor',
-        '@wangeditor/editor-for-vue'
-      ]
-    }
+        '@wangeditor/editor-for-vue',
+      ],
+    },
   }
 }

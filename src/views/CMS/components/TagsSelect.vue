@@ -1,26 +1,27 @@
-<template>
-  <el-select v-bind="$attrs" multiple clearable class="m-2" placeholder="Select Tag">
-    <el-option v-for="tag in tags" :key="tag._id" :value="tag._id" :label="tag.name">
-      {{ tag.name }}
-    </el-option>
-  </el-select>
-</template>
-
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue'
-  import { getTagsList } from '@/api/cms'
-  import { ElSelect, ElOption } from 'element-plus'
+import { onMounted, ref } from 'vue'
+import { ElOption, ElSelect } from 'element-plus'
+import { getTagsList } from '@/api/cms'
 
-  const tags = ref<CMSTag[]>()
+const tags = ref<CMSTag[]>()
 
-  const fetchTagsList = async () => {
-    const { data } = await getTagsList()
-    if (data) tags.value = data
-  }
+const fetchTagsList = async () => {
+  const { data } = await getTagsList()
+  if (data)
+    tags.value = data
+}
 
-  onMounted(async () => {
-    await fetchTagsList()
-  })
+onMounted(async () => {
+  await fetchTagsList()
+})
 </script>
+
+<template>
+  <ElSelect v-bind="$attrs" multiple clearable class="m-2" placeholder="Select Tag">
+    <ElOption v-for="tag in tags" :key="tag._id" :value="tag._id" :label="tag.name">
+      {{ tag.name }}
+    </ElOption>
+  </ElSelect>
+</template>
 
 <style scoped></style>

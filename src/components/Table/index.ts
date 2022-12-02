@@ -1,6 +1,6 @@
+import type { ElTable } from 'element-plus'
 import Table from './src/Table.vue'
-import { ElTable } from 'element-plus'
-import { TableSetPropsType } from '@/types/table'
+import type { TableSetPropsType } from '@/types/table'
 
 export interface TableExpose {
   setProps: (props: Recordable) => void

@@ -1,25 +1,25 @@
 <script setup lang="ts">
-  import { computed, unref } from 'vue'
-  import { useAppStore } from '@/store/modules/app'
-  import { propTypes } from '@/utils/propTypes'
-  import { useDesign } from '@/hooks/web/useDesign'
+import { computed, unref } from 'vue'
+import { useAppStore } from '@/store/modules/app'
+import { propTypes } from '@/utils/propTypes'
+import { useDesign } from '@/hooks/web/useDesign'
 
-  const { getPrefixCls } = useDesign()
+defineProps({
+  color: propTypes.string.def(''),
+})
 
-  const prefixCls = getPrefixCls('collapse')
+const { getPrefixCls } = useDesign()
 
-  defineProps({
-    color: propTypes.string.def('')
-  })
+const prefixCls = getPrefixCls('collapse')
 
-  const appStore = useAppStore()
+const appStore = useAppStore()
 
-  const collapse = computed(() => appStore.getCollapse)
+const collapse = computed(() => appStore.getCollapse)
 
-  const toggleCollapse = () => {
-    const collapsed = unref(collapse)
-    appStore.setCollapse(!collapsed)
-  }
+const toggleCollapse = () => {
+  const collapsed = unref(collapse)
+  appStore.setCollapse(!collapsed)
+}
 </script>
 
 <template>

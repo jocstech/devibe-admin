@@ -1,9 +1,11 @@
 import type { Component } from 'vue'
 import {
+  ElAutocomplete,
   ElCascader,
   ElCheckboxGroup,
   ElColorPicker,
   ElDatePicker,
+  ElDivider,
   ElInput,
   ElInputNumber,
   ElRadioGroup,
@@ -15,12 +17,10 @@ import {
   ElTimePicker,
   ElTimeSelect,
   ElTransfer,
-  ElAutocomplete,
-  ElDivider
 } from 'element-plus'
 import { InputPassword } from '@/components/InputPassword'
 import { Editor } from '@/components/Editor'
-import { ComponentName } from '@/types/components'
+import type { ComponentName } from '@/types/components'
 
 const componentMap: Recordable<Component, ComponentName> = {
   Radio: ElRadioGroup,
@@ -42,8 +42,8 @@ const componentMap: Recordable<Component, ComponentName> = {
   TimeSelect: ElTimeSelect,
   SelectV2: ElSelectV2,
   RadioButton: ElRadioGroup,
-  InputPassword: InputPassword,
-  Editor: Editor
+  InputPassword,
+  Editor,
 }
 
 export { componentMap }

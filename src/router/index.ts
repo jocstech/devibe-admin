@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import type { App } from 'vue'
-import { Layout, getParentLayout } from '@/utils/routerHelper'
+import { Layout } from '@/utils/routerHelper'
 import { useI18n } from '@/hooks/web/useI18n'
 
 const { t } = useI18n()
@@ -13,8 +13,8 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
     redirect: '/cms',
     name: 'Root',
     meta: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     path: '/redirect',
@@ -23,15 +23,15 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
     children: [
       {
         path: '/redirect/:path(.*)',
-        name: 'Redirect',
+        name: 'Redirects',
         component: () => import('@/views/Redirect/Redirect.vue'),
-        meta: {}
-      }
+        meta: {},
+      },
     ],
     meta: {
       hidden: true,
-      noTagsView: true
-    }
+      noTagsView: true,
+    },
   },
   {
     path: '/login',
@@ -40,8 +40,8 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
     meta: {
       hidden: true,
       title: t('router.login'),
-      noTagsView: true
-    }
+      noTagsView: true,
+    },
   },
   {
     path: '/404',
@@ -50,9 +50,9 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
     meta: {
       hidden: true,
       title: '404',
-      noTagsView: true
-    }
-  }
+      noTagsView: true,
+    },
+  },
 ]
 
 export const asyncRouterMap: AppRouteRecordRaw[] = [
@@ -64,7 +64,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     meta: {
       title: t('router.cms'),
       icon: 'ant-design:dashboard-filled',
-      alwaysShow: true
+      alwaysShow: true,
     },
     children: [
       {
@@ -72,10 +72,10 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         component: () => import('@/views/CMS/Articles.vue'),
         name: 'Articles',
         meta: {
+          icon: 'ant-design:file-text-filled',
           title: t('router.articles'),
-          noCache: false,
-          affix: true
-        }
+          affix: true,
+        },
       },
       {
         path: 'articles/:id',
@@ -83,17 +83,18 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         name: 'ArticleEdit',
         meta: {
           title: t('router.article_edit'),
-          hidden: true
-        }
+          hidden: true,
+        },
       },
       {
         path: 'tags',
         component: () => import('@/views/CMS/Tags.vue'),
         name: 'Tags',
         meta: {
+          icon: 'ant-design:tag-filled',
           title: t('router.tags'),
-          noCache: true
-        }
+          noCache: true,
+        },
       },
       {
         path: 'tags/:id',
@@ -101,27 +102,26 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         name: 'TagEdit',
         meta: {
           title: t('router.tags'),
-          hidden: true
-        }
-      }
-    ]
-  }
+          hidden: true,
+        },
+      },
+    ],
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   strict: true,
   routes: constantRouterMap as RouteRecordRaw[],
-  scrollBehavior: () => ({ left: 0, top: 0 })
+  scrollBehavior: () => ({ left: 0, top: 0 }),
 })
 
 export const resetRouter = (): void => {
   const resetWhiteNameList = ['Redirect', 'Login', 'NoFind', 'Root']
   router.getRoutes().forEach((route) => {
     const { name } = route
-    if (name && !resetWhiteNameList.includes(name as string)) {
+    if (name && !resetWhiteNameList.includes(name as string))
       router.hasRoute(name) && router.removeRoute(name)
-    }
   })
 }
 

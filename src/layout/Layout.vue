@@ -1,59 +1,65 @@
 <script lang="tsx">
-  import { computed, defineComponent, unref } from 'vue'
-  import { useAppStore } from '@/store/modules/app'
-  import { Backtop } from '@/components/Backtop'
-  import { Setting } from '@/components/Setting'
-  import { useRenderLayout } from './components/useRenderLayout'
-  import { useDesign } from '@/hooks/web/useDesign'
+import { computed, defineComponent, unref } from 'vue'
+import { useRenderLayout } from './components/useRenderLayout'
+import { useAppStore } from '@/store/modules/app'
+import { Backtop } from '@/components/Backtop'
+import { Setting } from '@/components/Setting'
+import { useDesign } from '@/hooks/web/useDesign'
 
-  const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign()
 
-  const prefixCls = getPrefixCls('layout')
+const prefixCls = getPrefixCls('layout')
 
-  const appStore = useAppStore()
+const appStore = useAppStore()
 
-  // 是否是移动端
-  const mobile = computed(() => appStore.getMobile)
+// 是否是移动端
+const mobile = computed(() => appStore.getMobile)
 
-  // 菜单折叠
-  const collapse = computed(() => appStore.getCollapse)
+// 菜单折叠
+const collapse = computed(() => appStore.getCollapse)
 
-  const layout = computed(() => appStore.getLayout)
+const layout = computed(() => appStore.getLayout)
 
-  const handleClickOutside = () => {
-    appStore.setCollapse(true)
-  }
+const handleClickOutside = () => {
+  appStore.setCollapse(true)
+}
 
-  const renderLayout = () => {
-    switch (unref(layout)) {
-      case 'classic':
-        const { renderClassic } = useRenderLayout()
-        return renderClassic()
-      case 'topLeft':
-        const { renderTopLeft } = useRenderLayout()
-        return renderTopLeft()
-      case 'top':
-        const { renderTop } = useRenderLayout()
-        return renderTop()
-      case 'cutMenu':
-        const { renderCutMenu } = useRenderLayout()
-        return renderCutMenu()
-      default:
-        break
+const renderLayout = () => {
+  switch (unref(layout)) {
+    case 'classic': {
+      const { renderClassic } = useRenderLayout()
+      return renderClassic()
     }
+    case 'topLeft': {
+      const { renderTopLeft } = useRenderLayout()
+      return renderTopLeft()
+    }
+    case 'top': {
+      const { renderTop } = useRenderLayout()
+      return renderTop()
+    }
+    case 'cutMenu': {
+      const { renderCutMenu } = useRenderLayout()
+      return renderCutMenu()
+    }
+    default:
+      break
   }
+}
 
-  export default defineComponent({
-    name: 'Layout',
-    setup() {
-      return () => (
+export default defineComponent({
+  name: 'Layout',
+  setup() {
+    return () => (
         <section class={[prefixCls, `${prefixCls}__${layout.value}`, 'w-[100%] h-[100%] relative']}>
-          {mobile.value && !collapse.value ? (
+          {mobile.value && !collapse.value
+            ? (
             <div
               class="absolute top-0 left-0 w-full h-full opacity-30 z-99 bg-[var(--el-color-black)]"
               onClick={handleClickOutside}
             ></div>
-          ) : undefined}
+              )
+            : undefined}
 
           {renderLayout()}
 
@@ -61,9 +67,9 @@
 
           <Setting></Setting>
         </section>
-      )
-    }
-  })
+    )
+  },
+})
 </script>
 
 <style lang="less" scoped>

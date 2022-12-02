@@ -1,10 +1,10 @@
-export type WorkplaceTotal = {
+export interface WorkplaceTotal {
   project: number
   access: number
   todo: number
 }
 
-export type Project = {
+export interface Project {
   name: string
   icon: string
   message: string
@@ -12,17 +12,17 @@ export type Project = {
   time: Date | number | string
 }
 
-export type Dynamic = {
+export interface Dynamic {
   keys: string[]
   time: Date | number | string
 }
 
-export type Team = {
+export interface Team {
   name: string
   icon: string
 }
 
-export type RadarData = {
+export interface RadarData {
   personal: number
   team: number
   max: number

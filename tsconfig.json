@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "baseUrl": ".",
+    "module": "ESNext",
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"],
     "strict": true,
+    "moduleResolution": "node",
     "jsx": "preserve",
+    "useDefineForClassFields": true,
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "baseUrl": ".",
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
@@ -21,6 +21,7 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "paths": {
+      "~/*": ["src/*"],
       "@/*": ["src/*"]
     },
     "types": [

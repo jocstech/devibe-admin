@@ -1,22 +1,22 @@
 import { service } from './service'
 import { config } from './config'
-const { default_headers } = config
 import { useAppStore } from '@/store/modules/app'
+const { default_headers } = config
 
 const appStore = useAppStore()
 
 const request = (option: any) => {
   const { url, method, params, data, headersType, responseType } = option
   return service({
-    url: url,
+    url,
     method,
     params,
     data,
-    responseType: responseType,
+    responseType,
     headers: {
       'Content-Type': headersType || default_headers,
-      Authorization: `Bearer ${appStore.getAuthToken}` //  如果JWT存在则携带JWT令牌
-    }
+      'Authorization': `Bearer ${appStore.getAuthToken}`, //  如果JWT存在则携带JWT令牌
+    },
   })
 }
 export default {
@@ -34,5 +34,5 @@ export default {
   },
   delete: <T = any>(option: any) => {
     return request({ method: 'DELETE', ...option }) as unknown as T
-  }
+  },
 }

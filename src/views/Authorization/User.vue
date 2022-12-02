@@ -1,78 +1,78 @@
 <script setup lang="ts">
-  import { useI18n } from '@/hooks/web/useI18n'
-  import { Table } from '@/components/Table'
-  import { getUserListApi } from '@/api/login'
-  import { UserType } from '@/api/auth/types'
-  import { ref, h } from 'vue'
-  import { ElButton } from 'element-plus'
-  import { TableColumn, TableSlotDefault } from '@/types/table'
+import { h, ref } from 'vue'
+import { ElButton } from 'element-plus'
+import { useI18n } from '@/hooks/web/useI18n'
+import { Table } from '@/components/Table'
+import { getUserListApi } from '@/api/login'
+import type { UserType } from '@/api/auth/types'
+import type { TableColumn } from '@/types/table'
+import { TableSlotDefault } from '@/types/table'
 
-  interface Params {
-    pageIndex?: number
-    pageSize?: number
-  }
+interface Params {
+  pageIndex?: number
+  pageSize?: number
+}
 
-  const { t } = useI18n()
+const { t } = useI18n()
 
-  const columns: TableColumn[] = [
-    {
-      field: 'index',
-      label: t('userDemo.index'),
-      type: 'index'
+const columns: TableColumn[] = [
+  {
+    field: 'index',
+    label: t('userDemo.index'),
+    type: 'index',
+  },
+  {
+    field: 'username',
+    label: t('userDemo.username'),
+  },
+  {
+    field: 'password',
+    label: t('userDemo.password'),
+  },
+  {
+    field: 'role',
+    label: t('userDemo.role'),
+  },
+  {
+    field: 'remark',
+    label: t('userDemo.remark'),
+    formatter: (row: UserType) => {
+      return h(
+        'span',
+        row.username === 'admin' ? t('userDemo.remarkMessage1') : t('userDemo.remarkMessage2'),
+      )
     },
-    {
-      field: 'username',
-      label: t('userDemo.username')
+  },
+  {
+    field: 'action',
+    label: t('userDemo.action'),
+  },
+]
+
+const loading = ref(true)
+
+const tableDataList = ref<UserType[]>([])
+
+const getTableList = async (params?: Params) => {
+  const res = await getUserListApi({
+    params: params || {
+      pageIndex: 1,
+      pageSize: 10,
     },
-    {
-      field: 'password',
-      label: t('userDemo.password')
-    },
-    {
-      field: 'role',
-      label: t('userDemo.role')
-    },
-    {
-      field: 'remark',
-      label: t('userDemo.remark'),
-      formatter: (row: UserType) => {
-        return h(
-          'span',
-          row.username === 'admin' ? t('userDemo.remarkMessage1') : t('userDemo.remarkMessage2')
-        )
-      }
-    },
-    {
-      field: 'action',
-      label: t('userDemo.action')
-    }
-  ]
+  })
+  // .catch(() => {})
+  // .finally(() => {
+  //   loading.value = false
+  // })
+  if (res)
+    tableDataList.value = res.list
+}
 
-  const loading = ref(true)
+getTableList()
 
-  let tableDataList = ref<UserType[]>([])
-
-  const getTableList = async (params?: Params) => {
-    const res = await getUserListApi({
-      params: params || {
-        pageIndex: 1,
-        pageSize: 10
-      }
-    })
-    // .catch(() => {})
-    // .finally(() => {
-    //   loading.value = false
-    // })
-    if (res) {
-      tableDataList.value = res.list
-    }
-  }
-
-  getTableList()
-
-  const actionFn = (data: TableSlotDefault) => {
-    console.log(data)
-  }
+const actionFn = (data: TableSlotDefault) => {
+  console.log(data)
+}
 </script>
 
 <template>

@@ -1,29 +1,29 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
-  import { ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
-  import { useAppStore } from '@/store/modules/app'
-  import { useI18n } from '@/hooks/web/useI18n'
-  import { propTypes } from '@/utils/propTypes'
-  import { useDesign } from '@/hooks/web/useDesign'
-  import { ElementPlusSize } from '@/types/elementPlus'
+import { computed } from 'vue'
+import { ElDropdown, ElDropdownItem, ElDropdownMenu } from 'element-plus'
+import { useAppStore } from '@/store/modules/app'
+import { useI18n } from '@/hooks/web/useI18n'
+import { propTypes } from '@/utils/propTypes'
+import { useDesign } from '@/hooks/web/useDesign'
+import type { ElementPlusSize } from '@/types/elementPlus'
 
-  const { getPrefixCls } = useDesign()
+defineProps({
+  color: propTypes.string.def(''),
+})
 
-  const prefixCls = getPrefixCls('size-dropdown')
+const { getPrefixCls } = useDesign()
 
-  defineProps({
-    color: propTypes.string.def('')
-  })
+const prefixCls = getPrefixCls('size-dropdown')
 
-  const { t } = useI18n()
+const { t } = useI18n()
 
-  const appStore = useAppStore()
+const appStore = useAppStore()
 
-  const sizeMap = computed(() => appStore.sizeMap)
+const sizeMap = computed(() => appStore.sizeMap)
 
-  const setCurrentSize = (size: ElementPlusSize) => {
-    appStore.setCurrentSize(size)
-  }
+const setCurrentSize = (size: ElementPlusSize) => {
+  appStore.setCurrentSize(size)
+}
 </script>
 
 <template>

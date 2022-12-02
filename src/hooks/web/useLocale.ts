@@ -5,13 +5,14 @@ import { setHtmlPageLang } from '@/plugins/vueI18n/helper'
 const setI18nLanguage = (locale: LocaleType) => {
   const localeStore = useLocaleStoreWithOut()
 
-  if (i18n.mode === 'legacy') {
+  if (i18n.mode === 'legacy')
     i18n.global.locale = locale
-  } else {
-    ;(i18n.global.locale as any).value = locale
-  }
+
+  else
+    (i18n.global.locale as any).value = locale
+
   localeStore.setCurrentLocale({
-    lang: locale
+    lang: locale,
   })
   setHtmlPageLang(locale)
 }
@@ -30,6 +31,6 @@ export const useLocale = () => {
   }
 
   return {
-    changeLocale
+    changeLocale,
   }
 }

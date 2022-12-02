@@ -9,7 +9,7 @@ export const getArticles = (): Promise<IResponse<CMSArticle[]>> => {
 
 // 通过ID获取文章
 export const getArticleById = (id: string): Promise<IResponse<CMSArticle>> => {
-  return request.get({ url: '/articles/' + id })
+  return request.get({ url: `/articles/${id}` })
 }
 
 // 创建一篇新文章
@@ -19,7 +19,7 @@ export const createArticle = (data: CMSArticle): Promise<IResponse> => {
 
 // 通过ID更新文章
 export const updateArticleById = (id: string, data: CMSArticle): Promise<IResponse> => {
-  return request.patch({ url: '/articles/' + id, data })
+  return request.patch({ url: `/articles/${id}`, data })
 }
 
 // Tags APIs =========================================================
@@ -35,7 +35,7 @@ export const getTagsList = async (): Promise<IResponse<CMSTag[]>> => {
 
 // 通过ID获取文章标签
 export const getTagById = (id: string): Promise<IResponse<CMSTag>> => {
-  return request.get({ url: '/tags/' + id })
+  return request.get({ url: `/tags/${id}` })
 }
 
 // 创建一个新文章标签
@@ -45,5 +45,5 @@ export const createTag = (data: CMSTag): Promise<IResponse<CMSTag>> => {
 
 // 通过ID更新文章标签
 export const updateTagById = (id: string | undefined, data: CMSTag): Promise<IResponse> => {
-  return request.patch({ url: '/tags/' + id, data })
+  return request.patch({ url: `/tags/${id}`, data })
 }
