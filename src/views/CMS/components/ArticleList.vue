@@ -4,7 +4,7 @@ defineProps<{
   articles: CMSArticle[]
 }>()
 
-const size = ref(10)
+const size = ref(5)
 const spacer = h(ElDivider, { direction: 'vertical' })
 </script>
 
@@ -27,11 +27,11 @@ const spacer = h(ElDivider, { direction: 'vertical' })
                   <h2>{{ article.title }}</h2>
                 </router-link>
               </div>
-              <div class="subtitle font-sans text-lg text-dark-200">
+              <div class="subtitle font-sans text-lg text-dark-200 italic">
                 <h3>{{ article.subtitle }}</h3>
               </div>
               <div class="excerpt flex-1">
-                <p class="text-dark-100 leading-7">
+                <p class="text-md text-dark-50 leading-7">
                   {{ article.excerpt }}
                 </p>
               </div>

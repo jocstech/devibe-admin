@@ -1,444 +1,429 @@
+analysis:
+  activeQuantity: Active quantity
+  actual: Actual
+  allianceAdvertising: Alliance advertising
+  april: April
+  august: August
+  december: December
+  directAccess: Airect access
+  estimate: Estimate
+  february: February
+  friday: Friday
+  january: January
+  july: July
+  june: June
+  mailMarketing: Mail marketing
+  march: March
+  may: May
+  monday: Monday
+  monthlySales: Monthly sales
+  newUser: New user
+  november: November
+  october: October
+  saturday: Saturday
+  searchEngines: Search engines
+  september: September
+  sunday: Sunday
+  thursday: Thursday
+  totalShopping: Total Shopping
+  transactionAmount: Transaction amount
+  tuesday: Tuesday
+  unreadInformation: Unread information
+  userAccessSource: User access source
+  videoAdvertising: Video advertising
+  wednesday: Wednesday
+  weeklyUserActivity: Weekly user activity
 common:
-  inputText: Please input
-  selectText: Please select
-  startTimeText: Start time
-  endTimeText: End time
-  login: Login
-  required: This is required
-  loginOut: Login out
-  document: Document
-  reminder: Reminder
-  loginOutMessage: Exit the system?
   back: Back
-  ok: OK
   cancel: Cancel
-  reload: Reload current
+  closeAll: Close all
+  closeOther: Close other
   closeTab: Close current
   closeTheLeftTab: Close left
   closeTheRightTab: Close right
-  closeOther: Close other
-  closeAll: Close all
-  prevLabel: Prev
-  nextLabel: Next
-  skipLabel: Jump
-  doneLabel: End
-  menu: Menu
-  menuDes: Menu bar rendered in routed structure
   collapse: Collapse
   collapseDes: Expand and zoom the menu bar
+  delCancel: Cancel
+  delMessage: Delete the selected data?
+  delNoData: Please select the data to delete
+  delOk: OK
+  delSuccess: Deleted successfully
+  delWarning: Warning
+  document: Document
+  doneLabel: End
+  endTimeText: End time
+  expand: Expand
+  inputText: Please input
+  login: Login
+  loginOut: Login out
+  loginOutMessage: Exit the system?
+  menu: Menu
+  menuDes: Menu bar rendered in routed structure
+  nextLabel: Next
+  ok: OK
+  prevLabel: Prev
+  query: Query
+  reload: Reload current
+  reminder: Reminder
+  required: This is required
+  reset: Reset
+  selectText: Please select
+  shrink: Put away
+  skipLabel: Jump
+  startTimeText: Start time
   tagsView: Tags view
   tagsViewDes: Used to record routing history
   tool: Tool
   toolDes: Used to set up custom systems
-  query: Query
-  reset: Reset
-  shrink: Put away
-  expand: Expand
-  delMessage: Delete the selected data?
-  delWarning: Warning
-  delOk: OK
-  delCancel: Cancel
-  delNoData: Please select the data to delete
-  delSuccess: Deleted successfully
-
+countToDemo:
+  countTo: CountTo
+  countToDes: >-
+    The transformation is based on vue-count-to and supports all vue-count-to
+    parameters.
+  duration: Duration
+  endVal: End val
+  pause: Pause
+  prefix: Prefix
+  resume: Resume
+  separator: Separator
+  start: Start
+  startVal: Start val
+  suffix: Suffix
+descriptionsDemo:
+  addr: Address
+  descriptions: Descriptions
+  descriptionsDes: Secondary packaging of Descriptions components based on ElementPlus
+  email: Email
+  form: Combined with Form component
+  nickName: NickName
+  phone: Phone
+  username: Username
+dialogDemo:
+  close: Close
+  combineWithForm: Combine with form
+  dialog: Dialog
+  dialogDes: Secondary packaging of Dialog components based on ElementPlus
+  open: Open
+  submit: Submit
+echartDemo:
+  echart: Echart
+  echartDes: >-
+    Based on the secondary packaging components of eckarts the width is
+    adaptive. The corresponding chart can be displayed by passing in the options
+    and height attributes.
 error:
+  networkError: Sorry the server reported an error.
   noPermission: Sorry you don't have permission to access this page.
   pageError: Sorry the page you visited does not exist.
-  networkError: Sorry the server reported an error.
   returnToHome: Return to home
-
-setting:
-  projectSetting: Project setting
-  theme: Theme
-  layout: Layout
-  systemTheme: System theme
-  menuTheme: Menu theme
-  interfaceDisplay: Interface display
-  breadcrumb: Breadcrumb
-  breadcrumbIcon: Breadcrumb icon
-  collapseMenu: Collapse menu
-  hamburgerIcon: Hamburger icon
-  screenfullIcon: Screenfull icon
-  sizeIcon: Size icon
-  localeIcon: Locale icon
-  tagsView: Tags view
-  logo: Logo
-  greyMode: Grey mode
-  fixedHeader: Fixed header
-  headerTheme: Header theme
-  cutMenu: Cut Menu
-  copy: Copy
-  clearAndReset: Clear cache and reset
-  copySuccess: Copy success
-  copyFailed: Copy failed
-  footer: Footer
-  uniqueOpened: Unique opened
-  tagsViewIcon: Tags view icon
-  dynamicRouter: Dynamic router
-  reExperienced: Please exit the login experience again
-  fixedMenu: Fixed menu
-
-size:
+exampleDemo:
+  add: Add
+  author: Author
+  content: Content
+  del: Delete
+  detail: Detail
+  displayTime: Display time
+  edit: Edit
+  importance: Importance
+  important: Important
+  pageviews: Pageviews
+  save: Save
+  title: Title
+formDemo:
+  aWeekAgo: A week ago
+  add: Add
+  autocomplete: Autocomplete
+  button: Button
+  cascader: Cascader
+  change: Change
+  checkbox: Checkbox
+  colorPicker: Color Picker
+  datePicker: Date Picker
+  dateTimePicker: DateTimePicker
+  dateTimerange: Datetime Range
+  daterange: Date Range
+  dates: Dates
   default: Default
-  large: Large
-  small: Small
-
+  defaultForm: All examples
+  delete: Delete
+  disabled: Disabled
+  disablement: Disablement
+  example: example
+  formDes: >-
+    The secondary encapsulation of form components based on ElementPlus realizes
+    data-driven and supports all Form parameters
+  formValidation: Form validation
+  icon: Icon
+  input: Input
+  inputNumber: InputNumber
+  inputPassword: input Password
+  mixed: Mixed
+  month: Month
+  monthrange: Month Range
+  operate: operate
+  passwordStrength: Password Strength
+  position: Position
+  radio: Radio
+  rate: Rate
+  render: Render
+  resetValue: Reset value
+  restore: Restore
+  select: Select
+  selectGroup: Select Group
+  selectV2: SelectV2
+  set: Set
+  setValue: Set value
+  shortcuts: Shortcuts
+  slider: Slider
+  slot: Slot
+  subitem: Subitem
+  switch: Switch
+  textarea: Textarea
+  timePicker: Time Picker
+  timeSelect: Time Select
+  today: Today
+  transfer: Transfer
+  verifyReset: Verify reset
+  week: Week
+  year: Year
+  yesterday: Yesterday
+guideDemo:
+  guide: Guide
+  message: >-
+    The guide page is very useful for some people who enter the project for the
+    first time. You can briefly introduce the functions of the project. The boot
+    page is based on intro js
+  start: Start
+highlightDemo:
+  highlight: Highlight
+  keys1: ten years ago
+  keys2: now
+  message: The best time to plant a tree is ten years ago followed by now.
+iconDemo:
+  accessAddress: Access address
+  icon: Icon
+  iconify: Iconify component
+  localIcon: Local Icon
+  recommendeDes: >-
+    Iconify component basically contains all icons. You can query any icon you
+    want. And packaging will only package the icons used.
+  recommendedUse: Recommended use
+imageViewerDemo:
+  imageViewer: Image viewer
+  imageViewerDes: Secondary packaging of ImageViewer components based on ElementPlus
+  open: Open
+infotipDemo:
+  infotip: Infotip
+  infotipDes: Secondary packaging of components based on Highlight
+  title: matters needing attention
+inputPasswordDemo:
+  inputPasswordDes: Secondary packaging of Input components based on ElementPlus
+  title: InputPassword
+levelDemo:
+  menu: Multi level menu cache
 login:
-  welcome: Welcome to the system
-  message: Backstage management system
-  username: Username
-  password: Password
-  register: Register
   checkPassword: Confirm password
-  login: Sign in
-  otherLogin: Sign in with
-  remember: Remember me
-  hasUser: Existing account? Go to login
-  forgetPassword: Forget password
-  usernamePlaceholder: Please input username
-  passwordPlaceholder: Please input password
   code: Verification code
   codePlaceholder: Please input verification code
-
+  forgetPassword: Forget password
+  hasUser: Existing account? Go to login
+  login: Sign in
+  message: Backstage management system
+  otherLogin: Sign in with
+  password: Password
+  passwordPlaceholder: Please input password
+  register: Register
+  remember: Remember me
+  username: Username
+  usernamePlaceholder: Please input username
+  welcome: Welcome to the system
+permission:
+  hasPermission: Please set the operation permission value
+qrcodeDemo:
+  asynchronousContent: Asynchronous content
+  basicUsage: Basic usage
+  click: Click event
+  imgTag: Img tag
+  invalid: Invalid
+  logoConfig: Logo config
+  logoStyle: Logo style
+  qrcode: Qrcode
+  qrcodeDes: Secondary packaging based on qrcode
+  size: size config
+  style: Style config
+richText:
+  richText: Rich text
+  richTextDes: Secondary packaging based on wangeditor
 router:
-  cms: CMS
-  articles: Articles
-  tags: Tags
+  analysis: Analysis
   article_edit: Edit Article
-  login: Login
+  articles: Articles
+  authorization: Authorization
+  cms: CMS
+  component: Component
+  countTo: Count to
+  dashboard: Dashboard
+  defaultForm: All examples
+  defaultTable: Basic example
+  descriptions: Descriptions
+  dialog: Dialog
+  document: Document
+  echart: Echart
+  editor: Editor
+  errorPage: Error page
+  example: Example
+  exampleAdd: Example page - add
+  exampleDetail: Example page - detail
+  exampleDialog: Example dialog
+  exampleEdit: Example page - edit
+  examplePage: Example page
+  form: Form
+  guide: Guide
+  highlight: Highlight
+  icon: Icon
+  imageViewer: Image viewer
+  infotip: Infotip
+  inputPassword: InputPassword
   level: Multi level menu
+  login: Login
   menu: Menu
   menu1: Menu1
   menu11: Menu1-1
   menu111: Menu1-1-1
   menu12: Menu1-2
   menu2: Menu2
-  dashboard: Dashboard
-  analysis: Analysis
-  workplace: Workplace
-  guide: Guide
-  component: Component
-  icon: Icon
-  echart: Echart
-  countTo: Count to
-  watermark: Watermark
   qrcode: Qrcode
-  highlight: Highlight
-  infotip: Infotip
-  form: Form
-  defaultForm: All examples
-  search: Search
-  table: Table
-  defaultTable: Basic example
-  editor: Editor
   richText: Rich text
-  dialog: Dialog
-  imageViewer: Image viewer
-  descriptions: Descriptions
-  example: Example
-  exampleDialog: Example dialog
-  examplePage: Example page
-  exampleAdd: Example page - add
-  exampleEdit: Example page - edit
-  exampleDetail: Example page - detail
-  errorPage: Error page
-  authorization: Authorization
-  user: User management
   role: Role management
-  document: Document
-  inputPassword: InputPassword
-  sticky: Sticky
-
-permission:
-  hasPermission: Please set the operation permission value
-
-analysis:
-  newUser: New user
-  unreadInformation: Unread information
-  transactionAmount: Transaction amount
-  totalShopping: Total Shopping
-  monthlySales: Monthly sales
-  userAccessSource: User access source
-  january: January
-  february: February
-  march: March
-  april: April
-  may: May
-  june: June
-  july: July
-  august: August
-  september: September
-  october: October
-  november: November
-  december: December
-  estimate: Estimate
-  actual: Actual
-  directAccess: Airect access
-  mailMarketing: Mail marketing
-  allianceAdvertising: Alliance advertising
-  videoAdvertising: Video advertising
-  searchEngines: Search engines
-  weeklyUserActivity: Weekly user activity
-  activeQuantity: Active quantity
-  monday: Monday
-  tuesday: Tuesday
-  wednesday: Wednesday
-  thursday: Thursday
-  friday: Friday
-  saturday: Saturday
-  sunday: Sunday
-
-workplace:
-  goodMorning: Good morning
-  happyDay: Wish you happy every day!
-  toady: It's sunny today
-  project: Project
-  access: Project access
-  toDo: To do
-  introduction: A serious introduction
-  more: More
-  shortcutOperation: Shortcut operation
-  operation: Operation
-  index: Index
-  personal: Personal
-  team: Team
-  quote: Quote
-  contribution: Contribution
-  hot: Hot
-  yield: Yield
-  dynamic: Dynamic
-  push: push
-  pushCode: Archer push code to Github
-  follow: Follow
-
-formDemo:
-  input: Input
-  inputNumber: InputNumber
-  default: Default
-  icon: Icon
-  mixed: Mixed
-  textarea: Textarea
-  slot: Slot
-  position: Position
-  autocomplete: Autocomplete
-  select: Select
-  selectGroup: Select Group
-  selectV2: SelectV2
-  cascader: Cascader
-  switch: Switch
-  rate: Rate
-  colorPicker: Color Picker
-  transfer: Transfer
-  render: Render
-  radio: Radio
-  button: Button
-  checkbox: Checkbox
-  slider: Slider
-  datePicker: Date Picker
-  shortcuts: Shortcuts
-  today: Today
-  yesterday: Yesterday
-  aWeekAgo: A week ago
-  week: Week
-  year: Year
-  month: Month
-  dates: Dates
-  daterange: Date Range
-  monthrange: Month Range
-  dateTimePicker: DateTimePicker
-  dateTimerange: Datetime Range
-  timePicker: Time Picker
-  timeSelect: Time Select
-  inputPassword: input Password
-  passwordStrength: Password Strength
-  defaultForm: All examples
-  formDes:
-    The secondary encapsulation of form components based on ElementPlus realizes data-driven and supports all Form parameters
-  example: example
-  operate: operate
-  change: Change
-  restore: Restore
-  disabled: Disabled
-  disablement: Disablement
-  delete: Delete
-  add: Add
-  setValue: Set value
-  resetValue: Reset value
-  set: Set
-  subitem: Subitem
-  formValidation: Form validation
-  verifyReset: Verify reset
-
-guideDemo:
-  guide: Guide
-  start: Start
-  message:
-    The guide page is very useful for some people who enter the project for the first time. You can briefly introduce the functions of the project. The boot page is based on intro js
-
-iconDemo:
-  icon: Icon
-  localIcon: Local Icon
-  iconify: Iconify component
-  recommendedUse: Recommended use
-  recommendeDes:
-    Iconify component basically contains all icons. You can query any icon you want. And packaging will only package the icons used.
-  accessAddress: Access address
-
-echartDemo:
-  echart: Echart
-  echartDes:
-    Based on the secondary packaging components of eckarts the width is adaptive. The corresponding chart can be displayed by passing in the options and height attributes.
-
-countToDemo:
-  countTo: CountTo
-  countToDes:
-    The transformation is based on vue-count-to and supports all vue-count-to parameters.
-  suffix: Suffix
-  prefix: Prefix
-  separator: Separator
-  duration: Duration
-  endVal: End val
-  startVal: Start val
-  start: Start
-  pause: Pause
-  resume: Resume
-
-watermarkDemo:
-  watermark: Watermark
-  createdWatermark: Created watermark
-  clearWatermark: Clear watermark
-  resetWatermark: Reset watermark
-
-qrcodeDemo:
-  qrcode: Qrcode
-  qrcodeDes: Secondary packaging based on qrcode
-  basicUsage: Basic usage
-  imgTag: Img tag
-  style: Style config
-  click: Click event
-  asynchronousContent: Asynchronous content
-  invalid: Invalid
-  logoConfig: Logo config
-  logoStyle: Logo style
-  size: size config
-
-highlightDemo:
-  highlight: Highlight
-  message: The best time to plant a tree is ten years ago followed by now.
-  keys1: ten years ago
-  keys2: now
-
-infotipDemo:
-  infotip: Infotip
-  infotipDes: Secondary packaging of components based on Highlight
-  title: matters needing attention
-
-levelDemo:
-  menu: Multi level menu cache
-
-searchDemo:
   search: Search
-  searchDes:
-    Based on the secondary encapsulation of form components the functions of query and reset are realized
-  operate: operate
-  change: Change
-  grid: grid
-  button: Button
-  restore: Restore
-  inline: inline
+  sticky: Sticky
+  table: Table
+  tags: Tags
+  user: User management
+  watermark: Watermark
+  workplace: Workplace
+searchDemo:
   bottom: Bottom
-  position: position
-  left: left
+  button: Button
   center: center
-  right: right
+  change: Change
   dynamicOptions: Dynamic options
-
+  grid: grid
+  inline: inline
+  left: left
+  operate: operate
+  position: position
+  restore: Restore
+  right: right
+  search: Search
+  searchDes: >-
+    Based on the secondary encapsulation of form components the functions of
+    query and reset are realized
+setting:
+  breadcrumb: Breadcrumb
+  breadcrumbIcon: Breadcrumb icon
+  clearAndReset: Clear cache and reset
+  collapseMenu: Collapse menu
+  copy: Copy
+  copyFailed: Copy failed
+  copySuccess: Copy success
+  cutMenu: Cut Menu
+  dynamicRouter: Dynamic router
+  fixedHeader: Fixed header
+  fixedMenu: Fixed menu
+  footer: Footer
+  greyMode: Grey mode
+  hamburgerIcon: Hamburger icon
+  headerTheme: Header theme
+  interfaceDisplay: Interface display
+  layout: Layout
+  localeIcon: Locale icon
+  logo: Logo
+  menuTheme: Menu theme
+  projectSetting: Project setting
+  reExperienced: Please exit the login experience again
+  screenfullIcon: Screenfull icon
+  sizeIcon: Size icon
+  systemTheme: System theme
+  tagsView: Tags view
+  tagsViewIcon: Tags view icon
+  theme: Theme
+  uniqueOpened: Unique opened
+size:
+  default: Default
+  large: Large
+  small: Small
 stickyDemo:
   sticky: Sticky
-
+system:
+  roles: Role Management
+  title: System
+  users: User Management
 tableDemo:
-  table: Table
-  tableDes: Secondary packaging of Table components based on ElementPlus
-  index: Index
-  title: Title
-  author: Author
-  displayTime: Display time
-  importance: Importance
-  pageviews: Pageviews
   action: Action
-  important: Important
-  good: Good
+  author: Author
+  changeTitle: Change title
   commonly: Commonly
-  operate: operate
+  displayTime: Display time
   example: example
-  show: Show
+  good: Good
+  header: Header
   hidden: Hidden
+  hiddenExpandedRows: Hidden expanded rows
+  hiddenSelections: Restore selections
+  importance: Importance
+  important: Important
+  index: Index
+  operate: operate
+  pageviews: Pageviews
   pagination: pagination
   reserveIndex: Reserve index
   restoreIndex: Restore index
-  showSelections: Show selections
-  hiddenSelections: Restore selections
-  showExpandedRows: Show expanded rows
-  hiddenExpandedRows: Hidden expanded rows
-  changeTitle: Change title
-  header: Header
   selectAllNone: Select all / none
-
-richText:
-  richText: Rich text
-  richTextDes: Secondary packaging based on wangeditor
-
-dialogDemo:
-  dialog: Dialog
-  dialogDes: Secondary packaging of Dialog components based on ElementPlus
-  open: Open
-  close: Close
-  combineWithForm: Combine with form
-  submit: Submit
-
-imageViewerDemo:
-  open: Open
-  imageViewer: Image viewer
-  imageViewerDes: Secondary packaging of ImageViewer components based on ElementPlus
-
-descriptionsDemo:
-  descriptions: Descriptions
-  descriptionsDes: Secondary packaging of Descriptions components based on ElementPlus
-  username: Username
-  nickName: NickName
-  phone: Phone
-  email: Email
-  addr: Address
-  form: Combined with Form component
-
-exampleDemo:
+  show: Show
+  showExpandedRows: Show expanded rows
+  showSelections: Show selections
+  table: Table
+  tableDes: Secondary packaging of Table components based on ElementPlus
   title: Title
-  add: Add
-  del: Delete
-  edit: Edit
-  author: Author
-  displayTime: Display time
-  importance: Importance
-  pageviews: Pageviews
-  important: Important
-  content: Content
-  save: Save
-  detail: Detail
-
 userDemo:
-  title: User management
-  message:
-    Because it is simulated data only two accounts with different permissions are provided which can be modified and combined by developers according to the actual situation.
-  index: Index
   action: Action
-  username: Username
+  index: Index
+  message: >-
+    Because it is simulated data only two accounts with different permissions
+    are provided which can be modified and combined by developers according to
+    the actual situation.
   password: Password
-  role: Role
   remark: Remark
   remarkMessage1: Back end control routing permission
   remarkMessage2: Front end control routing permission
-inputPasswordDemo:
-  title: InputPassword
-  inputPasswordDes: Secondary packaging of Input components based on ElementPlus
-
-
+  role: Role
+  title: User management
+  username: Username
+watermarkDemo:
+  clearWatermark: Clear watermark
+  createdWatermark: Created watermark
+  resetWatermark: Reset watermark
+  watermark: Watermark
+workplace:
+  access: Project access
+  contribution: Contribution
+  dynamic: Dynamic
+  follow: Follow
+  goodMorning: Good morning
+  happyDay: Wish you happy every day!
+  hot: Hot
+  index: Index
+  introduction: A serious introduction
+  more: More
+  operation: Operation
+  personal: Personal
+  project: Project
+  push: push
+  pushCode: Archer push code to Github
+  quote: Quote
+  shortcutOperation: Shortcut operation
+  team: Team
+  toDo: To do
+  toady: It's sunny today
+  yield: Yield

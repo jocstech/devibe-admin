@@ -116,7 +116,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     redirect: '/system/users',
     name: 'System',
     meta: {
-      title: '系统管理',
+      title: t('system.title'),
       icon: 'ant-design:tool-outlined',
       alwaysShow: true,
     },
@@ -126,7 +126,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         component: () => import('@/views/System/Users.vue'),
         name: 'Users',
         meta: {
-          title: '用户管理',
+          title: t('system.users'),
           icon: 'ant-design:user-outlined',
         },
       },
@@ -135,7 +135,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         component: () => import('@/views/System/Roles.vue'),
         name: 'Roles',
         meta: {
-          title: '角色管理',
+          title: t('system.roles'),
           icon: 'ant-design:solution-outlined',
         },
       },
