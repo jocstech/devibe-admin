@@ -127,7 +127,6 @@ const signIn = async () => {
         if (token) {
           // 1)通过token解码用户信息 2)把用户信息存到本地
           authStore.onLoginSuccess(token)
-
           // 是否使用动态路由
           if (appStore.getDynamicRouter) {
             getRole()
@@ -184,6 +183,10 @@ const getRole = async () => {
 const toRegister = () => {
   emit('toRegister')
 }
+
+const sendWIPMessage = () => {
+  ElMessage.info('暂时没开通此登陆方法')
+}
 </script>
 
 <template>
@@ -231,24 +234,28 @@ const toRegister = () => {
           :size="iconSize"
           class="cursor-pointer anticon"
           :color="iconColor"
+          @click="sendWIPMessage"
         />
         <Icon
           icon="ant-design:wechat-filled"
           :size="iconSize"
           class="cursor-pointer anticon"
           :color="iconColor"
+          @click="sendWIPMessage"
         />
         <Icon
           icon="ant-design:alipay-circle-filled"
           :size="iconSize"
           :color="iconColor"
-          class="cursor-pointer anticon"
+          lass="cursor-pointer anticon"
+          @click="sendWIPMessage"
         />
         <Icon
           icon="ant-design:weibo-circle-filled"
           :size="iconSize"
           :color="iconColor"
           class="cursor-pointer anticon"
+          @click="sendWIPMessage"
         />
       </div>
     </template>

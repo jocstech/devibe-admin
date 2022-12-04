@@ -72,19 +72,19 @@ export const useStore = defineStore('app', {
       currentSize: wsCache.get('default') || 'default', // 组件尺寸
       theme: wsCache.get('theme') || {
         // 主题色
-        elColorPrimary: '#0060FF',
+        elColorPrimary: '#002FA7',
         // 左侧菜单边框颜色
         leftMenuBorderColor: 'inherit',
         // 左侧菜单背景颜色
-        leftMenuBgColor: '#00163D',
+        leftMenuBgColor: '#111416',
         // 左侧菜单浅色背景颜色
-        leftMenuBgLightColor: '#001E52',
+        leftMenuBgLightColor: '#1d1e1f',
         // 左侧菜单选中背景颜色
         leftMenuBgActiveColor: 'var(--el-color-primary)',
         // 左侧菜单收起选中背景颜色
         leftMenuCollapseBgActiveColor: 'var(--el-color-primary)',
         // 左侧菜单字体颜色
-        leftMenuTextColor: '#bfcbd9',
+        leftMenuTextColor: '#BFCBD9',
         // 左侧菜单选中字体颜色
         leftMenuTextActiveColor: '#fff',
         // logo字体颜色

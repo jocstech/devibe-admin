@@ -50,7 +50,9 @@ const toLogin = () => {
           </TransitionGroup>
         </div>
       </div>
-      <div class="flex-1 p-30px <sm:p-10px dark:bg-v-dark relative">
+      <div class="flex-1 p-30px <sm:p-10px dark:bg-v-dark relative glass-bg">
+        <div class="bg-pattern one" />
+        <div class="bg-pattern two" />
         <div class="flex justify-between items-center text-white @2xl:justify-end @xl:justify-end">
           <div class="flex items-center @2xl:hidden @xl:hidden">
             <img src="@/assets/imgs/logo-white.png" alt="" class="w-48px h-48px mr-10px">
@@ -68,12 +70,12 @@ const toLogin = () => {
           >
             <LoginForm
               v-if="isLogin"
-              class="p-20px h-auto m-auto <xl:(rounded-3xl light:bg-white)"
+              class="p-20px h-auto m-auto <xl:(rounded-3xl light:bg-white) glass-box"
               @to-register="toRegister"
             />
             <RegisterForm
               v-else
-              class="p-20px h-auto m-auto <xl:(rounded-3xl light:bg-white)"
+              class="p-20px h-auto m-auto <xl:(rounded-3xl light:bg-white) glass-box"
               @to-login="toLogin"
             />
           </div>
@@ -102,4 +104,50 @@ const toLogin = () => {
       }
     }
   }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  // .glass-bg {
+  //   background: #fff;
+  //   .bg-pattern {
+  //     position: absolute;
+  //     width: 20rem;
+  //     height: 20rem;
+  //     border-radius: 50%;
+  //     animation: fadeIn 2s ease-in forwards ;
+
+  //     &.one {
+  //       top: 5%;
+  //       left: 5%;
+  //       background: linear-gradient(transparent,rgba(79, 129, 255, 0.8));
+  //     }
+  //     &.two {
+  //       bottom: 5%;
+  //       right: 5%;
+  //       background: linear-gradient(gray, transparent);
+  //     }
+  //   }
+  //   .glass-box {
+  //     border-radius: 1rem;
+  //     background: rgba(255, 255, 255, 0.8);
+  //     backdrop-filter: blur(5px);
+  //     z-index: 2;
+  //   }
+  // }
+
+  // .dark {
+  //   .glass-bg {
+  //   background: #141414;
+  //   .glass-box {
+  //       background: #14141469;
+  //   }
+  // }
+  // }
 </style>
