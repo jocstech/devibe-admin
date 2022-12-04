@@ -28,9 +28,10 @@ const onDelete = (id: string) => emit('delete', id)
         </div>
       </template>
     </el-table-column>
+
     <el-table-column prop="name" :label="$t('common.name')" />
     <el-table-column prop="username" :label="$t('common.username')" />
-    <el-table-column prop="email" :label="$t('common.email')" />
+    <el-table-column prop="email" :label="$t('common.email')" min-width="100px" />
     <el-table-column :label="$t('common.phone')">
       <template #default="scope">
         {{ String(scope.row.phone).replace(/^(.{3})(.*)(.{4})/, '$1-$2-$3') }}
@@ -45,6 +46,24 @@ const onDelete = (id: string) => emit('delete', id)
         </div>
       </template>
     </el-table-column>
+
+    <el-table-column :label="$t('common.verified')" width="70">
+      <template #default="{ row }">
+        <div class="flex items-center">
+          <icon v-if="row.verified" icon="carbon:flag-filled" color="green" />
+          <icon v-else icon="carbon:flag" />
+        </div>
+      </template>
+    </el-table-column>
+    <el-table-column :label="$t('common.blocked')" width="70">
+      <template #default="{ row }">
+        <div class="flex items-center">
+          <icon v-if="row.blocked" icon="carbon:error-filled" color="red" />
+          <icon v-else icon="carbon:circle-dash" color="gray" />
+        </div>
+      </template>
+    </el-table-column>
+
     <el-table-column fixed="right" :label="$t('system.operations')" width="120">
       <template #default="{ row }">
         <el-button link type="primary" size="small" @click="onEdit(row._id)">

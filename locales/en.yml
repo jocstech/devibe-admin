@@ -41,6 +41,7 @@ cms:
 common:
   avatar: Avatar
   back: Back
+  blocked: Blocked
   cancel: Cancel
   closeAll: Close all
   closeOther: Close other
@@ -87,6 +88,7 @@ common:
   tool: Tool
   toolDes: Used to set up custom systems
   username: Username
+  verified: Verified
 countToDemo:
   countTo: CountTo
   countToDes: >-

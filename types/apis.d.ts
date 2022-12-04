@@ -24,6 +24,8 @@ interface SystemUser extends SystemBasic {
   avatar?: string
   phone?: string
   email?: string
+  verified?: boolean
+  blocked?: boolean
   roles?: SystemRole[]
 }
 

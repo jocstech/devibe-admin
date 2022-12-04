@@ -41,6 +41,7 @@ cms:
 common:
   avatar: 头像
   back: 返回
+  blocked: 黑名
   cancel: 取消
   closeAll: 关闭全部标签页
   closeOther: 关闭其他标签页
@@ -87,6 +88,7 @@ common:
   tool: 工具
   toolDes: 用于设置定制系统
   username: 用户名
+  verified: 验证
 countToDemo:
   countTo: 数字动画
   countToDes: 基于 vue-count-to 进行改造，支持所有 vue-count-to 参数。

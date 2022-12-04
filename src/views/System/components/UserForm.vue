@@ -39,20 +39,32 @@ const formDefaultData = reactive({
       <ElFormItem label="Nickname">
         <ElInput v-model="user.nickname" />
       </ElFormItem>
-      <ElFormItem label="Name">
+      <ElFormItem label="Full Name">
         <ElInput v-model="user.name" />
       </ElFormItem>
-      <ElFormItem label="First Name">
-        <ElInput v-model="user.first_name" />
-      </ElFormItem>
-      <ElFormItem label="Last Name">
-        <ElInput v-model="user.last_name" />
+      <ElFormItem label="Real Name">
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <ElInput v-model="user.first_name" />
+          </el-col>
+          <el-col :span="12">
+            <ElInput v-model="user.last_name" />
+          </el-col>
+        </el-row>
       </ElFormItem>
       <ElFormItem label="Phone">
         <ElInput v-model="user.phone" />
       </ElFormItem>
       <ElFormItem label="Email">
         <ElInput v-model="user.email" />
+      </ElFormItem>
+      <ElFormItem label="Security">
+        <ElCheckbox v-model="user.verified">
+          Verified
+        </ElCheckbox>
+        <ElCheckbox v-model="user.blocked">
+          Blocked
+        </ElCheckbox>
       </ElFormItem>
       <ElFormItem label="Roles">
         <RoleSelect v-model="roles" />
