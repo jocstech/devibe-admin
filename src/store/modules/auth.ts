@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import jwt_decode from 'jwt-decode'
 import { store } from '../index'
 import { APP } from '@/config'
-import type { User } from '@/api/auth/types'
+import type { User } from '~/api/auth/types'
 import { useCache } from '@/hooks/web/useCache'
 
 const { wsCache } = useCache()

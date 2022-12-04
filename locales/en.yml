@@ -35,10 +35,11 @@ analysis:
   weeklyUserActivity: Weekly user activity
 cms:
   coverUpload:
-    or: or
-    dropFileHere: Drop file here
     clickToUpload: click to upload
+    dropFileHere: Drop file here
+    or: or
 common:
+  avatar: Avatar
   back: Back
   cancel: Cancel
   closeAll: Close all
@@ -56,6 +57,7 @@ common:
   delWarning: Warning
   document: Document
   doneLabel: End
+  email: Email
   endTimeText: End time
   expand: Expand
   inputText: Please input
@@ -64,14 +66,17 @@ common:
   loginOutMessage: Exit the system?
   menu: Menu
   menuDes: Menu bar rendered in routed structure
+  name: Name
   nextLabel: Next
   ok: OK
+  phone: Phone
   prevLabel: Prev
   query: Query
   reload: Reload current
   reminder: Reminder
   required: This is required
   reset: Reset
+  roles: Roles
   selectText: Please select
   shrink: Put away
   skipLabel: Jump
@@ -80,6 +85,7 @@ common:
   tagsViewDes: Used to record routing history
   tool: Tool
   toolDes: Used to set up custom systems
+  username: Username
 countToDemo:
   countTo: CountTo
   countToDes: >-
@@ -362,6 +368,7 @@ size:
 stickyDemo:
   sticky: Sticky
 system:
+  operations: Operations
   roles: Role Management
   title: System
   users: User Management

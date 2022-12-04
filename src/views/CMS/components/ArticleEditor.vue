@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { ElButton, ElInput } from 'element-plus'
-import { Delete, Edit, Upload } from '@element-plus/icons-vue'
-import { computed, ref, watch } from 'vue'
-import { CoverUpload, TagsSelect } from './'
-import { Editor } from '@/components/Editor'
+import { Delete, Edit, Link, Upload } from '@element-plus/icons-vue'
+import { ArticleCover, TagsSelect } from './'
 
 const props = defineProps<{
   article: CMSArticle
@@ -34,15 +31,15 @@ const tags = computed({
 // 监听文章数据是否已经更新
 watch(article, () => (isModified.value = true), { deep: true })
 
-const save = () => {
+const doSave = () => {
   emit('save', article.value)
 }
 
-const publish = () => {
+const doPublish = () => {
   delete article.value.published_at
 }
 
-const recover = () => {
+const doDelete = () => {
   article.value = {}
 }
 
@@ -65,57 +62,47 @@ const onUploadSuccess = (url: string) => {
     </div>
     <div class="side-section flex flex-col gap-2 flex-auto lg:max-w-sm">
       <div class="meta-section flex flex-col gap-2">
-        <div class="bg-white border p-2">
-          <div class="section-title">
-            访问地址
-          </div>
-          <ElInput v-model="article.slug" placeholder="请输入文章访问地址" />
-        </div>
-        <div class="bg-white border p-2">
-          <div class="section-title">
-            文章封面图
-          </div>
-          <img v-if="article.cover" :src="article.cover" :alt="article.title">
-          <CoverUpload v-else @on-upload-success="onUploadSuccess" />
-        </div>
-        <div class="bg-white border p-2">
-          <div class="section-title">
-            文章摘要
-          </div>
-          <ElInput
-            v-model="article.excerpt"
-            :rows="4"
-            type="textarea"
-            placeholder="Please input"
-          />
-        </div>
-        <div class="bg-white border p-2">
-          <div class="section-title">
-            文章标签
-          </div>
-          <TagsSelect v-model="tags" />
-        </div>
-      </div>
-      <div class="actions">
-        <div class="bg-white border p-2">
-          <ElButton size="large" type="success" :icon="Edit" @click="save">
-            保存
-          </ElButton>
-          <ElButton size="large" type="primary" :icon="Upload" @click="publish">
-            发布
-          </ElButton>
-          <ElButton size="large" type="danger" :icon="Delete" @click="recover">
-            删除
-          </ElButton>
-        </div>
+        <el-space direction="vertical" fill>
+          <ElCard shadow="hover" :body-style="{ padding: '1rem' }">
+            <span class="text-sm font-semibold true-gray-500">访问地址</span>
+            <ElInput v-model="article.slug" placeholder="请输入文章访问地址" :prefix-icon="Link" />
+          </ElCard>
+          <ElCard shadow="hover" :body-style="{ padding: '1rem' }">
+            <span class="text-sm font-semibold true-gray-500">
+              文章封面图
+            </span>
+            <ArticleCover v-model:url="article.cover" @upload-success="onUploadSuccess" />
+          </ElCard>
+          <ElCard shadow="hover" :body-style="{ padding: '1rem' }">
+            <span class="text-sm font-semibold true-gray-500">
+              文章摘要
+            </span>
+            <ElInput
+              v-model="article.excerpt"
+              :rows="6"
+              type="textarea"
+              placeholder="Please input"
+            />
+          </ElCard>
+          <ElCard shadow="hover" :body-style="{ padding: '1rem' }">
+            <span class="text-sm font-semibold true-gray-500">
+              文章标签
+            </span>
+            <TagsSelect v-model="tags" />
+          </ElCard>
+          <ElCard shadow="hover" :body-style="{ padding: '1rem' }">
+            <ElButton size="large" type="success" :icon="Edit" @click="doSave">
+              保存
+            </ElButton>
+            <ElButton size="large" type="primary" :icon="Upload" @click="doPublish">
+              发布
+            </ElButton>
+            <ElButton size="large" type="danger" :icon="Delete" @click="doDelete">
+              删除
+            </ElButton>
+          </ElCard>
+        </el-space>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-  .section-title {
-    padding-left: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-</style>

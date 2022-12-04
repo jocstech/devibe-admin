@@ -14,6 +14,9 @@ export default defineConfig({
   attributify: false,
   theme: {
     extend: {
+      colors: {
+        'klein-blue': '#002FA7',
+      },
       backgroundColor: {
         'v-dark': 'var(--dark-bg-color)',
       },

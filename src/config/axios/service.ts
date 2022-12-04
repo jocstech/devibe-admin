@@ -37,7 +37,7 @@ service.interceptors.request.use(
     loading = ElLoading.service({
       lock: true,
       text: '服务器请求中',
-      background: 'rgba(0, 0, 0, 0.5)',
+      background: 'var(--dark-bg-color)',
     })
 
     if (

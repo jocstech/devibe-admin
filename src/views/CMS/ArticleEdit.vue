@@ -34,7 +34,7 @@ const onSave = async (updatedArticle: CMSArticle) => {
 </script>
 
 <template>
-  <ContentDetailWrap :title="article.title" @back="$router.push('/cms/articles')">
+  <ContentDetailWrap :title="article.title" :body-style="{ padding: '0.5rem' }" @back="$router.push('/cms/articles')">
     <ArticleEditor v-model:article="article" @save="onSave" />
   </ContentDetailWrap>
 </template>

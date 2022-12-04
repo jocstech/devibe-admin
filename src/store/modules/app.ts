@@ -7,7 +7,7 @@ import type { ElementPlusSize } from '@/types/elementPlus'
 import { useCache } from '@/hooks/web/useCache'
 import type { LayoutType } from '@/types/layout'
 import type { ThemeTypes } from '@/types/theme'
-import type { User } from '@/api/auth/types'
+import type { User } from '~/api/auth/types'
 import { APP } from '@/config'
 
 const { wsCache } = useCache()

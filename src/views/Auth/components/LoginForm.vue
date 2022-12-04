@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { reactive, ref, unref, watch } from 'vue'
-import { ElButton, ElCheckbox, ElLink, ElMessage } from 'element-plus'
+// import { reactive, ref, unref, watch } from 'vue'
+import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 import type { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
 import { Form } from '@/components/Form'
@@ -8,15 +8,19 @@ import { useI18n } from '@/hooks/web/useI18n'
 import { useForm } from '@/hooks/web/useForm'
 import { authLogin, getAdminRoleApi, getTestRoleApi } from '@/api/login'
 import { useCache } from '@/hooks/web/useCache'
-import { useAppStore } from '@/store/modules/app'
-import { usePermissionStore } from '@/store/modules/permission'
-import type { LoginParams, UserType } from '@/api/auth/types'
+// import { useAppStore } from '@/store/modules/app'
+// import { usePermissionStore } from '@/store/modules/permission'
+import type { LoginParams, UserType } from '~/api/auth/types'
 import { useValidator } from '@/hooks/web/useValidator'
 import type { FormSchema } from '@/types/form'
+import { useAuthStore } from '~/store/modules/auth'
+import { usePermissionStore } from '~/store/modules/permission'
+import { useAppStore } from '~/store/modules/app'
 
 const emit = defineEmits(['toRegister'])
 const { required } = useValidator()
 const appStore = useAppStore()
+const authStore = useAuthStore()
 const permissionStore = usePermissionStore()
 const { currentRoute, addRoute, push } = useRouter()
 // const { wsCache } = useCache()
@@ -121,14 +125,14 @@ const signIn = async () => {
         } = await authLogin(formData)
         ElMessage.success('登陆成功，现在进入系统！')
         if (token) {
-          // 通过token解码用户信息
-          appStore.setAuthToken(token)
-          // 把用户信息存到本地
-          appStore.setCurrentUserByJWT(token)
+          // 1)通过token解码用户信息 2)把用户信息存到本地
+          authStore.onLoginSuccess(token)
+
           // 是否使用动态路由
           if (appStore.getDynamicRouter) {
             getRole()
           }
+
           else {
             await permissionStore.generateRoutes('none').catch(() => {})
             permissionStore.getAddRouters.forEach((route) => {

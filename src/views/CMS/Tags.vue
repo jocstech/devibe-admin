@@ -5,7 +5,7 @@ import { createTag, getTagById, getTags, updateTagById } from '@/api/cms'
 
 const tags = ref()
 const count = computed(() => tags.value?.length ?? 0)
-const editDialogConfig = reactive({ visible: false, tag: {} })
+const dialogConfig = reactive({ visible: false, tag: {} })
 
 // data handler
 const fetchTags = async () => {
@@ -62,15 +62,15 @@ const onDelete = async (type: string) => {
 
 // Edge Handler
 function openDialog(data?: CMSTag) {
-  editDialogConfig.visible = true
+  dialogConfig.visible = true
   if (data)
-    editDialogConfig.tag = data
+    dialogConfig.tag = data
 }
 
 function closeDialog(data?: CMSTag) {
-  editDialogConfig.visible = false
+  dialogConfig.visible = false
   if (data)
-    editDialogConfig.tag = data
+    dialogConfig.tag = data
 }
 
 function onSucceeded(title?: string, message?: string) {
@@ -90,18 +90,17 @@ function onFailed(title?: string, message?: string) {
 </script>
 
 <template>
-  <ContentWrap :title="`标签管理（一共${count}个标签）`" message="标签管理">
+  <ContentWrap :title="`标签管理（一共${count}个标签）`" message="标签管理" :body-style="{ padding: 0 }">
     <template #actions>
       <ElButton type="primary" @click="onCreate">
         创建新标签
       </ElButton>
     </template>
-
     <TagList v-if="tags" :tags="tags" @edit="onEdit" @delete="onDelete" />
   </ContentWrap>
   <TagEditDialog
-    v-model:visible="editDialogConfig.visible"
-    :tag="editDialogConfig.tag"
+    v-model:visible="dialogConfig.visible"
+    :tag="dialogConfig.tag"
     @save="onSave"
   />
 </template>

@@ -1,29 +1,29 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
-import { TagForm } from './index'
+import { UserForm } from './'
 import { propTypes } from '@/utils/propTypes'
 
 const props = defineProps({
   visible: propTypes.bool.def(false),
-  tag: {
-    type: Object as PropType<CMSTag>,
+  user: {
+    type: Object as PropType<SystemUser>,
     default: () => undefined,
   },
 })
 
 const emit = defineEmits<{
-  (e: 'save', tag: CMSTag): void
-  (e: 'update:tag', tag: CMSTag): void
+  (e: 'save', user: SystemUser): void
+  (e: 'update:user', user: SystemUser): void
   (e: 'update:visible', visible: Boolean): void
 }>()
 
-const mode = computed(() => (props.tag?._id ? 'edit' : 'create'))
-const title = computed(() => (mode.value === 'edit' ? '编辑标签内容' : '新建一个标签'))
+const mode = computed(() => (props.user?._id ? 'edit' : 'create'))
+const title = computed(() => (mode.value === 'edit' ? '修改用户信息' : '新建一个用户'))
 
 // v-model object 双向绑定的秘密
-const tag = computed({
-  get: () => props.tag,
-  set: (value: CMSTag) => emit('update:tag', value),
+const user = computed({
+  get: () => props.user,
+  set: (value: SystemUser) => emit('update:user', value),
 })
 
 const visible = computed({
@@ -32,13 +32,13 @@ const visible = computed({
 })
 
 const onSave = () => {
-  emit('save', tag.value as CMSTag)
+  emit('save', user.value as SystemUser)
 }
 </script>
 
 <template>
   <Dialog v-model="visible" :title="title" max-height="400px">
-    <TagForm v-if="tag" v-model:tag="tag" :mode="mode" />
+    <UserForm v-if="user" v-model:user="user" :mode="mode" />
     <template #footer>
       <span class="dialog-footer">
         <ElButton @click="visible = false">Cancel</ElButton>

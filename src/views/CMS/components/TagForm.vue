@@ -1,15 +1,4 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
-import {
-  ElForm,
-  ElFormItem,
-  ElInput,
-  ElOption,
-  ElRadio,
-  ElRadioGroup,
-  ElSelect,
-  ElSwitch,
-} from 'element-plus'
 import { icons } from '../data'
 
 const props = defineProps<{

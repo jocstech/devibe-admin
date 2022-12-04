@@ -4,7 +4,7 @@ import { ElButton } from 'element-plus'
 import { useI18n } from '@/hooks/web/useI18n'
 import { Table } from '@/components/Table'
 import { getUserListApi } from '@/api/login'
-import type { UserType } from '@/api/auth/types'
+import type { UserType } from '~/api/auth/types'
 import type { TableColumn } from '@/types/table'
 import { TableSlotDefault } from '@/types/table'
 

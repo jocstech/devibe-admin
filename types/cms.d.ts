@@ -16,12 +16,15 @@ interface SystemRole extends SystemBasic {
 }
 
 interface SystemUser extends SystemBasic {
-  username: string
-  nickname: string
-  name: string
-  first_name: string
-  last_name: string
-  avatar: string
+  username?: string
+  nickname?: string
+  name?: string
+  first_name?: string
+  last_name?: string
+  avatar?: string
+  phone?: string
+  email?: string
+  roles?: SystemRole[]
 }
 
 interface CMSTag extends SystemBasic {

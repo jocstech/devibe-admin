@@ -12,7 +12,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <ContentWrap title="文章管理" message="12312312">
+  <ContentWrap title="文章管理" :body-style="{ padding: '0.5rem' }">
     <template #actions>
       <el-button type="primary" @click="articleHook.onCreate">
         添加新文章

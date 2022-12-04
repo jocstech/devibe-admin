@@ -20,9 +20,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="contentDetailWrap" class="relative bg-[#fff]" :class="[`${prefixCls}-container`]">
+  <div ref="contentDetailWrap" class="relative bg-white dark:bg-v-dark" :class="[`${prefixCls}-container`]">
     <div
-      class="flex border-bottom-1 h-50px items-center text-center bg-white pr-10px" :class="[
+      class="flex border-bottom-1 h-50px items-center text-center bg-white dark:bg-v-dark pr-10px" :class="[
         `${prefixCls}-header`,
       ]"
     >
