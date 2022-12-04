@@ -46,7 +46,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/404',
     component: () => import('@/views/Error/404.vue'),
-    name: 'NoFind',
+    name: 'Error404',
     meta: {
       hidden: true,
       title: '404',
@@ -161,7 +161,7 @@ const router = createRouter({
 })
 
 export const resetRouter = (): void => {
-  const resetWhiteNameList = ['Redirect', 'Login', 'NoFind', 'Root']
+  const resetWhiteNameList = ['Redirect', 'Login', 'Error404', 'Root']
   router.getRoutes().forEach((route) => {
     const { name } = route
     if (name && !resetWhiteNameList.includes(name as string))

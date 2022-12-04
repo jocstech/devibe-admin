@@ -71,6 +71,7 @@ common:
   ok: OK
   phone: Phone
   prevLabel: Prev
+  profile: Profile
   query: Query
   reload: Reload current
   reminder: Reminder

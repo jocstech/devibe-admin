@@ -1,9 +1,9 @@
 import { service } from './service'
 import { config } from './config'
-import { useAppStore } from '@/store/modules/app'
+import { useAuthStore } from '@/store/modules/auth'
 const { default_headers } = config
 
-const appStore = useAppStore()
+const authStore = useAuthStore()
 
 const request = (option: any) => {
   const { url, method, params, data, headersType, responseType } = option
@@ -15,7 +15,7 @@ const request = (option: any) => {
     responseType,
     headers: {
       'Content-Type': headersType || default_headers,
-      'Authorization': `Bearer ${appStore.getAuthToken}`, //  如果JWT存在则携带JWT令牌
+      'Authorization': `Bearer ${authStore.getAuthToken}`, //  如果JWT存在则携带JWT令牌
     },
   })
 }

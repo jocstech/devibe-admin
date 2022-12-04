@@ -1,20 +1,16 @@
 import { defineStore } from 'pinia'
 import { ElMessage } from 'element-plus'
-import jwt_decode from 'jwt-decode'
 import { store } from '../index'
 import { humpToUnderline, setCssVar } from '@/utils'
 import type { ElementPlusSize } from '@/types/elementPlus'
 import { useCache } from '@/hooks/web/useCache'
 import type { LayoutType } from '@/types/layout'
 import type { ThemeTypes } from '@/types/theme'
-import type { User } from '~/api/auth/types'
-import { APP } from '@/config'
-
 const { wsCache } = useCache()
 
 interface AppState {
-  authToken: string
-  currentUser: User
+  // authToken: string
+  // currentUser: User
   breadcrumb: boolean
   breadcrumbIcon: boolean
   collapse: boolean
@@ -44,8 +40,6 @@ interface AppState {
 export const useStore = defineStore('app', {
   state: (): AppState => {
     return {
-      authToken: wsCache.get(APP.AUTH_JWT_KEY) || null,
-      currentUser: wsCache.get(APP.USER_CACHE_KEY) || null,
       sizeMap: ['default', 'large', 'small'],
       mobile: false, // 是否是移动端
       title: import.meta.env.VITE_APP_TITLE, // 标题
@@ -103,12 +97,6 @@ export const useStore = defineStore('app', {
     }
   },
   getters: {
-    getAuthToken(): string {
-      return this.authToken
-    },
-    getCurrentUser(): User {
-      return this.currentUser
-    },
     getBreadcrumb(): boolean {
       return this.breadcrumb
     },
@@ -183,25 +171,6 @@ export const useStore = defineStore('app', {
     },
   },
   actions: {
-    setAuthToken(token: string) {
-      if (!token)
-        return
-      this.authToken = token
-      wsCache.set(APP.AUTH_JWT_KEY, this.getAuthToken)
-    },
-    setCurrentUser(user: User) {
-      if (!user)
-        return
-      this.currentUser = user
-      wsCache.set(APP.USER_CACHE_KEY, this.getCurrentUser)
-    },
-    setCurrentUserByJWT(token: string) {
-      if (!token)
-        return
-      this.currentUser = jwt_decode(token)
-      wsCache.set(APP.USER_CACHE_KEY, this.getCurrentUser)
-    },
-
     setBreadcrumb(breadcrumb: boolean) {
       this.breadcrumb = breadcrumb
     },

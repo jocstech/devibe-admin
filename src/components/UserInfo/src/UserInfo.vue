@@ -7,16 +7,16 @@ import { resetRouter } from '@/router'
 import { authLogout } from '@/api/login'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useTagsViewStore } from '@/store/modules/tagsView'
-import { useAppStore } from '@/store/modules/app'
+import { useAuthStore } from '@/store/modules/auth'
 const tagsViewStore = useTagsViewStore()
 const { getPrefixCls } = useDesign()
 const prefixCls = getPrefixCls('user-info')
 const { t } = useI18n()
 const { wsCache } = useCache()
-const { replace } = useRouter()
+const { replace, push } = useRouter()
 
-const appStore = useAppStore()
-const currentUser = appStore.getCurrentUser
+const authStore = useAuthStore()
+const currentUser = authStore.getAuthUser
 
 const logout = () => {
   ElMessageBox.confirm(t('common.loginOutMessage'), t('common.reminder'), {
@@ -25,7 +25,7 @@ const logout = () => {
     type: 'warning',
   })
     .then(async () => {
-      const res = await authLogout().catch(() => {})
+      const res = await authLogout()
       if (res) {
         wsCache.clear()
         tagsViewStore.delAllViews()
@@ -38,6 +38,10 @@ const logout = () => {
 
 const toDocument = () => {
   window.open('https://element-plus-admin-doc.cn/')
+}
+
+const toProfile = () => {
+  push('.')
 }
 </script>
 
@@ -55,6 +59,11 @@ const toDocument = () => {
     </div>
     <template #dropdown>
       <ElDropdownMenu>
+        <ElDropdownItem>
+          <div @click="toProfile">
+            {{ t('common.profile') }}
+          </div>
+        </ElDropdownItem>
         <ElDropdownItem>
           <div @click="toDocument">
             {{ t('common.document') }}
