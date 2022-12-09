@@ -26,6 +26,7 @@
     },
     "types": [
       "@intlify/vite-plugin-vue-i18n/client",
+      "@iconify/types",
       "vite/client",
       "element-plus/global",
       "@types/intro.js",

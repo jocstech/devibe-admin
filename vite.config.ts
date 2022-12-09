@@ -1,31 +1,27 @@
-import path, { resolve } from 'path'
-import { loadEnv } from 'vite'
+import path from 'path'
+import type { ConfigEnv, UserConfig } from 'vite'
+
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+// unplugin
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import PurgeIcons from 'vite-plugin-purge-icons'
 import Vue from '@vitejs/plugin-vue'
 // i18n
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
-// vite-plugins
-// import { ElementPlusResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import PurgeIcons from 'vite-plugin-purge-icons'
-import { viteMockServe } from 'vite-plugin-mock'
-import { createHtmlPlugin } from 'vite-plugin-html'
-import WindiCSS from 'vite-plugin-windicss'
 import VueJsx from '@vitejs/plugin-vue-jsx'
-
-// unplugin
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import Components from 'unplugin-vue-components/vite'
-import AutoImport from 'unplugin-auto-import/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
+import WindiCSS from 'vite-plugin-windicss'
+import { createHtmlPlugin } from 'vite-plugin-html'
+// vite-plugins
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { loadEnv } from 'vite'
+import { viteMockServe } from 'vite-plugin-mock'
+
 // types
-import type { ConfigEnv, UserConfig } from 'vite'
 
 // https://vitejs.dev/config/
 const root = process.cwd()
-
-function pathResolve(dir: string) {
-  return resolve(root, '.', dir)
-}
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
@@ -36,9 +32,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     resolve: {
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.less', '.css'],
       alias: {
-        '~/': `${path.resolve(__dirname, 'src')}/`,
         'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
-        '/\@\//': `${path.resolve(__dirname, 'src')}/`,
+        '~/': `${path.resolve(__dirname, 'src')}/`,
+        '/@/': `${path.resolve(__dirname, 'src')}/`,
         '@/': `${path.resolve(__dirname, 'src')}/`,
       },
 
@@ -46,7 +42,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     plugins: [
       VueJsx(),
       createSvgIconsPlugin({
-        iconDirs: [pathResolve('src/assets/svgs')],
+        iconDirs: [path.resolve(root, '.', 'src/assets/svgs')],
         symbolId: 'icon-[dir]-[name]',
         svgoOptions: true,
       }),
@@ -135,19 +131,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       },
     },
     server: {
-      port: 4000,
-      proxy: {
-        // 选项写法
-        '/api': {
-          target: 'http://127.0.0.1:8000',
-          changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, ''),
-        },
-      },
-      hmr: {
-        overlay: false,
-      },
-      host: '0.0.0.0',
+      hmr: true,
     },
     optimizeDeps: {
       include: [

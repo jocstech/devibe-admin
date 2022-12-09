@@ -9,13 +9,8 @@ import axios from 'axios'
 import qs from 'qs'
 import { ElLoading, ElMessage } from 'element-plus'
 import { config } from './config'
-// import { useAppStore } from '@/store/modules/app'
-// import { useCache } from '@/hooks/web/useCache'
-// import { APP } from '..'
-
-// const { wsCache } = useCache()
 const { result_code, base_url } = config
-// const appStore = useAppStore()
+
 let loading
 
 export const PATH_URL = base_url[import.meta.env.VITE_API_BASEPATH]
@@ -37,7 +32,7 @@ service.interceptors.request.use(
     loading = ElLoading.service({
       lock: true,
       text: '服务器请求中',
-      background: 'var(--dark-bg-color)',
+      background: 'var(--overley-bg-color)',
     })
 
     if (

@@ -49,6 +49,7 @@ interface CMSArticle extends SystemBasic {
   editor_type?: string
   content?: string
   excerpt?: string
+  pinned?: boolean
   tags?: CMSTag[]
   roles?: any[]
   published_at?: Date | string

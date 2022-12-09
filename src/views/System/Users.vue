@@ -34,7 +34,7 @@ function closeDialog(data?: SystemUser) {
     dialogConfig.user = data
 }
 
-// callback actions
+// Callback actions
 const onCreate = () => {
   openDialog({ } as SystemUser)
 }
@@ -46,7 +46,7 @@ const onEdit = async (id: string) => {
     if (data)
       openDialog(data)
     else
-      onFailed(undefined, '无法编辑该标签')
+      onFailed('服务端错误', '无法编辑该标签')
   }
 }
 

@@ -7,15 +7,10 @@ import { useDesign } from '@/hooks/web/useDesign'
 import { useCache } from '@/hooks/web/useCache'
 
 const { getPrefixCls } = useDesign()
-
 const prefixCls = getPrefixCls('app')
-
 const appStore = useAppStore()
-
 const currentSize = computed(() => appStore.getCurrentSize)
-
 const greyMode = computed(() => appStore.getGreyMode)
-
 const { wsCache } = useCache()
 
 // 根据浏览器当前主题设置系统主题色

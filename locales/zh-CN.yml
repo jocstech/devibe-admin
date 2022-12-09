@@ -50,17 +50,20 @@ common:
   closeTheRightTab: 关闭右侧标签页
   collapse: 展开缩收
   collapseDes: 展开和缩放菜单栏
+  count: 计数
   delCancel: 取消
   delMessage: 是否删除所选中数据？
   delNoData: 请选择需要删除的数据
   delOk: 确定
   delSuccess: 删除成功
   delWarning: 提示
+  description: 描述
   document: 项目文档
   doneLabel: 结束
   email: 邮箱
   endTimeText: 结束时间
   expand: 展开
+  icon: 图标
   inputText: 请输入
   login: 登录
   loginOut: 退出系统
@@ -88,6 +91,7 @@ common:
   tool: 工具
   toolDes: 用于设置定制系统
   username: 用户名
+  value: 赋值
   verified: 验证
 countToDemo:
   countTo: 数字动画

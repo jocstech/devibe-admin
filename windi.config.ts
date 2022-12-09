@@ -59,5 +59,6 @@ export default defineConfig({
         ...obj,
       })
     }),
+    require('windicss/plugin/line-clamp'),
   ],
 })

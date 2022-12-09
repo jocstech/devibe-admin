@@ -58,7 +58,7 @@ const onDelete = (id: string) => emit('delete', id)
     <el-table-column :label="$t('common.blocked')" width="70">
       <template #default="{ row }">
         <div class="flex items-center">
-          <icon v-if="row.blocked" icon="carbon:error-filled" color="red" />
+          <icon v-if="row.blocked" icon="carbon:error" color="red" />
           <icon v-else icon="carbon:circle-dash" color="gray" />
         </div>
       </template>

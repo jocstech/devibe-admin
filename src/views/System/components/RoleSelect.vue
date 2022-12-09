@@ -17,7 +17,7 @@ onMounted(async () => {
 <template>
   <ElSelect v-bind="$attrs" multiple clearable class="w-full" placeholder="Select Role">
     <ElOption v-for="role in roles" :key="role._id" :value="role._id" :label="role.name">
-      {{ role.name }}
+      <b>{{ role.name }}</b> ({{ role.value }})
     </ElOption>
   </ElSelect>
 </template>

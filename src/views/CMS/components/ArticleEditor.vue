@@ -90,6 +90,14 @@ const onUploadSuccess = (url: string) => {
             </span>
             <TagsSelect v-model="tags" />
           </ElCard>
+          <ElCard shadow="hover" :body-style="{ padding: '0' }">
+            <div class="flex flex-row place-items-center px-4 py-1">
+              <span class="text-sm font-semibold true-gray-500 mr-2">
+                文章置顶
+              </span>
+              <ElSwitch v-model="article.pinned" />
+            </div>
+          </ElCard>
           <ElCard shadow="hover" :body-style="{ padding: '1rem' }">
             <ElButton size="large" type="success" :icon="Edit" @click="doSave">
               保存

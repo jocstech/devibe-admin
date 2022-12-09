@@ -50,17 +50,20 @@ common:
   closeTheRightTab: Close right
   collapse: Collapse
   collapseDes: Expand and zoom the menu bar
+  count: Count
   delCancel: Cancel
   delMessage: Delete the selected data?
   delNoData: Please select the data to delete
   delOk: OK
   delSuccess: Deleted successfully
   delWarning: Warning
+  description: Description
   document: Document
   doneLabel: End
   email: Email
   endTimeText: End time
   expand: Expand
+  icon: Icon
   inputText: Please input
   login: Login
   loginOut: Login out
@@ -88,6 +91,7 @@ common:
   tool: Tool
   toolDes: Used to set up custom systems
   username: Username
+  value: Value
   verified: Verified
 countToDemo:
   countTo: CountTo
