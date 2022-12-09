@@ -22,23 +22,23 @@ const spacer = h(ElDivider, { direction: 'vertical' })
         >
           <div class="flex">
             <div class="cover">
-              <ElImage class="h-43 w-60 rounded m-1" :src="article.cover" fit="cover" />
+              <ElImage class="h-30 w-30 md:h-43 md:w-60 rounded m-1" :src="article.cover" fit="cover" />
             </div>
             <div class="info flex flex-col py-1 px-3 space-y-1 overflow-auto">
-              <div class="title font-sans text-2xl  font-semibold ">
+              <div class="title font-sans text-lg md:text-2xl  font-semibold ">
                 <RouterLink :to="`/cms/articles/${article._id}`">
                   <h2 class="truncate">
                     {{ article.title }}
                   </h2>
                 </RouterLink>
               </div>
-              <div class="subtitle font-sans text-lg text-trueGray-600 italic">
+              <div class="subtitle font-sans text-md md:text-lg text-trueGray-600 italic">
                 <h3 class="truncate">
                   {{ article.subtitle }}
                 </h3>
               </div>
               <div class="excerpt flex-1">
-                <p class="text-md text-trueGray-400 leading-8 line-clamp-2">
+                <p class="text-sm md:text-md text-trueGray-400 leading-6 md:leading-8 line-clamp-2">
                   {{ article.excerpt }}
                 </p>
               </div>
@@ -46,7 +46,7 @@ const spacer = h(ElDivider, { direction: 'vertical' })
                 <div v-if="article.author" class="author">
                   <AuthorInfo :author="article.author as SystemUser" />
                 </div>
-                <div v-if="article.tags?.length" class="tags flex-auto">
+                <div v-if="article.tags?.length" class="tags flex-auto hidden md:block">
                   <TagsInfo :tags="article.tags as CMSTag[]" />
                 </div>
                 <div class="actions text-sm">
