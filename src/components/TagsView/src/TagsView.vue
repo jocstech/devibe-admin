@@ -467,7 +467,7 @@ watch(
 </template>
 
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-tags-view';
+@prefix-cls: ~'@{namespace}-tags-view';
 
   .@{prefix-cls} {
     :deep(.@{elNamespace}-scrollbar__view) {
@@ -504,6 +504,7 @@ watch(
       font-size: 12px;
       cursor: pointer;
       border: 1px solid #d9d9d9;
+      border-radius: var(--el-border-radius-base);
 
       &--close {
         position: absolute;

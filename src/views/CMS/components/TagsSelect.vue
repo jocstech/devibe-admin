@@ -17,8 +17,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <ElSelect v-bind="$attrs" multiple clearable class="w-full" placeholder="Select Tag">
-    <ElOption v-for="tag in tags" :key="tag._id" :value="tag._id" :label="tag.name">
+  <ElSelect v-bind="$attrs" multiple clearable placeholder="Select Tag">
+    <ElOption v-for="tag in tags" :key="tag._id" :value="tag._id as any" :label="tag.name">
       {{ tag.name }}
     </ElOption>
   </ElSelect>

@@ -52,6 +52,9 @@ interface CMSArticle extends SystemBasic {
   pinned?: boolean
   tags?: CMSTag[]
   roles?: any[]
-  published_at?: Date | string
   author?: SystemUser | string
+  visible?: boolean
+  published?: boolean
+  published_at?: Date | string
+
 }
